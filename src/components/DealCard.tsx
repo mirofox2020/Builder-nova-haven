@@ -273,7 +273,7 @@ export const DealCard = ({
         </CardContent>
       </Card>
 
-      {/* Mobile Layout - Image Left, Details Right */}
+      {/* Mobile Layout - 2 Sections: Left (Image & Vote) + Right (Product Details) */}
       <div className="lg:hidden">
         <a
           href={`/deal/${id}`}
@@ -295,38 +295,37 @@ export const DealCard = ({
             backgroundColor: "rgb(255, 255, 255)",
           }}
         >
-          {/* Vote Buttons - On Top of Image */}
-          <div className="mb-2">
-            <VoteButtons initialVotes={votes} compact size="sm" />
-          </div>
+          {/* Mobile Layout: 2 Sections */}
+          <div className="flex gap-4">
+            {/* LEFT SECTION: Image & Vote */}
+            <div className="flex flex-col items-center space-y-3">
+              {/* Vote Buttons */}
+              <VoteButtons initialVotes={votes} compact size="sm" />
 
-          {/* Mobile Layout: Image Left, Content Right */}
-          <div className="flex gap-3 items-center">
-            {/* Mobile Image - Left Side, Centered, Bigger */}
-            <div className="w-24 h-24 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex-shrink-0 relative overflow-hidden flex items-center justify-center border border-gray-200/50">
-              <img
-                src={image}
-                alt={title}
-                className="w-full h-full object-contain p-2"
-              />
-              {discount > 0 && (
-                <div className="absolute top-1 left-1 bg-green-600 text-white px-1.5 py-0.5 rounded text-xs font-semibold shadow-sm">
-                  {discount}%
-                </div>
-              )}
+              {/* Mobile Image */}
+              <div className="w-24 h-24 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex-shrink-0 relative overflow-hidden flex items-center justify-center border border-gray-200/50">
+                <img
+                  src={image}
+                  alt={title}
+                  className="w-full h-full object-contain p-2"
+                />
+                {discount > 0 && (
+                  <div className="absolute top-1 left-1 bg-green-600 text-white px-1.5 py-0.5 rounded text-xs font-semibold shadow-sm">
+                    {discount}%
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* Mobile Content - Right Side */}
-            <div className="flex-1 min-w-0">
+            {/* RIGHT SECTION: Product Details */}
+            <div className="flex-1 min-w-0 space-y-3">
               {/* Title */}
-              <div className="mb-2">
-                <h3 className="font-bold text-gray-900 text-sm line-clamp-2 leading-tight">
-                  {title}
-                </h3>
-              </div>
+              <h3 className="font-bold text-gray-900 text-sm line-clamp-2 leading-tight">
+                {title}
+              </h3>
 
               {/* Price */}
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2">
                 <span
                   className="text-lg font-bold"
                   style={{ color: "rgba(111, 162, 37, 1)" }}
@@ -339,7 +338,7 @@ export const DealCard = ({
               </div>
 
               {/* Merchant and Time */}
-              <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+              <div className="flex items-center justify-between text-xs text-gray-500">
                 <div className="flex items-center gap-1">
                   <MapPin className="h-3 w-3" />
                   <span>{merchant}</span>
@@ -352,7 +351,7 @@ export const DealCard = ({
 
               {/* Promo Code for Mobile */}
               {promoCode && (
-                <div className="bg-orange-50 border border-orange-200 rounded p-2 mb-2">
+                <div className="bg-orange-50 border border-orange-200 rounded p-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-orange-600 font-medium">
                       Code: {promoCode}
