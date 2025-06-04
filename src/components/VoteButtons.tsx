@@ -38,23 +38,23 @@ export const VoteButtons = ({
 
   if (compact) {
     return (
-      <div className={cn("flex items-center gap-1", className)}>
+      <div className={cn("flex items-center", className)}>
         {/* Thumbs Up Button */}
         <Button
           variant="ghost"
           size="sm"
           onClick={() => handleVote("up")}
           className={cn(
-            "hover:bg-gray-50 transition-all duration-200 rounded p-1",
-            isLarge ? "h-10 w-10" : "h-8 w-8",
-            userVote === "up" && "bg-gray-50",
+            "hover:bg-gray-100 transition-all duration-200 p-1 rounded",
+            isLarge ? "h-12 w-12" : "h-10 w-10",
+            userVote === "up" && "bg-gray-100",
           )}
         >
           <ThumbsUp
             className={cn(
-              "text-gray-400",
-              isLarge ? "h-5 w-5" : "h-4 w-4",
-              userVote === "up" && "text-gray-600",
+              "text-gray-500",
+              isLarge ? "h-6 w-6" : "h-5 w-5",
+              userVote === "up" && "text-gray-700",
             )}
           />
         </Button>
@@ -62,8 +62,8 @@ export const VoteButtons = ({
         {/* Vote Count Text */}
         <span
           className={cn(
-            "text-gray-400 mx-1",
-            isLarge ? "text-base font-medium" : "text-sm font-medium",
+            "text-gray-500 px-2",
+            isLarge ? "text-lg font-medium" : "text-base font-medium",
           )}
         >
           {votes} votes
@@ -75,16 +75,16 @@ export const VoteButtons = ({
           size="sm"
           onClick={() => handleVote("down")}
           className={cn(
-            "hover:bg-gray-50 transition-all duration-200 rounded p-1",
-            isLarge ? "h-10 w-10" : "h-8 w-8",
-            userVote === "down" && "bg-gray-50",
+            "hover:bg-gray-100 transition-all duration-200 p-1 rounded",
+            isLarge ? "h-12 w-12" : "h-10 w-10",
+            userVote === "down" && "bg-gray-100",
           )}
         >
           <ThumbsDown
             className={cn(
-              "text-gray-400",
-              isLarge ? "h-5 w-5" : "h-4 w-4",
-              userVote === "down" && "text-gray-600",
+              "text-gray-500",
+              isLarge ? "h-6 w-6" : "h-5 w-5",
+              userVote === "down" && "text-gray-700",
             )}
           />
         </Button>
