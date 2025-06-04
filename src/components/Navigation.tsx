@@ -2,6 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Tag,
   Percent,
   Gift,
@@ -12,9 +18,15 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { categories } from "@/data/categories";
 
 const mainCategories = [
-  { id: "categories", label: "Categories", icon: Tag },
+  {
+    id: "categories",
+    label: "Categories",
+    icon: Tag,
+    hasDropdown: true,
+  },
   { id: "codes", label: "Discount Codes", icon: Percent, badge: "234" },
   { id: "deals", label: "Deals", icon: Gift, active: true },
   { id: "freebies", label: "Freebies", icon: Gift, badge: "Hot" },
@@ -32,6 +44,19 @@ export const Navigation = () => {
   const [activeCategory, setActiveCategory] = useState("deals");
   const [activeTab, setActiveTab] = useState("for-you");
 
+  const handleCategoryClick = (categoryId: string) => {
+    if (categoryId === "categories") {
+      // Handle categories dropdown - will be handled by dropdown component
+      return;
+    }
+    setActiveCategory(categoryId);
+  };
+
+  const handleCategorySelect = (categoryId: string) => {
+    // Navigate to category page
+    window.location.href = `/categories/${categoryId}`;
+  };
+
   return (
     <div className="bg-white/50 backdrop-blur-sm border-b border-gray-200/70">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,12 +66,45 @@ export const Navigation = () => {
             const Icon = category.icon;
             const isActive = activeCategory === category.id;
 
+            if (category.hasDropdown) {
+              return (
+                <DropdownMenu key={category.id}>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className={cn(
+                        "flex items-center gap-2 text-sm font-medium whitespace-nowrap rounded-full px-4 py-2 transition-all duration-200",
+                        "text-gray-600 hover:text-gray-900 hover:bg-gray-100",
+                      )}
+                    >
+                      <Icon className="h-4 w-4" />
+                      {category.label}
+                      <ChevronDown className="h-3 w-3 ml-1" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-64 max-h-96 overflow-y-auto">
+                    {categories.map((cat) => (
+                      <DropdownMenuItem
+                        key={cat.id}
+                        onClick={() => handleCategorySelect(cat.id)}
+                        className="flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-50"
+                      >
+                        <span className="text-lg">{cat.icon}</span>
+                        <span className="font-medium">{cat.name}</span>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              );
+            }
+
             return (
               <Button
                 key={category.id}
                 variant={isActive ? "default" : "ghost"}
                 size="sm"
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() => handleCategoryClick(category.id)}
                 className={cn(
                   "flex items-center gap-2 text-sm font-medium whitespace-nowrap rounded-full px-4 py-2 transition-all duration-200",
                   isActive
