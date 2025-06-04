@@ -135,7 +135,7 @@ const Index = () => {
               </div>
 
               {/* Mobile Grid Layout - Hidden on Desktop */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:hidden">
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:hidden">
                 {sampleDeals.map((deal) => (
                   <DealCard key={deal.id} {...deal} />
                 ))}
