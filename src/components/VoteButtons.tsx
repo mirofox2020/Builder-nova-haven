@@ -37,14 +37,14 @@ export const VoteButtons = ({
     return (
       <div
         className={cn(
-          "flex items-center bg-gray-100 border border-gray-200 rounded-md px-2 py-1",
+          "flex items-center bg-gray-50 rounded-full px-3 py-1.5 border border-gray-200",
           className,
         )}
       >
         {/* Thumbs Up */}
         <button
           onClick={() => handleVote("up")}
-          className="flex items-center justify-center hover:bg-gray-200 rounded p-1 transition-colors duration-200"
+          className="flex items-center justify-center hover:bg-gray-100 rounded-full p-1 transition-colors duration-200"
         >
           <ThumbsUp
             className={cn(
@@ -58,7 +58,7 @@ export const VoteButtons = ({
         {/* Votes Text */}
         <span
           className={cn(
-            "text-gray-600 font-normal px-2",
+            "text-gray-600 font-medium px-2",
             isLarge ? "text-sm" : "text-xs",
           )}
         >
@@ -68,7 +68,7 @@ export const VoteButtons = ({
         {/* Thumbs Down */}
         <button
           onClick={() => handleVote("down")}
-          className="flex items-center justify-center hover:bg-gray-200 rounded p-1 transition-colors duration-200"
+          className="flex items-center justify-center hover:bg-gray-100 rounded-full p-1 transition-colors duration-200"
         >
           <ThumbsDown
             className={cn(
