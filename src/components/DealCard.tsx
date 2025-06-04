@@ -278,21 +278,25 @@ export const DealCard = ({
         <a
           href={`/deal/${id}`}
           className={cn(
-            "block relative bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 hover:border-orange-300",
-            !isAvailable && "opacity-75",
+            "block relative bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 hover:border-orange-300 sm:p-3",
+            !isAvailable && "opacity-75"
           )}
           style={{
-            cursor: "pointer",
-            display: "block",
-            fontWeight: "400",
-            lineHeight: "24px",
-            overflowWrap: "break-word",
-            position: "relative",
-            transitionDuration: "0.3s",
-            transitionProperty: "box-shadow, border-color",
-            transitionTimingFunction: "cubic-bezier(0.165, 0.84, 0.44, 1)",
-            wordBreak: "break-word",
-            backgroundColor: "rgb(255, 255, 255)",
+            cursor: 'pointer',
+            display: 'block',
+            fontWeight: '400',
+            lineHeight: '24px',
+            overflowWrap: 'break-word',
+            position: 'relative',
+            transitionDuration: '0.3s',
+            transitionProperty: 'box-shadow, border-color',
+            transitionTimingFunction: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
+            wordBreak: 'break-word',
+            backgroundColor: 'rgb(255, 255, 255)',
+            '@media (max-width: 640px)': {
+              padding: '0 5px'
+            }
+          }}
           }}
         >
           {/* Mobile Layout: 2 Sections */}
