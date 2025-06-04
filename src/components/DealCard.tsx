@@ -297,15 +297,8 @@ export const DealCard = ({
         >
           {/* Mobile Layout: 2 Sections */}
           <div className="flex gap-4">
-            {/* LEFT SECTION: Image & Vote - with mobile background */}
-            <div
-              className="flex flex-col items-center space-y-3"
-              style={{
-                "@media (max-width: 640px)": {
-                  backgroundColor: "rgba(250, 247, 247, 1)",
-                },
-              }}
-            >
+            {/* LEFT SECTION: Image, Vote & Share/Comment - with same background as image */}
+            <div className="flex flex-col items-center space-y-3 bg-gradient-to-br from-gray-50 to-gray-100 p-3 rounded-lg border border-gray-200/50">
               {/* Vote Buttons */}
               <VoteButtons initialVotes={votes} compact size="sm" />
 
@@ -321,6 +314,29 @@ export const DealCard = ({
                     {discount}%
                   </div>
                 )}
+              </div>
+
+              {/* Share and Comment Icons - Under Image */}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // Handle comment
+                  }}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-white/80 hover:bg-white transition-colors duration-200"
+                >
+                  <MessageCircle className="h-3 w-3 text-gray-600" />
+                </button>
+
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleShare();
+                  }}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-white/80 hover:bg-white transition-colors duration-200"
+                >
+                  <Share2 className="h-3 w-3 text-gray-600" />
+                </button>
               </div>
             </div>
 
@@ -348,14 +364,7 @@ export const DealCard = ({
               <div className="flex items-center justify-between text-xs text-gray-500">
                 <div className="flex items-center gap-1">
                   <MapPin className="h-3 w-3" />
-                  <span
-                    className="sm:text-gray-500"
-                    style={{
-                      "@media (max-width: 640px)": {
-                        color: "rgba(0, 0, 0, 1)",
-                      },
-                    }}
-                  >
+                  <span className="text-black sm:text-gray-500">
                     {merchant}
                   </span>
                 </div>
@@ -388,33 +397,8 @@ export const DealCard = ({
                 </div>
               )}
 
-              {/* Mobile Actions */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // Handle comment
-                    }}
-                    className="flex items-center gap-1 text-xs text-gray-500 hover:text-orange-600"
-                  >
-                    <MessageCircle className="h-3 w-3" />
-                    <span>{comments}</span>
-                  </button>
-
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleShare();
-                    }}
-                    className="flex items-center gap-1 text-xs text-gray-500 hover:text-blue-600"
-                  >
-                    <Share2 className="h-3 w-3" />
-                    <span>Share</span>
-                  </button>
-                </div>
-
-                {/* Get Deal Button instead of Available badge */}
+              {/* Mobile Actions - Only Get Deal Button */}
+              <div className="flex justify-end">
                 <Button
                   size="sm"
                   onClick={(e) => {
