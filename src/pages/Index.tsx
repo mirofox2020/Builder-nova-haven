@@ -103,70 +103,72 @@ const sampleDeals = [
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      {/* Background Pattern - Full Width */}
+      {/* Background Pattern */}
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.05),transparent_70%)] pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(219,39,119,0.05),transparent_50%)] pointer-events-none" />
 
       <Header />
 
-      <main className="relative w-full">
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 lg:gap-8 py-6 lg:py-8">
-          {/* Main Content */}
-          <div className="xl:col-span-3 space-y-6 lg:space-y-8 px-4 sm:px-6 lg:px-8">
-            {/* Section Header */}
-            <div className="space-y-3 text-center lg:text-left">
-              <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent font-sans">
-                Deals for you
-              </h1>
-              <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
-                Discover the best deals, discounts, and offers from top brands.
-                Save money on electronics, fashion, home goods, and more with
-                our carefully curated selection.
-              </p>
-            </div>
-
-            {/* Deals Grid - Desktop: Vertical Stack, Mobile: 1-Column Grid */}
-            <div className="space-y-6 lg:space-y-6">
-              {/* Desktop Layout - Hidden on Mobile */}
-              <div className="hidden lg:block space-y-6">
-                {sampleDeals.map((deal) => (
-                  <DealCard key={deal.id} {...deal} />
-                ))}
+      <main className="relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 lg:gap-8">
+            {/* Main Content */}
+            <div className="xl:col-span-3 space-y-6 lg:space-y-8">
+              {/* Section Header */}
+              <div className="space-y-3 text-center lg:text-left">
+                <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent font-sans">
+                  Deals for you
+                </h1>
+                <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
+                  Discover the best deals, discounts, and offers from top
+                  brands. Save money on electronics, fashion, home goods, and
+                  more with our carefully curated selection.
+                </p>
               </div>
 
-              {/* Mobile Grid Layout - Hidden on Desktop */}
-              <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:hidden">
-                {sampleDeals.map((deal) => (
-                  <DealCard key={deal.id} {...deal} />
-                ))}
+              {/* Deals Grid - Desktop: Vertical Stack, Mobile: 1-Column Grid */}
+              <div className="space-y-6 lg:space-y-6">
+                {/* Desktop Layout - Hidden on Mobile */}
+                <div className="hidden lg:block space-y-6">
+                  {sampleDeals.map((deal) => (
+                    <DealCard key={deal.id} {...deal} />
+                  ))}
+                </div>
+
+                {/* Mobile Grid Layout - Hidden on Desktop */}
+                <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:hidden">
+                  {sampleDeals.map((deal) => (
+                    <DealCard key={deal.id} {...deal} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Sidebar on Mobile/Tablet */}
+              <div className="xl:hidden">
+                <Sidebar />
+              </div>
+
+              {/* Load More */}
+              <div className="text-center pt-8">
+                <button className="px-8 py-4 bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-700 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 font-semibold text-lg hover:-translate-y-1">
+                  Load More Deals
+                </button>
               </div>
             </div>
 
-            {/* Sidebar on Mobile/Tablet */}
-            <div className="xl:hidden px-4 sm:px-6 lg:px-8">
-              <Sidebar />
-            </div>
-
-            {/* Load More */}
-            <div className="text-center pt-8">
-              <button className="px-8 py-4 bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-700 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 font-semibold text-lg hover:-translate-y-1">
-                Load More Deals
-              </button>
-            </div>
-          </div>
-
-          {/* Sidebar Desktop Only */}
-          <div className="hidden xl:block xl:col-span-1 px-4 sm:px-6 lg:px-8">
-            <div className="sticky top-24 lg:top-28">
-              <Sidebar />
+            {/* Sidebar Desktop Only */}
+            <div className="hidden xl:block xl:col-span-1">
+              <div className="sticky top-24 lg:top-28">
+                <Sidebar />
+              </div>
             </div>
           </div>
         </div>
       </main>
 
-      {/* Footer - Full Width */}
-      <footer className="relative bg-white/80 backdrop-blur-sm border-t border-gray-200/50 mt-16 w-full">
-        <div className="w-full py-12 px-4 sm:px-6 lg:px-8">
+      {/* Footer */}
+      <footer className="relative bg-white/80 backdrop-blur-sm border-t border-gray-200/50 mt-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
             <div>
               <h3 className="font-bold text-gray-900 mb-4 text-lg">Company</h3>
