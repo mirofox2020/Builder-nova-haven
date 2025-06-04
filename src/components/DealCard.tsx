@@ -295,6 +295,11 @@ export const DealCard = ({
             backgroundColor: "rgb(255, 255, 255)",
           }}
         >
+          {/* Vote Buttons - On Top of Image */}
+          <div className="mb-2">
+            <VoteButtons initialVotes={votes} compact size="sm" />
+          </div>
+
           {/* Mobile Layout: Image Left, Content Right */}
           <div className="flex gap-3 items-center">
             {/* Mobile Image - Left Side, Centered */}
@@ -313,15 +318,11 @@ export const DealCard = ({
 
             {/* Mobile Content - Right Side */}
             <div className="flex-1 min-w-0">
-              {/* Vote Buttons - Top Right */}
-              <div className="flex items-start justify-between mb-2">
-                <div className="flex-1 pr-2">
-                  {/* Title */}
-                  <h3 className="font-bold text-gray-900 text-sm line-clamp-2 leading-tight">
-                    {title}
-                  </h3>
-                </div>
-                <VoteButtons initialVotes={votes} compact size="sm" />
+              {/* Title */}
+              <div className="mb-2">
+                <h3 className="font-bold text-gray-900 text-sm line-clamp-2 leading-tight">
+                  {title}
+                </h3>
               </div>
 
               {/* Price */}
