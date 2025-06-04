@@ -37,16 +37,19 @@ export const VoteButtons = ({
 
   if (compact) {
     return (
-      <div className={cn("flex items-center gap-2", className)}>
+      <div className={cn("flex items-center", className)}>
         {/* Thumbs Up */}
         <button
           onClick={() => handleVote("up")}
-          className="flex items-center justify-center hover:bg-gray-100 rounded-md transition-colors duration-200 p-1"
+          className={cn(
+            "flex items-center justify-center hover:bg-gray-50 rounded-md transition-colors duration-200",
+            isLarge ? "h-12 w-12 p-3" : "h-10 w-10 p-2",
+          )}
         >
           <ThumbsUp
             className={cn(
-              "text-gray-400 stroke-2",
-              isLarge ? "h-6 w-6" : "h-5 w-5",
+              "text-gray-500",
+              isLarge ? "h-7 w-7" : "h-6 w-6",
               userVote === "up" && "text-blue-600",
             )}
           />
@@ -55,8 +58,8 @@ export const VoteButtons = ({
         {/* Votes Text */}
         <span
           className={cn(
-            "text-gray-400 font-normal px-1",
-            isLarge ? "text-lg" : "text-base",
+            "text-gray-500 font-normal mx-3",
+            isLarge ? "text-xl" : "text-lg",
           )}
         >
           {votes} votes
@@ -65,12 +68,15 @@ export const VoteButtons = ({
         {/* Thumbs Down */}
         <button
           onClick={() => handleVote("down")}
-          className="flex items-center justify-center hover:bg-gray-100 rounded-md transition-colors duration-200 p-1"
+          className={cn(
+            "flex items-center justify-center hover:bg-gray-50 rounded-md transition-colors duration-200",
+            isLarge ? "h-12 w-12 p-3" : "h-10 w-10 p-2",
+          )}
         >
           <ThumbsDown
             className={cn(
-              "text-gray-400 stroke-2",
-              isLarge ? "h-6 w-6" : "h-5 w-5",
+              "text-gray-500",
+              isLarge ? "h-7 w-7" : "h-6 w-6",
               userVote === "down" && "text-red-600",
             )}
           />
@@ -92,13 +98,13 @@ export const VoteButtons = ({
       >
         <ThumbsUp
           className={cn(
-            "h-5 w-5 text-gray-400 stroke-2",
+            "h-5 w-5 text-gray-500",
             userVote === "up" && "text-blue-600",
           )}
         />
       </button>
 
-      <span className="font-bold py-2 text-base text-gray-400">{votes}</span>
+      <span className="font-bold py-2 text-base text-gray-500">{votes}</span>
 
       <button
         onClick={() => handleVote("down")}
@@ -106,7 +112,7 @@ export const VoteButtons = ({
       >
         <ThumbsDown
           className={cn(
-            "h-5 w-5 text-gray-400 stroke-2",
+            "h-5 w-5 text-gray-500",
             userVote === "down" && "text-red-600",
           )}
         />
