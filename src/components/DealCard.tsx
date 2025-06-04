@@ -168,7 +168,13 @@ export const DealCard = ({
                       <span className="text-xs text-gray-600 font-medium">
                         Promo Code:
                       </span>
-                      <div className="font-mono text-lg font-bold text-gray-900 px-3 py-1 bg-white rounded-lg border-2 border-dashed border-orange-300">
+                      <div
+                        className="font-mono text-lg font-bold text-gray-900 px-3 py-1 bg-white rounded-lg border-2 border-dashed border-orange-300"
+                        style={{
+                          fontFamily:
+                            'Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+                        }}
+                      >
                         {promoCode}
                       </div>
                     </div>

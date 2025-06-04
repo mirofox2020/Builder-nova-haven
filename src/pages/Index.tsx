@@ -115,7 +115,7 @@ const Index = () => {
           <div className="xl:col-span-3 space-y-6 lg:space-y-8">
             {/* Section Header */}
             <div className="space-y-3 text-center lg:text-left">
-              <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent">
+              <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent font-sans">
                 Deals for you
               </h1>
               <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
