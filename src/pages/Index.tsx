@@ -132,6 +132,11 @@ const Index = () => {
               ))}
             </div>
 
+            {/* Sidebar on Mobile/Tablet */}
+            <div className="xl:hidden">
+              <Sidebar />
+            </div>
+
             {/* Load More */}
             <div className="text-center pt-8">
               <button className="px-8 py-4 bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-700 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 font-semibold text-lg hover:-translate-y-1">
@@ -140,15 +145,14 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="xl:col-span-1 order-first xl:order-last">
+          {/* Sidebar Desktop Only */}
+          <div className="hidden xl:block xl:col-span-1">
             <div className="sticky top-24 lg:top-28">
               <Sidebar />
             </div>
           </div>
         </div>
       </main>
-
       {/* Footer */}
       <footer className="relative bg-white/80 backdrop-blur-sm border-t border-gray-200/50 mt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">

@@ -82,25 +82,16 @@ export const DealCard = ({
     >
       <CardContent className="p-0">
         <div className="flex flex-col lg:flex-row">
-          {/* Vote Section */}
-          <div className="flex lg:flex-col items-center lg:items-start gap-3 p-4 lg:pr-3 bg-gradient-to-br from-gray-50 to-gray-100/50">
-            <VoteButtons initialVotes={votes} />
-            <div className="flex lg:flex-col items-center gap-1 text-xs text-gray-500">
-              <Clock className="h-3 w-3" />
-              <span className="font-medium">{timePosted}</span>
-            </div>
-          </div>
-
-          {/* Product Image */}
-          <div className="lg:w-36 lg:h-36 flex-shrink-0 relative overflow-hidden">
+          {/* Product Image - Made Bigger */}
+          <div className="lg:w-48 lg:h-48 flex-shrink-0 relative overflow-hidden">
             <img
               src={image}
               alt={title}
-              className="w-full h-48 lg:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-56 lg:h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
             {isFeatured && (
-              <div className="absolute top-2 left-2">
-                <Badge className="bg-gradient-to-r from-orange-500 to-pink-500 text-white border-0 text-xs">
+              <div className="absolute top-3 left-3">
+                <Badge className="bg-gradient-to-r from-orange-500 to-pink-500 text-white border-0 text-sm">
                   <Zap className="h-3 w-3 mr-1" />
                   Featured
                 </Badge>
@@ -111,6 +102,15 @@ export const DealCard = ({
           {/* Content */}
           <div className="flex-1 p-4 lg:p-6">
             <div className="space-y-4">
+              {/* Vote and Time at Top */}
+              <div className="flex items-center justify-between">
+                <VoteButtons initialVotes={votes} compact />
+                <div className="flex items-center gap-1 text-xs text-gray-500">
+                  <Clock className="h-3 w-3" />
+                  <span className="font-medium">{timePosted}</span>
+                </div>
+              </div>
+
               {/* Title and Description */}
               <div>
                 <h3 className="font-bold text-gray-900 text-base lg:text-lg line-clamp-2 group-hover:text-orange-600 transition-colors duration-200">
@@ -122,7 +122,7 @@ export const DealCard = ({
               </div>
 
               {/* Price and Discount */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
                   <span className="text-2xl font-bold text-gray-900">
                     ${discountedPrice}
@@ -140,7 +140,7 @@ export const DealCard = ({
               </div>
 
               {/* Merchant and Availability */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-3 text-sm">
                   <div className="flex items-center gap-2 text-gray-600">
                     <MapPin className="h-4 w-4" />
@@ -163,7 +163,7 @@ export const DealCard = ({
               {/* Promo Code */}
               {promoCode && (
                 <div className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-xl p-4 border border-orange-200">
-                  <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
                     <div className="flex items-center gap-3">
                       <span className="text-xs text-gray-600 font-medium">
                         Promo Code:
@@ -214,7 +214,7 @@ export const DealCard = ({
               )}
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+              <div className="flex items-center justify-between pt-3 border-t border-gray-100 flex-wrap gap-4">
                 <div className="flex items-center gap-6">
                   <Button
                     variant="ghost"
