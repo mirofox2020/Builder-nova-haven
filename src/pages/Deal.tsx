@@ -463,17 +463,16 @@ const Deal = () => {
                 <div className="flex items-center justify-center gap-6">
                   <button
                     onClick={() => handleVote("up")}
-                    className="flex items-center gap-3 px-6 py-3 rounded-full border-2 border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200"
+                    className="flex items-center justify-center w-16 h-16 rounded-full border-2 border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200"
                   >
                     <ThumbsUp
                       className={cn(
-                        "h-6 w-6",
+                        "h-7 w-7",
                         userVote === "up"
                           ? "text-green-600 fill-current"
                           : "text-gray-600",
                       )}
                     />
-                    <span className="font-medium text-gray-700">Helpful</span>
                   </button>
 
                   <div className="text-center">
@@ -485,19 +484,16 @@ const Deal = () => {
 
                   <button
                     onClick={() => handleVote("down")}
-                    className="flex items-center gap-3 px-6 py-3 rounded-full border-2 border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200"
+                    className="flex items-center justify-center w-16 h-16 rounded-full border-2 border-gray-200 hover:border-red-300 hover:bg-red-50 transition-all duration-200"
                   >
                     <ThumbsDown
                       className={cn(
-                        "h-6 w-6",
+                        "h-7 w-7",
                         userVote === "down"
                           ? "text-red-600 fill-current"
                           : "text-gray-600",
                       )}
                     />
-                    <span className="font-medium text-gray-700">
-                      Not Helpful
-                    </span>
                   </button>
                 </div>
               </div>
