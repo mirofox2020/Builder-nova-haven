@@ -172,50 +172,57 @@ const Categories = () => {
                 <h2 className="text-lg font-semibold text-gray-900">
                   Filter by Category
                 </h2>
-                <div className="flex flex-wrap gap-3 overflow-x-auto scrollbar-hide pb-2">
-                  {/* All Categories Filter */}
-                  <Button
-                    variant={
-                      selectedSubcategory === "all" ? "default" : "outline"
-                    }
-                    size="sm"
-                    onClick={() => setSelectedSubcategory("all")}
-                    className={cn(
-                      "flex items-center gap-2 whitespace-nowrap transition-all duration-200",
-                      selectedSubcategory === "all"
-                        ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-md"
-                        : "hover:bg-gray-50",
-                    )}
-                  >
-                    <span className="text-lg">🏷️</span>
-                    <span>All</span>
-                  </Button>
+                <div className="relative">
+                  {/* Horizontal Scrollable Container */}
+                  <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 scroll-smooth">
+                    <div className="flex gap-3 min-w-max">
+                      {/* All Categories Filter */}
+                      <Button
+                        variant={
+                          selectedSubcategory === "all" ? "default" : "outline"
+                        }
+                        size="sm"
+                        onClick={() => setSelectedSubcategory("all")}
+                        className={cn(
+                          "flex items-center gap-2 whitespace-nowrap transition-all duration-200 flex-shrink-0",
+                          selectedSubcategory === "all"
+                            ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-md"
+                            : "hover:bg-gray-50",
+                        )}
+                      >
+                        <span className="text-lg">🏷️</span>
+                        <span>All</span>
+                      </Button>
 
-                  {/* Subcategory Filters */}
-                  {category.subcategories.map((subcategory) => (
-                    <Button
-                      key={subcategory.id}
-                      variant={
-                        selectedSubcategory === subcategory.id
-                          ? "default"
-                          : "outline"
-                      }
-                      size="sm"
-                      onClick={() => setSelectedSubcategory(subcategory.id)}
-                      className={cn(
-                        "flex items-center gap-2 whitespace-nowrap transition-all duration-200",
-                        selectedSubcategory === subcategory.id
-                          ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-md"
-                          : "hover:bg-gray-50",
-                      )}
-                    >
-                      <span className="text-lg">{subcategory.icon}</span>
-                      <span>{subcategory.name}</span>
-                    </Button>
-                  ))}
+                      {/* Subcategory Filters */}
+                      {category.subcategories.map((subcategory) => (
+                        <Button
+                          key={subcategory.id}
+                          variant={
+                            selectedSubcategory === subcategory.id
+                              ? "default"
+                              : "outline"
+                          }
+                          size="sm"
+                          onClick={() => setSelectedSubcategory(subcategory.id)}
+                          className={cn(
+                            "flex items-center gap-2 whitespace-nowrap transition-all duration-200 flex-shrink-0",
+                            selectedSubcategory === subcategory.id
+                              ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-md"
+                              : "hover:bg-gray-50",
+                          )}
+                        >
+                          <span className="text-lg">{subcategory.icon}</span>
+                          <span>{subcategory.name}</span>
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Gradient Fade on Right */}
+                  <div className="absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white to-transparent pointer-events-none opacity-50" />
                 </div>
               </div>
-
               {/* Active Filter Display */}
               {selectedSubcategory !== "all" && (
                 <div className="flex items-center gap-2">
