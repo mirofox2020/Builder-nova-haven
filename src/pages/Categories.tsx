@@ -5,7 +5,7 @@ import { DealCard } from "@/components/DealCard";
 import { Sidebar } from "@/components/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Filter } from "lucide-react";
+import { ArrowLeft, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { categories, Category } from "@/data/categories";
 
@@ -169,12 +169,25 @@ const Categories = () => {
 
               {/* Subcategory Filters */}
               <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-gray-900">
-                  Filter by Category
-                </h2>
+                <div className="flex items-center justify-between">
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    Filter by Category
+                  </h2>
+                  <div className="flex items-center gap-1 text-xs text-gray-500">
+                    <ChevronLeft className="h-3 w-3" />
+                    <span>Slide to see more</span>
+                    <ChevronRight className="h-3 w-3" />
+                  </div>
+                </div>
                 <div className="relative">
+                  {/* Left Scroll Indicator */}
+                  <div className="absolute left-0 top-0 h-full w-8 bg-gradient-to-r from-white to-transparent pointer-events-none opacity-50 z-10" />
+
                   {/* Horizontal Scrollable Container */}
-                  <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 scroll-smooth">
+                  <div
+                    id="filter-container"
+                    className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 scroll-smooth px-4"
+                  >
                     <div className="flex gap-3 min-w-max">
                       {/* All Categories Filter */}
                       <Button
@@ -219,8 +232,35 @@ const Categories = () => {
                     </div>
                   </div>
 
-                  {/* Gradient Fade on Right */}
-                  <div className="absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white to-transparent pointer-events-none opacity-50" />
+                  {/* Right Scroll Indicator */}
+                  <div className="absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white to-transparent pointer-events-none opacity-50 z-10" />
+
+                  {/* Scroll Buttons for Desktop */}
+                  <button
+                    onClick={() => {
+                      const container =
+                        document.getElementById("filter-container");
+                      if (container) {
+                        container.scrollBy({ left: -200, behavior: "smooth" });
+                      }
+                    }}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border border-gray-200 rounded-full p-1 shadow-sm z-20 hidden lg:flex items-center justify-center"
+                  >
+                    <ChevronLeft className="h-4 w-4 text-gray-600" />
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      const container =
+                        document.getElementById("filter-container");
+                      if (container) {
+                        container.scrollBy({ left: 200, behavior: "smooth" });
+                      }
+                    }}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border border-gray-200 rounded-full p-1 shadow-sm z-20 hidden lg:flex items-center justify-center"
+                  >
+                    <ChevronRight className="h-4 w-4 text-gray-600" />
+                  </button>
                 </div>
               </div>
               {/* Active Filter Display */}

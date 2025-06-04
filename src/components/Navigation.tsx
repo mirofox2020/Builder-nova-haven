@@ -75,7 +75,7 @@ export const Navigation = () => {
                       size="sm"
                       className={cn(
                         "flex items-center gap-2 text-sm font-medium whitespace-nowrap rounded-full px-4 py-2 transition-all duration-200",
-                        "text-gray-600 hover:text-gray-900 hover:bg-gray-100",
+                        "text-black hover:text-black hover:bg-gray-100",
                       )}
                     >
                       <Icon className="h-4 w-4" />
@@ -109,7 +109,7 @@ export const Navigation = () => {
                   "flex items-center gap-2 text-sm font-medium whitespace-nowrap rounded-full px-4 py-2 transition-all duration-200",
                   isActive
                     ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-md hover:shadow-lg"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100",
+                    : "text-black hover:text-black hover:bg-gray-100",
                 )}
               >
                 <Icon className="h-4 w-4" />
