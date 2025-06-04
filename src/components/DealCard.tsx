@@ -89,8 +89,14 @@ export const DealCard = ({
               alt={title}
               className="w-full h-56 lg:h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
+            {/* Green Discount Badge - Positioned like in image */}
+            <div className="absolute top-3 left-3">
+              <div className="bg-green-600 text-white px-3 py-1 rounded-md text-sm font-semibold">
+                {discount}% off
+              </div>
+            </div>
             {isFeatured && (
-              <div className="absolute top-3 left-3">
+              <div className="absolute top-3 right-3">
                 <Badge className="bg-gradient-to-r from-orange-500 to-pink-500 text-white border-0 text-sm">
                   <Zap className="h-3 w-3 mr-1" />
                   Featured
@@ -134,9 +140,6 @@ export const DealCard = ({
                     ${originalPrice}
                   </span>
                 </div>
-                <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white border-0 text-sm px-3 py-1">
-                  -{discount}%
-                </Badge>
                 <div className="text-sm text-green-600 font-semibold">
                   Save ${savings}
                 </div>
@@ -163,16 +166,16 @@ export const DealCard = ({
                 </div>
               </div>
 
-              {/* Promo Code */}
+              {/* Promo Code - Styled like in the image */}
               {promoCode && (
-                <div className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-xl p-4 border border-orange-200">
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
                   <div className="flex items-center justify-between gap-3 flex-wrap">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs text-gray-600 font-medium">
-                        Promo Code:
+                      <span className="text-orange-600 text-sm font-medium">
+                        🏷️ Promo Code:
                       </span>
                       <div
-                        className="font-mono text-lg font-bold text-gray-900 px-3 py-1 bg-white rounded-lg border-2 border-dashed border-orange-300"
+                        className="font-mono text-lg font-bold text-gray-900 px-3 py-1 bg-white border-2 border-dashed border-orange-300 rounded"
                         style={{
                           fontFamily:
                             'Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
@@ -187,7 +190,7 @@ export const DealCard = ({
                         variant="outline"
                         onClick={handleCopyCode}
                         className={cn(
-                          "text-xs transition-all duration-200",
+                          "text-xs transition-all duration-200 border-gray-300",
                           codeCopied &&
                             "bg-green-50 border-green-300 text-green-700",
                         )}
@@ -206,10 +209,10 @@ export const DealCard = ({
                       </Button>
                       <Button
                         size="sm"
-                        className="text-xs bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 shadow-md"
+                        className="text-xs bg-blue-600 hover:bg-blue-700 text-white"
                       >
                         <ExternalLink className="h-3 w-3 mr-1" />
-                        Get Deal
+                        View Deal
                       </Button>
                     </div>
                   </div>
@@ -256,10 +259,10 @@ export const DealCard = ({
                 {!promoCode && (
                   <Button
                     size="sm"
-                    className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-sm font-medium shadow-md hover:shadow-lg transition-all duration-200"
+                    className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-all duration-200"
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />
-                    Get Deal
+                    View Deal
                   </Button>
                 )}
               </div>

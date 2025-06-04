@@ -38,44 +38,36 @@ export const VoteButtons = ({
 
   if (compact) {
     return (
-      <div className={cn("flex items-center gap-2", className)}>
+      <div className={cn("flex items-center gap-3", className)}>
         <Button
           variant="ghost"
           size="sm"
           onClick={() => handleVote("up")}
           className={cn(
-            "hover:bg-red-100 hover:text-red-600 transition-all duration-200 rounded-lg p-1 h-6 w-6",
-            userVote === "up" && "bg-red-100 text-red-600",
+            "hover:bg-gray-100 transition-all duration-200 rounded-full p-2 h-8 w-8",
+            userVote === "up" && "bg-gray-100",
           )}
         >
           <Heart
-            className={cn("h-3 w-3", userVote === "up" && "fill-current")}
+            className={cn(
+              "h-4 w-4 text-gray-600",
+              userVote === "up" && "fill-red-500 text-red-500",
+            )}
           />
         </Button>
 
-        <span
-          className={cn(
-            "font-semibold text-xs",
-            votes > 0
-              ? "text-red-600"
-              : votes < 0
-                ? "text-gray-600"
-                : "text-gray-600",
-          )}
-        >
-          {votes > 0 ? votes : 0}
-        </span>
+        <span className="font-medium text-sm text-gray-700">{votes} votes</span>
 
         <Button
           variant="ghost"
           size="sm"
           onClick={() => handleVote("down")}
           className={cn(
-            "hover:bg-gray-100 hover:text-gray-600 transition-all duration-200 rounded-lg p-1 h-6 w-6",
-            userVote === "down" && "bg-gray-100 text-gray-600",
+            "hover:bg-gray-100 transition-all duration-200 rounded-full p-2 h-8 w-8",
+            userVote === "down" && "bg-gray-100",
           )}
         >
-          <ThumbsDown className="h-3 w-3" />
+          <ThumbsDown className="h-4 w-4 text-gray-600" />
         </Button>
       </div>
     );
