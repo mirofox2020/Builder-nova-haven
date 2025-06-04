@@ -2,7 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { VoteButtons } from "./VoteButtons";
-import { ExternalLink, TrendingUp } from "lucide-react";
+import {
+  ExternalLink,
+  TrendingUp,
+  Fire,
+  Users,
+  DollarSign,
+  Activity,
+} from "lucide-react";
 
 interface HotDeal {
   id: string;
@@ -62,17 +69,21 @@ export const Sidebar = () => {
   return (
     <div className="space-y-6">
       {/* Hottest Deals */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-lg flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-orange-500" />
-            Hottest Deals
+      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg flex items-center gap-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-pink-500 rounded-lg flex items-center justify-center">
+              <Fire className="h-4 w-4 text-white" />
+            </div>
+            <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              Hottest Deals
+            </span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {hotDeals.map((deal) => (
+          {hotDeals.map((deal, index) => (
             <div key={deal.id} className="group">
-              <div className="flex gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
+              <div className="flex gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-pink-50 transition-all duration-200 border border-transparent hover:border-orange-200">
                 {/* Vote Buttons */}
                 <VoteButtons
                   initialVotes={deal.votes}
@@ -81,33 +92,38 @@ export const Sidebar = () => {
                 />
 
                 {/* Product Image */}
-                <div className="w-12 h-12 flex-shrink-0">
+                <div className="w-14 h-14 flex-shrink-0 relative">
                   <img
                     src={deal.image}
                     alt={deal.title}
-                    className="w-full h-full object-cover rounded"
+                    className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-200"
                   />
+                  {index === 0 && (
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">#1</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-medium text-sm text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                  <h4 className="font-semibold text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors">
                     {deal.title}
                   </h4>
 
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="font-semibold text-sm text-gray-900">
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="font-bold text-sm text-gray-900">
                       ${deal.discountedPrice}
                     </span>
                     <span className="text-xs text-gray-500 line-through">
                       ${deal.originalPrice}
                     </span>
-                    <Badge variant="destructive" className="text-xs py-0">
+                    <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs py-0 border-0">
                       -{deal.discount}%
                     </Badge>
                   </div>
 
-                  <div className="text-xs text-gray-500 mt-1">
+                  <div className="text-xs text-gray-500 mt-1 font-medium">
                     {deal.merchant}
                   </div>
                 </div>
@@ -115,44 +131,86 @@ export const Sidebar = () => {
             </div>
           ))}
 
-          <Button variant="outline" className="w-full text-sm" size="sm">
+          <Button
+            variant="outline"
+            className="w-full text-sm border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-200"
+            size="sm"
+          >
             View All Hot Deals
             <ExternalLink className="h-3 w-3 ml-2" />
           </Button>
         </CardContent>
       </Card>
 
-      {/* Ad Space */}
-      <Card>
-        <CardContent className="p-6">
-          <div className="text-center space-y-3">
-            <div className="w-full h-32 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg flex items-center justify-center">
-              <div className="text-gray-500 text-sm">Advertisement Space</div>
+      {/* Today's Stats */}
+      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg flex items-center gap-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+              <Activity className="h-4 w-4 text-white" />
             </div>
-            <Button size="sm" className="w-full">
-              Learn More
-            </Button>
+            <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              Today's Stats
+            </span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex justify-between items-center p-3 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                <TrendingUp className="h-4 w-4 text-white" />
+              </div>
+              <span className="text-sm font-medium text-gray-700">
+                New Deals
+              </span>
+            </div>
+            <span className="font-bold text-green-600 text-lg">+47</span>
+          </div>
+
+          <div className="flex justify-between items-center p-3 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                <Users className="h-4 w-4 text-white" />
+              </div>
+              <span className="text-sm font-medium text-gray-700">
+                Active Users
+              </span>
+            </div>
+            <span className="font-bold text-blue-600 text-lg">2.4K</span>
+          </div>
+
+          <div className="flex justify-between items-center p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center">
+                <DollarSign className="h-4 w-4 text-white" />
+              </div>
+              <span className="text-sm font-medium text-gray-700">
+                Total Savings
+              </span>
+            </div>
+            <span className="font-bold text-purple-600 text-lg">$1.2M</span>
           </div>
         </CardContent>
       </Card>
 
-      {/* Quick Stats */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-lg">Today's Stats</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">New Deals</span>
-            <span className="font-semibold text-green-600">+47</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Active Codes</span>
-            <span className="font-semibold text-blue-600">234</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Total Savings</span>
-            <span className="font-semibold text-purple-600">$1.2M</span>
+      {/* Premium Ad Space */}
+      <Card className="bg-gradient-to-br from-orange-500 to-pink-500 border-0 shadow-lg text-white overflow-hidden">
+        <CardContent className="p-6 relative">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+          <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full translate-y-10 -translate-x-10"></div>
+          <div className="relative text-center space-y-4">
+            <div className="space-y-2">
+              <h3 className="font-bold text-lg">Get Premium</h3>
+              <p className="text-white/90 text-sm leading-relaxed">
+                Unlock exclusive deals, early access, and ad-free browsing
+              </p>
+            </div>
+            <Button
+              size="sm"
+              className="w-full bg-white text-orange-600 hover:bg-gray-100 font-semibold shadow-md"
+            >
+              Upgrade Now
+            </Button>
           </div>
         </CardContent>
       </Card>
