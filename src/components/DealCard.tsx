@@ -273,12 +273,12 @@ export const DealCard = ({
         </CardContent>
       </Card>
 
-      {/* Mobile Grid Layout */}
+      {/* Mobile Layout - Image Left, Details Right */}
       <div className="lg:hidden">
         <a
           href={`/deal/${id}`}
           className={cn(
-            "block relative bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-orange-300",
+            "block relative bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 hover:border-orange-300",
             !isAvailable && "opacity-75",
           )}
           style={{
@@ -295,117 +295,121 @@ export const DealCard = ({
             backgroundColor: "rgb(255, 255, 255)",
           }}
         >
-          {/* Mobile Vote Buttons - Top Right */}
-          <div className="absolute top-3 right-3 z-10">
-            <VoteButtons initialVotes={votes} compact size="sm" />
-          </div>
-
-          {/* Mobile Image */}
-          <div className="w-full h-32 bg-gray-50 rounded-lg mb-3 relative overflow-hidden">
-            <img
-              src={image}
-              alt={title}
-              className="w-full h-full object-contain p-2"
-            />
-            {discount > 0 && (
-              <div className="absolute top-2 left-2 bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
-                {discount}% off
-              </div>
-            )}
-          </div>
-
-          {/* Mobile Content */}
-          <div className="space-y-2">
-            {/* Title */}
-            <h3 className="font-bold text-gray-900 text-sm line-clamp-2 leading-tight">
-              {title}
-            </h3>
-
-            {/* Price */}
-            <div className="flex items-center gap-2">
-              <span
-                className="text-lg font-bold"
-                style={{ color: "rgba(111, 162, 37, 1)" }}
-              >
-                ${discountedPrice}
-              </span>
-              <span className="text-sm text-gray-500 line-through">
-                ${originalPrice}
-              </span>
+          {/* Mobile Layout: Image Left, Content Right */}
+          <div className="flex gap-3">
+            {/* Mobile Image - Left Side */}
+            <div className="w-20 h-20 bg-gray-50 rounded-lg flex-shrink-0 relative overflow-hidden">
+              <img
+                src={image}
+                alt={title}
+                className="w-full h-full object-contain p-1"
+              />
+              {discount > 0 && (
+                <div className="absolute top-1 left-1 bg-green-600 text-white px-1 py-0.5 rounded text-xs font-semibold">
+                  {discount}%
+                </div>
+              )}
             </div>
 
-            {/* Merchant and Time */}
-            <div className="flex items-center justify-between text-xs text-gray-500">
-              <div className="flex items-center gap-1">
-                <MapPin className="h-3 w-3" />
-                <span>{merchant}</span>
+            {/* Mobile Content - Right Side */}
+            <div className="flex-1 min-w-0">
+              {/* Vote Buttons - Top Right */}
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex-1 pr-2">
+                  {/* Title */}
+                  <h3 className="font-bold text-gray-900 text-sm line-clamp-2 leading-tight">
+                    {title}
+                  </h3>
+                </div>
+                <VoteButtons initialVotes={votes} compact size="sm" />
               </div>
-              <div className="flex items-center gap-1">
-                <Clock className="h-3 w-3" />
-                <span>{timePosted}</span>
-              </div>
-            </div>
 
-            {/* Promo Code for Mobile */}
-            {promoCode && (
-              <div className="bg-orange-50 border border-orange-200 rounded p-2 mt-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-orange-600 font-medium">
-                    Code: {promoCode}
-                  </span>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCopyCode();
-                    }}
-                    className="text-xs h-6 px-2"
-                  >
-                    <Copy className="h-2 w-2 mr-1" />
-                    {codeCopied ? "Copied!" : "Copy"}
-                  </Button>
+              {/* Price */}
+              <div className="flex items-center gap-2 mb-2">
+                <span
+                  className="text-lg font-bold"
+                  style={{ color: "rgba(111, 162, 37, 1)" }}
+                >
+                  ${discountedPrice}
+                </span>
+                <span className="text-sm text-gray-500 line-through">
+                  ${originalPrice}
+                </span>
+              </div>
+
+              {/* Merchant and Time */}
+              <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+                <div className="flex items-center gap-1">
+                  <MapPin className="h-3 w-3" />
+                  <span>{merchant}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Clock className="h-3 w-3" />
+                  <span>{timePosted}</span>
                 </div>
               </div>
-            )}
 
-            {/* Mobile Actions */}
-            <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // Handle comment
-                  }}
-                  className="flex items-center gap-1 text-xs text-gray-500 hover:text-orange-600"
-                >
-                  <MessageCircle className="h-3 w-3" />
-                  <span>{comments}</span>
-                </button>
+              {/* Promo Code for Mobile */}
+              {promoCode && (
+                <div className="bg-orange-50 border border-orange-200 rounded p-2 mb-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-orange-600 font-medium">
+                      Code: {promoCode}
+                    </span>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleCopyCode();
+                      }}
+                      className="text-xs h-5 px-2"
+                    >
+                      <Copy className="h-2 w-2 mr-1" />
+                      {codeCopied ? "Copied!" : "Copy"}
+                    </Button>
+                  </div>
+                </div>
+              )}
 
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleShare();
-                  }}
-                  className="flex items-center gap-1 text-xs text-gray-500 hover:text-blue-600"
+              {/* Mobile Actions */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // Handle comment
+                    }}
+                    className="flex items-center gap-1 text-xs text-gray-500 hover:text-orange-600"
+                  >
+                    <MessageCircle className="h-3 w-3" />
+                    <span>{comments}</span>
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleShare();
+                    }}
+                    className="flex items-center gap-1 text-xs text-gray-500 hover:text-blue-600"
+                  >
+                    <Share2 className="h-3 w-3" />
+                    <span>Share</span>
+                  </button>
+                </div>
+
+                <Badge
+                  variant={isAvailable ? "secondary" : "outline"}
+                  className={cn(
+                    "text-xs",
+                    isAvailable
+                      ? "bg-green-100 text-green-700 border-green-200"
+                      : "bg-red-100 text-red-700 border-red-200",
+                  )}
                 >
-                  <Share2 className="h-3 w-3" />
-                  <span>Share</span>
-                </button>
+                  {isAvailable ? "Available" : "Expired"}
+                </Badge>
               </div>
-
-              <Badge
-                variant={isAvailable ? "secondary" : "outline"}
-                className={cn(
-                  "text-xs",
-                  isAvailable
-                    ? "bg-green-100 text-green-700 border-green-200"
-                    : "bg-red-100 text-red-700 border-red-200",
-                )}
-              >
-                {isAvailable ? "Available" : "Expired"}
-              </Badge>
             </div>
           </div>
         </a>
