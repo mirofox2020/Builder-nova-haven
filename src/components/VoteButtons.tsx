@@ -44,7 +44,7 @@ export const VoteButtons = ({
         {/* Thumbs Up */}
         <button
           onClick={() => handleVote("up")}
-          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-1 transition-colors duration-200"
+          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-0.5 transition-colors duration-200"
         >
           <ThumbsUp
             className={cn(
@@ -55,15 +55,13 @@ export const VoteButtons = ({
           />
         </button>
 
-        {/* Votes Text */}
-        <span className="text-gray-600 font-normal text-xs px-1">
-          {votes} votes
-        </span>
+        {/* Vote Count Only - No "votes" text */}
+        <span className="text-gray-600 font-normal text-xs px-1">{votes}</span>
 
         {/* Thumbs Down */}
         <button
           onClick={() => handleVote("down")}
-          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-1 transition-colors duration-200"
+          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-0.5 transition-colors duration-200"
         >
           <ThumbsDown
             className={cn(
