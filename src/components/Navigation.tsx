@@ -59,7 +59,7 @@ export const Navigation = () => {
 
   return (
     <div className="bg-white/50 backdrop-blur-sm border-b border-gray-200/70">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* Main Categories */}
         <div className="flex items-center gap-2 py-4 overflow-x-auto scrollbar-hide">
           {mainCategories.map((category) => {

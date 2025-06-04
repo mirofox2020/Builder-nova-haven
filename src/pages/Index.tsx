@@ -109,7 +109,7 @@ const Index = () => {
 
       <Header />
 
-      <main className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+      <main className="relative w-full px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 lg:gap-8">
           {/* Main Content */}
           <div className="xl:col-span-3 space-y-6 lg:space-y-8">
@@ -166,7 +166,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="relative bg-white/80 backdrop-blur-sm border-t border-gray-200/50 mt-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
             <div>
               <h3 className="font-bold text-gray-900 mb-4 text-lg">Company</h3>

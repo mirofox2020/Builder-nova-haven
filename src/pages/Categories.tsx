@@ -99,7 +99,7 @@ const Categories = () => {
 
       <Header />
 
-      <main className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+      <main className="relative w-full px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
         {/* Category Header */}
         <div className="mb-6">
           <div className="flex items-center gap-4 mb-4">
