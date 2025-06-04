@@ -8,7 +8,7 @@ import {
   MessageCircle,
   Filter,
   ChevronDown,
-  Fire,
+  Flame,
   TrendingUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,7 +23,7 @@ const mainCategories = [
 
 const feedTabs = [
   { id: "for-you", label: "For you", active: true, icon: null },
-  { id: "hottest", label: "Hottest", icon: Fire },
+  { id: "hottest", label: "Hottest", icon: Flame },
   { id: "trending", label: "Trending", icon: TrendingUp },
   { id: "all", label: "All", icon: null },
 ];

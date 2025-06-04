@@ -73,7 +73,7 @@ export const Sidebar = () => {
         <CardHeader className="pb-4">
           <CardTitle className="text-lg flex items-center gap-3">
             <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <Fire className="h-4 w-4 text-white" />
+              <Flame className="h-4 w-4 text-white" />
             </div>
             <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
               Hottest Deals
