@@ -341,7 +341,7 @@ export const DealCard = ({
             </div>
 
             {/* RIGHT SECTION: Product Details */}
-            <div className="flex-1 min-w-0 space-y-3 max-sm:space-y-2">
+            <div className="flex-1 min-w-0 space-y-3 max-sm:space-y-2 max-sm:my-auto">
               {/* Time at Top */}
               <div className="flex items-center gap-1 text-xs max-sm:text-xs text-gray-500">
                 <Clock className="h-3 w-3 max-sm:h-2.5 max-sm:w-2.5" />
