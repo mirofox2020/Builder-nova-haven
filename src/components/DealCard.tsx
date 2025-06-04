@@ -11,7 +11,6 @@ import {
   Copy,
   Clock,
   MapPin,
-  Zap,
   Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -69,48 +68,30 @@ export const DealCard = ({
     });
   };
 
-  const savings = originalPrice - discountedPrice;
-
   return (
     <Card
       className={cn(
         "group overflow-hidden hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-0 shadow-sm hover:-translate-y-1",
         !isAvailable && "opacity-75",
-        isFeatured &&
-          "ring-2 ring-gradient-to-r from-orange-400 to-pink-400 shadow-lg",
       )}
     >
       <CardContent className="p-0">
         <div className="flex flex-col lg:flex-row">
-          {/* Product Image - Made Bigger */}
-          <div className="lg:w-48 lg:h-48 flex-shrink-0 relative overflow-hidden">
+          {/* Product Image - Bigger and Centered, No Badges */}
+          <div className="lg:w-56 lg:h-56 flex-shrink-0 relative overflow-hidden flex items-center justify-center bg-gray-50">
             <img
               src={image}
               alt={title}
-              className="w-full h-56 lg:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-64 lg:h-full object-contain group-hover:scale-105 transition-transform duration-300 p-4"
             />
-            {/* Green Discount Badge - Positioned like in image */}
-            <div className="absolute top-3 left-3">
-              <div className="bg-green-600 text-white px-3 py-1 rounded-md text-sm font-semibold">
-                {discount}% off
-              </div>
-            </div>
-            {isFeatured && (
-              <div className="absolute top-3 right-3">
-                <Badge className="bg-gradient-to-r from-orange-500 to-pink-500 text-white border-0 text-sm">
-                  <Zap className="h-3 w-3 mr-1" />
-                  Featured
-                </Badge>
-              </div>
-            )}
           </div>
 
           {/* Content */}
           <div className="flex-1 p-4 lg:p-6">
             <div className="space-y-4">
-              {/* Vote and Time at Top */}
+              {/* Vote and Time at Top - Bigger Vote Buttons */}
               <div className="flex items-center justify-between">
-                <VoteButtons initialVotes={votes} compact />
+                <VoteButtons initialVotes={votes} compact size="lg" />
                 <div className="flex items-center gap-1 text-xs text-gray-500">
                   <Clock className="h-3 w-3" />
                   <span className="font-medium">{timePosted}</span>
@@ -127,7 +108,7 @@ export const DealCard = ({
                 </p>
               </div>
 
-              {/* Price and Discount */}
+              {/* Price and Percent Off */}
               <div className="flex items-center gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
                   <span
@@ -140,8 +121,8 @@ export const DealCard = ({
                     ${originalPrice}
                   </span>
                 </div>
-                <div className="text-sm text-green-600 font-semibold">
-                  Save ${savings}
+                <div className="text-sm font-semibold px-2 py-1 bg-green-100 text-green-700 rounded">
+                  {discount}% off
                 </div>
               </div>
 
