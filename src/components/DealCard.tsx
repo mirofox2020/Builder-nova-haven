@@ -278,7 +278,7 @@ export const DealCard = ({
         <a
           href={`/deal/${id}`}
           className={cn(
-            "block relative bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-300 hover:border-orange-300 sm:p-3",
+            "block relative bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300 hover:border-orange-300 p-3 max-sm:px-1.5 max-sm:py-0",
             !isAvailable && "opacity-75"
           )}
           style={{
@@ -292,7 +292,8 @@ export const DealCard = ({
             transitionProperty: 'box-shadow, border-color',
             transitionTimingFunction: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
             wordBreak: 'break-word',
-            backgroundColor: 'rgb(255, 255, 255)',
+            backgroundColor: 'rgb(255, 255, 255)'
+          }}
             '@media (max-width: 640px)': {
               padding: '0 5px'
             }
