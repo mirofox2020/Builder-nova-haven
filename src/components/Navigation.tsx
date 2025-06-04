@@ -59,9 +59,9 @@ export const Navigation = () => {
 
   return (
     <div className="bg-white/50 backdrop-blur-sm border-b border-gray-200/70">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="w-full">
         {/* Main Categories */}
-        <div className="flex items-center gap-2 py-4 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center gap-2 py-4 overflow-x-auto scrollbar-hide px-4 sm:px-6 lg:px-8">
           {mainCategories.map((category) => {
             const Icon = category.icon;
             const isActive = activeCategory === category.id;
@@ -131,7 +131,7 @@ export const Navigation = () => {
         </div>
 
         {/* Secondary Navigation */}
-        <div className="flex items-center justify-between py-3 border-t border-gray-200/50">
+        <div className="flex items-center justify-between py-3 border-t border-gray-200/50 px-4 sm:px-6 lg:px-8">
           {/* Feed Tabs */}
           <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
             {feedTabs.map((tab) => {

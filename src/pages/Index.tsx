@@ -103,14 +103,14 @@ const sampleDeals = [
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      {/* Background Pattern */}
+      {/* Background Pattern - Full Width */}
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.05),transparent_70%)] pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(219,39,119,0.05),transparent_50%)] pointer-events-none" />
 
       <Header />
 
-      <main className="relative w-full px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 lg:gap-8">
+      <main className="relative w-full">
+        <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
           {/* Main Content */}
           <div className="xl:col-span-3 space-y-6 lg:space-y-8">
             {/* Section Header */}
@@ -125,7 +125,7 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Deals Grid - Desktop: Vertical Stack, Mobile: 2-Column Grid */}
+            {/* Deals Grid - Desktop: Vertical Stack, Mobile: 1-Column Grid */}
             <div className="space-y-6 lg:space-y-6">
               {/* Desktop Layout - Hidden on Mobile */}
               <div className="hidden lg:block space-y-6">
@@ -164,8 +164,8 @@ const Index = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="relative bg-white/80 backdrop-blur-sm border-t border-gray-200/50 mt-16">
+      {/* Footer - Full Width */}
+      <footer className="relative bg-white/80 backdrop-blur-sm border-t border-gray-200/50 mt-16 w-full">
         <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
             <div>
