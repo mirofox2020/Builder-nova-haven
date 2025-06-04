@@ -125,11 +125,21 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Deals Grid */}
-            <div className="space-y-6">
-              {sampleDeals.map((deal) => (
-                <DealCard key={deal.id} {...deal} />
-              ))}
+            {/* Deals Grid - Desktop: Vertical Stack, Mobile: 2-Column Grid */}
+            <div className="space-y-6 lg:space-y-6">
+              {/* Desktop Layout - Hidden on Mobile */}
+              <div className="hidden lg:block space-y-6">
+                {sampleDeals.map((deal) => (
+                  <DealCard key={deal.id} {...deal} />
+                ))}
+              </div>
+
+              {/* Mobile Grid Layout - Hidden on Desktop */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:hidden">
+                {sampleDeals.map((deal) => (
+                  <DealCard key={deal.id} {...deal} />
+                ))}
+              </div>
             </div>
 
             {/* Sidebar on Mobile/Tablet */}
@@ -153,6 +163,7 @@ const Index = () => {
           </div>
         </div>
       </main>
+
       {/* Footer */}
       <footer className="relative bg-white/80 backdrop-blur-sm border-t border-gray-200/50 mt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
