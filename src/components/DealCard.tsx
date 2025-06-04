@@ -342,6 +342,12 @@ export const DealCard = ({
 
             {/* RIGHT SECTION: Product Details */}
             <div className="flex-1 min-w-0 space-y-3 max-sm:space-y-2">
+              {/* Time at Top */}
+              <div className="flex items-center gap-1 text-xs max-sm:text-xs text-gray-500">
+                <Clock className="h-3 w-3 max-sm:h-2.5 max-sm:w-2.5" />
+                <span>{timePosted}</span>
+              </div>
+
               {/* Title */}
               <h3 className="font-bold text-gray-900 text-sm max-sm:text-xs line-clamp-2 leading-tight">
                 {title}
@@ -360,18 +366,10 @@ export const DealCard = ({
                 </span>
               </div>
 
-              {/* Merchant and Time */}
-              <div className="flex items-center justify-between text-xs max-sm:text-xs text-gray-500">
-                <div className="flex items-center gap-1">
-                  <MapPin className="h-3 w-3 max-sm:h-2.5 max-sm:w-2.5" />
-                  <span className="text-black sm:text-gray-500">
-                    {merchant}
-                  </span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Clock className="h-3 w-3 max-sm:h-2.5 max-sm:w-2.5" />
-                  <span>{timePosted}</span>
-                </div>
+              {/* Merchant */}
+              <div className="flex items-center gap-1 text-xs max-sm:text-xs text-gray-500">
+                <MapPin className="h-3 w-3 max-sm:h-2.5 max-sm:w-2.5" />
+                <span className="text-black sm:text-gray-500">{merchant}</span>
               </div>
 
               {/* Promo Code for Mobile */}
