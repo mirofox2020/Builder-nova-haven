@@ -124,7 +124,10 @@ export const DealCard = ({
               {/* Price and Discount */}
               <div className="flex items-center gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl font-bold text-gray-900">
+                  <span
+                    className="text-2xl font-bold"
+                    style={{ color: "rgba(111, 162, 37, 1)" }}
+                  >
                     ${discountedPrice}
                   </span>
                   <span className="text-lg text-gray-500 line-through">

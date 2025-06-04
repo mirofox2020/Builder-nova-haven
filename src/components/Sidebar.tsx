@@ -84,13 +84,6 @@ export const Sidebar = () => {
           {hotDeals.map((deal, index) => (
             <div key={deal.id} className="group">
               <div className="flex gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-pink-50 transition-all duration-200 border border-transparent hover:border-orange-200">
-                {/* Vote Buttons */}
-                <VoteButtons
-                  initialVotes={deal.votes}
-                  size="sm"
-                  className="self-start"
-                />
-
                 {/* Product Image */}
                 <div className="w-14 h-14 flex-shrink-0 relative">
                   <img
