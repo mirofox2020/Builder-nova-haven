@@ -116,7 +116,7 @@ const Index = () => {
             <div className="xl:col-span-3 space-y-6 lg:space-y-8">
               {/* Section Header */}
               <div className="space-y-3 text-center lg:text-left">
-                <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent font-sans">
+                <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent">
                   Deals for you
                 </h1>
                 <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
@@ -126,26 +126,11 @@ const Index = () => {
                 </p>
               </div>
 
-              {/* Deals Grid - Desktop: Vertical Stack, Mobile: 1-Column Grid */}
+              {/* Deals Grid */}
               <div className="space-y-6 lg:space-y-6">
-                {/* Desktop Layout - Hidden on Mobile */}
-                <div className="hidden lg:block space-y-6">
-                  {sampleDeals.map((deal) => (
-                    <DealCard key={deal.id} {...deal} />
-                  ))}
-                </div>
-
-                {/* Mobile Grid Layout - Hidden on Desktop */}
-                <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:hidden">
-                  {sampleDeals.map((deal) => (
-                    <DealCard key={deal.id} {...deal} />
-                  ))}
-                </div>
-              </div>
-
-              {/* Sidebar on Mobile/Tablet */}
-              <div className="xl:hidden">
-                <Sidebar />
+                {sampleDeals.map((deal) => (
+                  <DealCard key={deal.id} {...deal} />
+                ))}
               </div>
 
               {/* Load More */}
