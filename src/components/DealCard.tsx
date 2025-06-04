@@ -309,11 +309,6 @@ export const DealCard = ({
                   alt={title}
                   className="w-full h-full object-contain p-2 max-sm:p-0"
                 />
-                {discount > 0 && (
-                  <div className="absolute top-1 left-1 bg-green-600 text-white px-1.5 py-0.5 rounded text-xs font-semibold shadow-sm">
-                    {discount}%
-                  </div>
-                )}
               </div>
 
               {/* Share and Comment Icons - Under Image */}
@@ -355,6 +350,11 @@ export const DealCard = ({
 
               {/* Price */}
               <div className="flex items-center gap-2">
+                {discount > 0 && (
+                  <span className="text-sm max-sm:text-xs font-semibold bg-green-100 text-green-700 px-2 py-1 rounded">
+                    {discount}% off
+                  </span>
+                )}
                 <span
                   className="text-lg max-sm:text-base font-bold"
                   style={{ color: "rgba(111, 162, 37, 1)" }}
