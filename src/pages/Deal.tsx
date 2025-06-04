@@ -22,6 +22,8 @@ import {
   ThumbsUp,
   ThumbsDown,
   TrendingUp,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -78,7 +80,7 @@ This deal includes free shipping and comes with Apple's standard one-year limite
   subcategory: "smartphones",
 };
 
-// Sample recommended deals
+// Sample recommended deals - 10 products for slider
 const recommendedDeals = [
   {
     id: "2",
@@ -120,6 +122,104 @@ const recommendedDeals = [
     timePosted: "8h ago",
     votes: 67,
     comments: 8,
+    isAvailable: true,
+  },
+  {
+    id: "5",
+    title: "Xiaomi 14 Pro 256GB",
+    description: "Premium camera phone with Leica partnership.",
+    image: "/placeholder.svg",
+    originalPrice: 799,
+    discountedPrice: 599,
+    discount: 25,
+    merchant: "Xiaomi",
+    timePosted: "10h ago",
+    votes: 92,
+    comments: 15,
+    isAvailable: true,
+  },
+  {
+    id: "6",
+    title: "Nothing Phone (2) 128GB",
+    description: "Unique transparent design with Glyph interface.",
+    image: "/placeholder.svg",
+    originalPrice: 699,
+    discountedPrice: 499,
+    discount: 29,
+    merchant: "Nothing",
+    timePosted: "12h ago",
+    votes: 78,
+    comments: 9,
+    isAvailable: true,
+  },
+  {
+    id: "7",
+    title: "Asus ROG Phone 8 Pro",
+    description: "Ultimate gaming phone with cooling system.",
+    image: "/placeholder.svg",
+    originalPrice: 1199,
+    discountedPrice: 899,
+    discount: 25,
+    merchant: "Asus",
+    timePosted: "14h ago",
+    votes: 156,
+    comments: 22,
+    isAvailable: true,
+  },
+  {
+    id: "8",
+    title: "Sony Xperia 1 VI",
+    description: "Professional camera phone for creators.",
+    image: "/placeholder.svg",
+    originalPrice: 1299,
+    discountedPrice: 999,
+    discount: 23,
+    merchant: "Sony",
+    timePosted: "16h ago",
+    votes: 87,
+    comments: 11,
+    isAvailable: true,
+  },
+  {
+    id: "9",
+    title: "Motorola Edge 50 Pro",
+    description: "Curved display with premium build quality.",
+    image: "/placeholder.svg",
+    originalPrice: 599,
+    discountedPrice: 399,
+    discount: 33,
+    merchant: "Motorola",
+    timePosted: "18h ago",
+    votes: 64,
+    comments: 7,
+    isAvailable: true,
+  },
+  {
+    id: "10",
+    title: "Realme GT 5 Pro",
+    description: "Flagship killer with powerful performance.",
+    image: "/placeholder.svg",
+    originalPrice: 499,
+    discountedPrice: 349,
+    discount: 30,
+    merchant: "Realme",
+    timePosted: "20h ago",
+    votes: 113,
+    comments: 16,
+    isAvailable: true,
+  },
+  {
+    id: "11",
+    title: "Honor Magic 6 Pro",
+    description: "AI-powered smartphone with amazing battery.",
+    image: "/placeholder.svg",
+    originalPrice: 899,
+    discountedPrice: 699,
+    discount: 22,
+    merchant: "Honor",
+    timePosted: "22h ago",
+    votes: 95,
+    comments: 13,
     isAvailable: true,
   },
 ];
@@ -622,44 +722,175 @@ const Deal = () => {
                   <div className="w-24 h-0.5 bg-gradient-to-r from-orange-500 to-pink-500 mx-auto rounded-full"></div>
                 </div>
 
-                {/* Deals Grid - 2 Columns, 6 Items */}
-                <div className="grid grid-cols-2 gap-6">
-                  {recommendedDeals.slice(0, 6).map((deal, index) => (
-                    <div
-                      key={deal.id}
-                      className="group transform transition-all duration-300 hover:-translate-y-2 cursor-pointer"
-                      onClick={() =>
-                        (window.location.href = `/deal/${deal.id}`)
-                      }
-                      style={{
-                        animationDelay: `${index * 150}ms`,
-                      }}
-                    >
-                      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:border-orange-200">
-                        {/* Deal Image */}
-                        <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 p-4 relative overflow-hidden">
-                          <img
-                            src={deal.image}
-                            alt={deal.title}
-                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                          />
-                          {/* Discount Badge */}
-                          <div className="absolute top-3 right-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
-                            -{deal.discount}%
+                {/* Desktop: Grid for first 6 items + Slider */}
+                <div className="hidden md:block">
+                  {/* First 6 items in grid */}
+                  <div className="grid grid-cols-3 gap-6 mb-8">
+                    {recommendedDeals.slice(0, 6).map((deal, index) => (
+                      <div
+                        key={deal.id}
+                        className="group transform transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+                        onClick={() =>
+                          (window.location.href = `/deal/${deal.id}`)
+                        }
+                        style={{
+                          animationDelay: `${index * 150}ms`,
+                        }}
+                      >
+                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:border-orange-200">
+                          {/* Deal Image */}
+                          <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 p-4 relative overflow-hidden">
+                            <img
+                              src={deal.image}
+                              alt={deal.title}
+                              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                            />
+                            {/* Discount Badge */}
+                            <div className="absolute top-3 right-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+                              -{deal.discount}%
+                            </div>
+                          </div>
+
+                          {/* Deal Content - Only Title */}
+                          <div className="p-4">
+                            <h3 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
+                              {deal.title}
+                            </h3>
                           </div>
                         </div>
-
-                        {/* Deal Content - Only Title */}
-                        <div className="p-4">
-                          <h3 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
-                            {deal.title}
-                          </h3>
-                        </div>
                       </div>
+                    ))}
+                  </div>
+
+                  {/* Remaining items in slider */}
+                  {recommendedDeals.length > 6 && (
+                    <div className="relative">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                        More Similar Deals
+                      </h3>
+                      <div
+                        className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 scroll-smooth"
+                        id="desktop-slider"
+                      >
+                        {recommendedDeals.slice(6).map((deal, index) => (
+                          <div
+                            key={deal.id}
+                            className="group transform transition-all duration-300 hover:-translate-y-2 cursor-pointer flex-shrink-0 w-64"
+                            onClick={() =>
+                              (window.location.href = `/deal/${deal.id}`)
+                            }
+                            style={{
+                              animationDelay: `${(index + 6) * 150}ms`,
+                            }}
+                          >
+                            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:border-orange-200">
+                              {/* Deal Image */}
+                              <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 p-4 relative overflow-hidden">
+                                <img
+                                  src={deal.image}
+                                  alt={deal.title}
+                                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                                />
+                                {/* Discount Badge */}
+                                <div className="absolute top-3 right-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+                                  -{deal.discount}%
+                                </div>
+                              </div>
+
+                              {/* Deal Content - Only Title */}
+                              <div className="p-4">
+                                <h3 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
+                                  {deal.title}
+                                </h3>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Desktop Slider Navigation */}
+                      <button
+                        onClick={() => {
+                          const slider =
+                            document.getElementById("desktop-slider");
+                          if (slider) {
+                            slider.scrollBy({ left: -300, behavior: "smooth" });
+                          }
+                        }}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border border-gray-200 rounded-full p-2 shadow-md z-20 transition-all duration-200"
+                      >
+                        <ChevronLeft className="h-5 w-5 text-gray-600" />
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          const slider =
+                            document.getElementById("desktop-slider");
+                          if (slider) {
+                            slider.scrollBy({ left: 300, behavior: "smooth" });
+                          }
+                        }}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border border-gray-200 rounded-full p-2 shadow-md z-20 transition-all duration-200"
+                      >
+                        <ChevronRight className="h-5 w-5 text-gray-600" />
+                      </button>
                     </div>
-                  ))}
+                  )}
                 </div>
 
+                {/* Mobile: Horizontal Slider for all 10 items */}
+                <div className="md:hidden">
+                  <div className="relative">
+                    <div
+                      className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 scroll-smooth"
+                      id="mobile-slider"
+                    >
+                      {recommendedDeals.slice(0, 10).map((deal, index) => (
+                        <div
+                          key={deal.id}
+                          className="group transform transition-all duration-300 hover:-translate-y-1 cursor-pointer flex-shrink-0 w-40"
+                          onClick={() =>
+                            (window.location.href = `/deal/${deal.id}`)
+                          }
+                          style={{
+                            animationDelay: `${index * 100}ms`,
+                          }}
+                        >
+                          <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-orange-200">
+                            {/* Deal Image */}
+                            <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 p-3 relative overflow-hidden">
+                              <img
+                                src={deal.image}
+                                alt={deal.title}
+                                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                              />
+                              {/* Discount Badge */}
+                              <div className="absolute top-2 right-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-1.5 py-0.5 rounded-full text-xs font-bold shadow-lg">
+                                -{deal.discount}%
+                              </div>
+                            </div>
+
+                            {/* Deal Content - Only Title */}
+                            <div className="p-3">
+                              <h3 className="font-bold text-xs text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
+                                {deal.title}
+                              </h3>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Mobile Slider Indicators */}
+                    <div className="flex justify-center gap-1 mt-4">
+                      <div className="flex items-center gap-1 text-xs text-gray-500">
+                        <ChevronLeft className="h-3 w-3" />
+                        <span>Swipe to see more</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 {/* View More Button */}
                 <div className="text-center pt-4">
                   <Button
