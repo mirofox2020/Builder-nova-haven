@@ -83,6 +83,7 @@ export const DealCard = ({
               src={image}
               alt={title}
               className="w-full h-64 lg:h-full object-contain group-hover:scale-105 transition-transform duration-300 p-4"
+              style={{ margin: "auto 0" }}
             />
           </div>
 
@@ -108,42 +109,56 @@ export const DealCard = ({
                 </p>
               </div>
 
-              {/* Price and Percent Off */}
-              <div className="flex items-center gap-4 flex-wrap">
-                <div className="flex items-center gap-3">
-                  <span
-                    className="text-2xl font-bold"
-                    style={{ color: "rgba(111, 162, 37, 1)" }}
-                  >
-                    ${discountedPrice}
-                  </span>
-                  <span className="text-lg text-gray-500 line-through">
-                    ${originalPrice}
-                  </span>
-                </div>
-                <div className="text-sm font-semibold px-2 py-1 bg-green-100 text-green-700 rounded">
-                  {discount}% off
-                </div>
-              </div>
-
-              {/* Merchant and Availability */}
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <MapPin className="h-4 w-4" />
-                    <span className="font-medium">{merchant}</span>
+              {/* Price and Merchant Info - Restructured Layout */}
+              <div className="flex flex-col">
+                <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+                  {/* Price Column */}
+                  <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
+                    <div className="flex items-center gap-4 flex-wrap mt-4">
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="text-2xl font-bold"
+                          style={{ color: "rgba(111, 162, 37, 1)" }}
+                        >
+                          ${discountedPrice}
+                        </span>
+                        <span className="text-lg text-gray-500 line-through">
+                          ${originalPrice}
+                        </span>
+                      </div>
+                      <div className="text-sm font-semibold px-2 py-1 bg-green-100 text-green-700 rounded">
+                        {discount}% off
+                      </div>
+                    </div>
                   </div>
-                  <Badge
-                    variant={isAvailable ? "secondary" : "outline"}
-                    className={cn(
-                      "text-xs font-medium",
-                      isAvailable
-                        ? "bg-green-100 text-green-700 border-green-200"
-                        : "bg-red-100 text-red-700 border-red-200",
-                    )}
-                  >
-                    {isAvailable ? "Available" : "Expired"}
-                  </Badge>
+
+                  {/* Merchant Column */}
+                  <div className="flex flex-col w-1/2 ml-5 max-md:ml-0 max-md:w-full">
+                    <div className="flex items-center justify-between flex-wrap gap-2 mt-4 ml-auto max-md:ml-0">
+                      <div className="flex items-center gap-3 text-sm">
+                        <div className="flex items-center gap-2 text-gray-600">
+                          <MapPin className="h-4 w-4" />
+                          <span
+                            className="font-medium"
+                            style={{ color: "rgba(5, 5, 5, 1)" }}
+                          >
+                            {merchant}
+                          </span>
+                        </div>
+                        <Badge
+                          variant={isAvailable ? "secondary" : "outline"}
+                          className={cn(
+                            "text-xs font-medium",
+                            isAvailable
+                              ? "bg-green-100 text-green-700 border-green-200"
+                              : "bg-red-100 text-red-700 border-red-200",
+                          )}
+                        >
+                          {isAvailable ? "Available" : "Expired"}
+                        </Badge>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
