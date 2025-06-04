@@ -296,9 +296,9 @@ export const DealCard = ({
           }}
         >
           {/* Mobile Layout: Image Left, Content Right */}
-          <div className="flex gap-3">
-            {/* Mobile Image - Left Side */}
-            <div className="w-20 h-20 bg-gray-50 rounded-lg flex-shrink-0 relative overflow-hidden">
+          <div className="flex gap-3 items-center">
+            {/* Mobile Image - Left Side, Centered */}
+            <div className="w-20 h-20 bg-gray-50 rounded-lg flex-shrink-0 relative overflow-hidden flex items-center justify-center">
               <img
                 src={image}
                 alt={title}
