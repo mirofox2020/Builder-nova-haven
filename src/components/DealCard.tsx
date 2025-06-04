@@ -73,9 +73,10 @@ export const DealCard = ({
       {/* Desktop Layout */}
       <Card
         className={cn(
-          "group overflow-hidden hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-0 shadow-sm hover:-translate-y-1 hidden lg:block",
+          "group overflow-hidden hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-0 shadow-sm hover:-translate-y-1 hidden lg:block cursor-pointer",
           !isAvailable && "opacity-75",
         )}
+        onClick={() => (window.location.href = `/deal/${id}`)}
       >
         <CardContent className="p-0">
           <div className="flex flex-col lg:flex-row">
@@ -186,7 +187,10 @@ export const DealCard = ({
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={handleCopyCode}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCopyCode();
+                          }}
                           className={cn(
                             "text-xs transition-all duration-200 border-gray-300",
                             codeCopied &&
@@ -207,6 +211,10 @@ export const DealCard = ({
                         </Button>
                         <Button
                           size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.location.href = `/deal/${id}`;
+                          }}
                           className="text-xs bg-blue-600 hover:bg-blue-700 text-white"
                         >
                           <ExternalLink className="h-3 w-3 mr-1" />
@@ -223,6 +231,10 @@ export const DealCard = ({
                     <Button
                       variant="ghost"
                       size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.location.href = `/deal/${id}`;
+                      }}
                       className="text-gray-600 hover:text-orange-600 hover:bg-orange-50 transition-all duration-200"
                     >
                       <MessageCircle className="h-4 w-4 mr-2" />
@@ -232,7 +244,10 @@ export const DealCard = ({
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={handleShare}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleShare();
+                      }}
                       className="text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200"
                     >
                       <Share2 className="h-4 w-4 mr-2" />
@@ -242,7 +257,10 @@ export const DealCard = ({
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setIsBookmarked(!isBookmarked)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsBookmarked(!isBookmarked);
+                      }}
                       className={cn(
                         "text-gray-600 hover:text-yellow-600 hover:bg-yellow-50 transition-all duration-200",
                         isBookmarked && "text-yellow-500 bg-yellow-50",
@@ -260,6 +278,10 @@ export const DealCard = ({
                   {!promoCode && (
                     <Button
                       size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.location.href = `/deal/${id}`;
+                      }}
                       className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-all duration-200"
                     >
                       <ExternalLink className="h-4 w-4 mr-2" />
@@ -275,25 +297,12 @@ export const DealCard = ({
 
       {/* Mobile Layout - 2 Sections: Left (Image & Vote) + Right (Product Details) */}
       <div className="lg:hidden">
-        <a
-          href={`/deal/${id}`}
+        <div
+          onClick={() => (window.location.href = `/deal/${id}`)}
           className={cn(
-            "block relative bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300 hover:border-orange-300 p-3 max-sm:px-1.5 max-sm:py-2",
+            "block relative bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300 hover:border-orange-300 p-3 max-sm:px-1.5 max-sm:py-2 cursor-pointer",
             !isAvailable && "opacity-75",
           )}
-          style={{
-            cursor: "pointer",
-            display: "block",
-            fontWeight: "400",
-            lineHeight: "24px",
-            overflowWrap: "break-word",
-            position: "relative",
-            transitionDuration: "0.3s",
-            transitionProperty: "box-shadow, border-color",
-            transitionTimingFunction: "cubic-bezier(0.165, 0.84, 0.44, 1)",
-            wordBreak: "break-word",
-            backgroundColor: "rgb(255, 255, 255)",
-          }}
         >
           {/* Mobile Layout: 2 Sections */}
           <div className="flex gap-4 max-sm:gap-2">
@@ -315,7 +324,7 @@ export const DealCard = ({
               <div className="flex items-center gap-2">
                 <button
                   onClick={(e) => {
-                    e.preventDefault();
+                    e.stopPropagation();
                     // Handle comment
                   }}
                   className="flex items-center justify-center w-8 h-8 max-sm:w-6 max-sm:h-6 rounded-full bg-white/80 hover:bg-white transition-colors duration-200"
@@ -325,7 +334,7 @@ export const DealCard = ({
 
                 <button
                   onClick={(e) => {
-                    e.preventDefault();
+                    e.stopPropagation();
                     handleShare();
                   }}
                   className="flex items-center justify-center w-8 h-8 max-sm:w-6 max-sm:h-6 rounded-full bg-white/80 hover:bg-white transition-colors duration-200"
@@ -383,7 +392,7 @@ export const DealCard = ({
                       size="sm"
                       variant="outline"
                       onClick={(e) => {
-                        e.preventDefault();
+                        e.stopPropagation();
                         handleCopyCode();
                       }}
                       className="text-xs max-sm:text-xs h-5 max-sm:h-4 px-2 max-sm:px-1.5"
@@ -400,8 +409,9 @@ export const DealCard = ({
                 <Button
                   size="sm"
                   onClick={(e) => {
-                    e.preventDefault();
-                    // Handle get deal action
+                    e.stopPropagation();
+                    // Handle get deal action - could open external link
+                    window.open(`/deal/${id}`, "_blank");
                   }}
                   className="text-xs max-sm:text-xs bg-blue-600 hover:bg-blue-700 text-white h-6 max-sm:h-5 px-3 max-sm:px-2"
                 >
@@ -411,7 +421,7 @@ export const DealCard = ({
               </div>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </>
   );
