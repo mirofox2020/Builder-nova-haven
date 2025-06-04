@@ -79,7 +79,6 @@ export const Header = () => {
         </div>
 
         {/* Mobile Search Bar */}
-        <div
         <div className={cn(
           "md:hidden overflow-hidden transition-all duration-300 ease-out px-4 sm:px-6 lg:px-8",
           isMenuOpen ? "max-h-20 pb-4 opacity-100" : "max-h-0 opacity-0"
