@@ -297,8 +297,15 @@ export const DealCard = ({
         >
           {/* Mobile Layout: 2 Sections */}
           <div className="flex gap-4">
-            {/* LEFT SECTION: Image & Vote */}
-            <div className="flex flex-col items-center space-y-3">
+            {/* LEFT SECTION: Image & Vote - with mobile background */}
+            <div
+              className="flex flex-col items-center space-y-3"
+              style={{
+                "@media (max-width: 640px)": {
+                  backgroundColor: "rgba(250, 247, 247, 1)",
+                },
+              }}
+            >
               {/* Vote Buttons */}
               <VoteButtons initialVotes={votes} compact size="sm" />
 
@@ -341,7 +348,16 @@ export const DealCard = ({
               <div className="flex items-center justify-between text-xs text-gray-500">
                 <div className="flex items-center gap-1">
                   <MapPin className="h-3 w-3" />
-                  <span>{merchant}</span>
+                  <span
+                    className="sm:text-gray-500"
+                    style={{
+                      "@media (max-width: 640px)": {
+                        color: "rgba(0, 0, 0, 1)",
+                      },
+                    }}
+                  >
+                    {merchant}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
@@ -398,17 +414,18 @@ export const DealCard = ({
                   </button>
                 </div>
 
-                <Badge
-                  variant={isAvailable ? "secondary" : "outline"}
-                  className={cn(
-                    "text-xs",
-                    isAvailable
-                      ? "bg-green-100 text-green-700 border-green-200"
-                      : "bg-red-100 text-red-700 border-red-200",
-                  )}
+                {/* Get Deal Button instead of Available badge */}
+                <Button
+                  size="sm"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // Handle get deal action
+                  }}
+                  className="text-xs bg-blue-600 hover:bg-blue-700 text-white h-6 px-3"
                 >
-                  {isAvailable ? "Available" : "Expired"}
-                </Badge>
+                  <ExternalLink className="h-2 w-2 mr-1" />
+                  Get Deal
+                </Button>
               </div>
             </div>
           </div>
