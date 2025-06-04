@@ -302,15 +302,15 @@ export const DealCard = ({
 
           {/* Mobile Layout: Image Left, Content Right */}
           <div className="flex gap-3 items-center">
-            {/* Mobile Image - Left Side, Centered */}
-            <div className="w-20 h-20 bg-gray-50 rounded-lg flex-shrink-0 relative overflow-hidden flex items-center justify-center">
+            {/* Mobile Image - Left Side, Centered, Bigger */}
+            <div className="w-24 h-24 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex-shrink-0 relative overflow-hidden flex items-center justify-center border border-gray-200/50">
               <img
                 src={image}
                 alt={title}
-                className="w-full h-full object-contain p-1"
+                className="w-full h-full object-contain p-2"
               />
               {discount > 0 && (
-                <div className="absolute top-1 left-1 bg-green-600 text-white px-1 py-0.5 rounded text-xs font-semibold">
+                <div className="absolute top-1 left-1 bg-green-600 text-white px-1.5 py-0.5 rounded text-xs font-semibold shadow-sm">
                   {discount}%
                 </div>
               )}
