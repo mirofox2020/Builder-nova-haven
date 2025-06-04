@@ -11,6 +11,8 @@ import {
   Copy,
   Clock,
   MapPin,
+  Zap,
+  Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -67,70 +69,91 @@ export const DealCard = ({
     });
   };
 
+  const savings = originalPrice - discountedPrice;
+
   return (
     <Card
       className={cn(
-        "overflow-hidden hover:shadow-md transition-shadow duration-200",
+        "group overflow-hidden hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-0 shadow-sm hover:-translate-y-1",
         !isAvailable && "opacity-75",
-        isFeatured && "ring-2 ring-orange-200",
+        isFeatured &&
+          "ring-2 ring-gradient-to-r from-orange-400 to-pink-400 shadow-lg",
       )}
     >
       <CardContent className="p-0">
-        <div className="flex flex-col sm:flex-row">
+        <div className="flex flex-col lg:flex-row">
           {/* Vote Section */}
-          <div className="flex sm:flex-col items-center sm:items-start gap-2 p-4 sm:pr-2">
+          <div className="flex lg:flex-col items-center lg:items-start gap-3 p-4 lg:pr-3 bg-gradient-to-br from-gray-50 to-gray-100/50">
             <VoteButtons initialVotes={votes} />
-            <div className="flex sm:flex-col items-center gap-1 text-xs text-gray-500">
+            <div className="flex lg:flex-col items-center gap-1 text-xs text-gray-500">
               <Clock className="h-3 w-3" />
-              <span>{timePosted}</span>
+              <span className="font-medium">{timePosted}</span>
             </div>
           </div>
 
           {/* Product Image */}
-          <div className="sm:w-32 sm:h-32 flex-shrink-0">
+          <div className="lg:w-36 lg:h-36 flex-shrink-0 relative overflow-hidden">
             <img
               src={image}
               alt={title}
-              className="w-full h-48 sm:h-full object-cover"
+              className="w-full h-48 lg:h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
+            {isFeatured && (
+              <div className="absolute top-2 left-2">
+                <Badge className="bg-gradient-to-r from-orange-500 to-pink-500 text-white border-0 text-xs">
+                  <Zap className="h-3 w-3 mr-1" />
+                  Featured
+                </Badge>
+              </div>
+            )}
           </div>
 
           {/* Content */}
-          <div className="flex-1 p-4 sm:pl-4">
-            <div className="space-y-3">
+          <div className="flex-1 p-4 lg:p-6">
+            <div className="space-y-4">
               {/* Title and Description */}
               <div>
-                <h3 className="font-semibold text-gray-900 text-sm sm:text-base line-clamp-2">
+                <h3 className="font-bold text-gray-900 text-base lg:text-lg line-clamp-2 group-hover:text-orange-600 transition-colors duration-200">
                   {title}
                 </h3>
-                <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+                <p className="text-gray-600 text-sm mt-2 line-clamp-2 leading-relaxed">
                   {description}
                 </p>
               </div>
 
               {/* Price and Discount */}
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg font-bold text-gray-900">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl font-bold text-gray-900">
                     ${discountedPrice}
                   </span>
-                  <span className="text-sm text-gray-500 line-through">
+                  <span className="text-lg text-gray-500 line-through">
                     ${originalPrice}
                   </span>
                 </div>
-                <Badge variant="destructive" className="text-xs">
+                <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white border-0 text-sm px-3 py-1">
                   -{discount}%
                 </Badge>
+                <div className="text-sm text-green-600 font-semibold">
+                  Save ${savings}
+                </div>
               </div>
 
               {/* Merchant and Availability */}
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <MapPin className="h-3 w-3" />
-                  <span>{merchant}</span>
+                <div className="flex items-center gap-3 text-sm">
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <MapPin className="h-4 w-4" />
+                    <span className="font-medium">{merchant}</span>
+                  </div>
                   <Badge
                     variant={isAvailable ? "secondary" : "outline"}
-                    className="text-xs"
+                    className={cn(
+                      "text-xs font-medium",
+                      isAvailable
+                        ? "bg-green-100 text-green-700 border-green-200"
+                        : "bg-red-100 text-red-700 border-red-200",
+                    )}
                   >
                     {isAvailable ? "Available" : "Expired"}
                   </Badge>
@@ -139,24 +162,42 @@ export const DealCard = ({
 
               {/* Promo Code */}
               {promoCode && (
-                <div className="bg-gray-50 rounded-lg p-3 border-2 border-dashed border-gray-200">
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="font-mono text-sm font-semibold text-gray-900">
-                      {promoCode}
+                <div className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-xl p-4 border border-orange-200">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-gray-600 font-medium">
+                        Promo Code:
+                      </span>
+                      <div className="font-mono text-lg font-bold text-gray-900 px-3 py-1 bg-white rounded-lg border-2 border-dashed border-orange-300">
+                        {promoCode}
+                      </div>
                     </div>
                     <div className="flex gap-2">
                       <Button
                         size="sm"
                         variant="outline"
                         onClick={handleCopyCode}
-                        className="text-xs"
+                        className={cn(
+                          "text-xs transition-all duration-200",
+                          codeCopied &&
+                            "bg-green-50 border-green-300 text-green-700",
+                        )}
                       >
-                        <Copy className="h-3 w-3 mr-1" />
-                        {codeCopied ? "Copied!" : "Copy"}
+                        {codeCopied ? (
+                          <>
+                            <Check className="h-3 w-3 mr-1" />
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="h-3 w-3 mr-1" />
+                            Copy
+                          </>
+                        )}
                       </Button>
                       <Button
                         size="sm"
-                        className="text-xs bg-orange-500 hover:bg-orange-600"
+                        className="text-xs bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 shadow-md"
                       >
                         <ExternalLink className="h-3 w-3 mr-1" />
                         Get Deal
@@ -167,25 +208,25 @@ export const DealCard = ({
               )}
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                <div className="flex items-center gap-4">
+              <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                <div className="flex items-center gap-6">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-gray-600 hover:text-gray-900"
+                    className="text-gray-600 hover:text-orange-600 hover:bg-orange-50 transition-all duration-200"
                   >
-                    <MessageCircle className="h-4 w-4 mr-1" />
-                    <span className="text-xs">{comments}</span>
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    <span className="text-sm font-medium">{comments}</span>
                   </Button>
 
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={handleShare}
-                    className="text-gray-600 hover:text-gray-900"
+                    className="text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200"
                   >
-                    <Share2 className="h-4 w-4 mr-1" />
-                    <span className="text-xs">Share</span>
+                    <Share2 className="h-4 w-4 mr-2" />
+                    <span className="text-sm font-medium">Share</span>
                   </Button>
 
                   <Button
@@ -193,8 +234,8 @@ export const DealCard = ({
                     size="sm"
                     onClick={() => setIsBookmarked(!isBookmarked)}
                     className={cn(
-                      "text-gray-600 hover:text-gray-900",
-                      isBookmarked && "text-orange-500 hover:text-orange-600",
+                      "text-gray-600 hover:text-yellow-600 hover:bg-yellow-50 transition-all duration-200",
+                      isBookmarked && "text-yellow-500 bg-yellow-50",
                     )}
                   >
                     <Bookmark
@@ -206,9 +247,9 @@ export const DealCard = ({
                 {!promoCode && (
                   <Button
                     size="sm"
-                    className="bg-orange-500 hover:bg-orange-600 text-xs"
+                    className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-sm font-medium shadow-md hover:shadow-lg transition-all duration-200"
                   >
-                    <ExternalLink className="h-3 w-3 mr-1" />
+                    <ExternalLink className="h-4 w-4 mr-2" />
                     Get Deal
                   </Button>
                 )}
