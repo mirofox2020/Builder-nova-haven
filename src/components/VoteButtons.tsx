@@ -44,29 +44,29 @@ export const VoteButtons = ({
         {/* Thumbs Up */}
         <button
           onClick={() => handleVote("up")}
-          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-0.5 transition-colors duration-200"
+          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-1 transition-colors duration-200"
         >
           <ThumbsUp
             className={cn(
-              "text-gray-500",
-              "h-3.5 w-3.5",
+              "text-black font-bold",
+              "h-5 w-5",
               userVote === "up" && "text-blue-600",
             )}
           />
         </button>
 
         {/* Vote Count Only - No "votes" text */}
-        <span className="text-gray-600 font-normal text-xs px-1">{votes}</span>
+        <span className="text-black font-bold text-sm px-1">{votes}</span>
 
         {/* Thumbs Down */}
         <button
           onClick={() => handleVote("down")}
-          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-0.5 transition-colors duration-200"
+          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-1 transition-colors duration-200"
         >
           <ThumbsDown
             className={cn(
-              "text-gray-500",
-              "h-3.5 w-3.5",
+              "text-black font-bold",
+              "h-5 w-5",
               userVote === "down" && "text-red-600",
             )}
           />
@@ -84,25 +84,25 @@ export const VoteButtons = ({
     >
       <button
         onClick={() => handleVote("up")}
-        className="flex items-center justify-center hover:bg-gray-100 rounded-lg transition-all duration-200 h-10 w-10"
+        className="flex items-center justify-center hover:bg-gray-100 rounded-lg transition-all duration-200 h-12 w-12"
       >
         <ThumbsUp
           className={cn(
-            "h-6 w-6 text-gray-500",
+            "h-7 w-7 text-black font-bold",
             userVote === "up" && "text-blue-600",
           )}
         />
       </button>
 
-      <span className="font-bold py-2 text-lg text-gray-500">{votes}</span>
+      <span className="font-bold py-2 text-xl text-black">{votes}</span>
 
       <button
         onClick={() => handleVote("down")}
-        className="flex items-center justify-center hover:bg-gray-100 rounded-lg transition-all duration-200 h-10 w-10"
+        className="flex items-center justify-center hover:bg-gray-100 rounded-lg transition-all duration-200 h-12 w-12"
       >
         <ThumbsDown
           className={cn(
-            "h-6 w-6 text-gray-500",
+            "h-7 w-7 text-black font-bold",
             userVote === "down" && "text-red-600",
           )}
         />
