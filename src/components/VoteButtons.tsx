@@ -42,18 +42,18 @@ export const VoteButtons = ({
       <div className={cn("flex items-center gap-4", className)}>
         <Button
           variant="ghost"
-          size={isLarge ? "default" : "sm"}
+          size="sm"
           onClick={() => handleVote("up")}
           className={cn(
-            "hover:bg-gray-100 transition-all duration-200 rounded-full",
-            isLarge ? "p-3 h-10 w-10" : "p-2 h-8 w-8",
+            "hover:bg-gray-100 transition-all duration-200 rounded-full p-2",
+            isLarge ? "h-12 w-12" : "h-10 w-10",
             userVote === "up" && "bg-gray-100",
           )}
         >
           <Heart
             className={cn(
               "text-gray-600",
-              isLarge ? "h-5 w-5" : "h-4 w-4",
+              isLarge ? "h-6 w-6" : "h-5 w-5",
               userVote === "up" && "fill-red-500 text-red-500",
             )}
           />
@@ -61,8 +61,8 @@ export const VoteButtons = ({
 
         <span
           className={cn(
-            "font-medium text-gray-700",
-            isLarge ? "text-base" : "text-sm",
+            "font-medium text-gray-600",
+            isLarge ? "text-lg" : "text-base",
           )}
         >
           {votes} votes
@@ -70,16 +70,16 @@ export const VoteButtons = ({
 
         <Button
           variant="ghost"
-          size={isLarge ? "default" : "sm"}
+          size="sm"
           onClick={() => handleVote("down")}
           className={cn(
-            "hover:bg-gray-100 transition-all duration-200 rounded-full",
-            isLarge ? "p-3 h-10 w-10" : "p-2 h-8 w-8",
+            "hover:bg-gray-100 transition-all duration-200 rounded-full p-2",
+            isLarge ? "h-12 w-12" : "h-10 w-10",
             userVote === "down" && "bg-gray-100",
           )}
         >
           <ThumbsDown
-            className={cn("text-gray-600", isLarge ? "h-5 w-5" : "h-4 w-4")}
+            className={cn("text-gray-600", isLarge ? "h-6 w-6" : "h-5 w-5")}
           />
         </Button>
       </div>
