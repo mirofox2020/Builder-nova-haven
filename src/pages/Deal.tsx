@@ -210,10 +210,6 @@ const Deal = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      {/* Background Pattern */}
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.05),transparent_70%)] pointer-events-none" />
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(219,39,119,0.05),transparent_50%)] pointer-events-none" />
-
       <Header />
 
       <main className="relative w-full py-6 lg:py-8 px-4 sm:px-6 lg:px-8">
@@ -324,7 +320,7 @@ const Deal = () => {
                     <div className="flex items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
                         <span className="text-orange-600 font-medium">
-                          🏷�� Promo Code:
+                          🏷️ Promo Code:
                         </span>
                         <div className="font-mono text-lg font-bold text-gray-900 px-3 py-1 bg-white border-2 border-dashed border-orange-300 rounded">
                           {dealData.promoCode}

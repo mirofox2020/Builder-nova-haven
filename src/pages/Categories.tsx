@@ -107,10 +107,6 @@ const Categories = () => {
   if (!category) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-        {/* Background Pattern */}
-        <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.05),transparent_70%)] pointer-events-none" />
-        <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(219,39,119,0.05),transparent_50%)] pointer-events-none" />
-
         <Header />
         <main className="relative w-full">
           <div className="w-full py-6 lg:py-8 px-4 sm:px-6 lg:px-8">
@@ -131,10 +127,6 @@ const Categories = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      {/* Background Pattern */}
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,165,0,0.05),transparent_70%)] pointer-events-none" />
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(219,39,119,0.05),transparent_50%)] pointer-events-none" />
-
       <Header />
 
       <main className="relative w-full">
