@@ -5,7 +5,7 @@ import { VoteButtons } from "./VoteButtons";
 import {
   ExternalLink,
   TrendingUp,
-  Fire,
+  Flame,
   Users,
   DollarSign,
   Activity,
