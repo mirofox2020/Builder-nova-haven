@@ -38,56 +38,52 @@ export const VoteButtons = ({
 
   if (compact) {
     return (
-      <div className={cn("flex items-center", className)}>
-        {/* Thumbs Up Button */}
-        <Button
-          variant="ghost"
-          size="sm"
+      <div className={cn("flex items-center gap-0", className)}>
+        {/* Thumbs Up */}
+        <button
           onClick={() => handleVote("up")}
           className={cn(
-            "hover:bg-gray-100 transition-all duration-200 p-1 rounded",
+            "flex items-center justify-center transition-colors duration-200",
             isLarge ? "h-12 w-12" : "h-10 w-10",
-            userVote === "up" && "bg-gray-100",
+            "hover:bg-gray-100 rounded-md",
           )}
         >
           <ThumbsUp
             className={cn(
-              "text-gray-500",
+              "text-gray-400",
               isLarge ? "h-6 w-6" : "h-5 w-5",
-              userVote === "up" && "text-gray-700",
+              userVote === "up" && "text-blue-600",
             )}
           />
-        </Button>
+        </button>
 
-        {/* Vote Count Text */}
+        {/* Votes Text */}
         <span
           className={cn(
-            "text-gray-500 px-2",
-            isLarge ? "text-lg font-medium" : "text-base font-medium",
+            "text-gray-400 mx-2",
+            isLarge ? "text-lg font-normal" : "text-base font-normal",
           )}
         >
           {votes} votes
         </span>
 
-        {/* Thumbs Down Button */}
-        <Button
-          variant="ghost"
-          size="sm"
+        {/* Thumbs Down */}
+        <button
           onClick={() => handleVote("down")}
           className={cn(
-            "hover:bg-gray-100 transition-all duration-200 p-1 rounded",
+            "flex items-center justify-center transition-colors duration-200",
             isLarge ? "h-12 w-12" : "h-10 w-10",
-            userVote === "down" && "bg-gray-100",
+            "hover:bg-gray-100 rounded-md",
           )}
         >
           <ThumbsDown
             className={cn(
-              "text-gray-500",
+              "text-gray-400",
               isLarge ? "h-6 w-6" : "h-5 w-5",
-              userVote === "down" && "text-gray-700",
+              userVote === "down" && "text-red-600",
             )}
           />
-        </Button>
+        </button>
       </div>
     );
   }
