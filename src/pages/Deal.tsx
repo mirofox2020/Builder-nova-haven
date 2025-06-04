@@ -622,77 +622,38 @@ const Deal = () => {
                   <div className="w-24 h-0.5 bg-gradient-to-r from-orange-500 to-pink-500 mx-auto rounded-full"></div>
                 </div>
 
-                {/* Deals Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                  {recommendedDeals.map((deal, index) => (
+                {/* Deals Grid - 2 Columns, 6 Items */}
+                <div className="grid grid-cols-2 gap-6">
+                  {recommendedDeals.slice(0, 6).map((deal, index) => (
                     <div
                       key={deal.id}
-                      className="group transform transition-all duration-300 hover:-translate-y-2"
+                      className="group transform transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+                      onClick={() =>
+                        (window.location.href = `/deal/${deal.id}`)
+                      }
                       style={{
                         animationDelay: `${index * 150}ms`,
                       }}
                     >
                       <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:border-orange-200">
                         {/* Deal Image */}
-                        <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 p-6 relative overflow-hidden">
+                        <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 p-4 relative overflow-hidden">
                           <img
                             src={deal.image}
                             alt={deal.title}
                             className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                           />
                           {/* Discount Badge */}
-                          <div className="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                          <div className="absolute top-3 right-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
                             -{deal.discount}%
                           </div>
                         </div>
 
-                        {/* Deal Content */}
-                        <div className="p-6 space-y-4">
-                          {/* Title */}
-                          <h3 className="font-bold text-lg text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
+                        {/* Deal Content - Only Title */}
+                        <div className="p-4">
+                          <h3 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
                             {deal.title}
                           </h3>
-
-                          {/* Description */}
-                          <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed">
-                            {deal.description}
-                          </p>
-
-                          {/* Price and Merchant */}
-                          <div className="space-y-3">
-                            <div className="flex items-center gap-3 flex-wrap">
-                              <span className="text-2xl font-bold text-green-600">
-                                ${deal.discountedPrice}
-                              </span>
-                              <span className="text-lg text-gray-500 line-through">
-                                ${deal.originalPrice}
-                              </span>
-                            </div>
-
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2 text-sm text-gray-600">
-                                <MapPin className="h-4 w-4" />
-                                <span className="font-medium text-black">
-                                  {deal.merchant}
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-1 text-sm text-gray-500">
-                                <Clock className="h-3 w-3" />
-                                <span>{deal.timePosted}</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Action Button */}
-                          <Button
-                            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium shadow-md hover:shadow-lg transition-all duration-200"
-                            onClick={() =>
-                              (window.location.href = `/deal/${deal.id}`)
-                            }
-                          >
-                            <ExternalLink className="h-4 w-4 mr-2" />
-                            View Deal
-                          </Button>
                         </div>
                       </div>
                     </div>
