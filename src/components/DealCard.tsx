@@ -278,37 +278,32 @@ export const DealCard = ({
         <a
           href={`/deal/${id}`}
           className={cn(
-            "block relative bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300 hover:border-orange-300 p-3 max-sm:px-1.5 max-sm:py-0",
-            !isAvailable && "opacity-75"
+            "block relative bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300 hover:border-orange-300 p-3 max-sm:px-1.5 max-sm:py-2",
+            !isAvailable && "opacity-75",
           )}
           style={{
-            cursor: 'pointer',
-            display: 'block',
-            fontWeight: '400',
-            lineHeight: '24px',
-            overflowWrap: 'break-word',
-            position: 'relative',
-            transitionDuration: '0.3s',
-            transitionProperty: 'box-shadow, border-color',
-            transitionTimingFunction: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
-            wordBreak: 'break-word',
-            backgroundColor: 'rgb(255, 255, 255)'
-          }}
-            '@media (max-width: 640px)': {
-              padding: '0 5px'
-            }
-          }}
+            cursor: "pointer",
+            display: "block",
+            fontWeight: "400",
+            lineHeight: "24px",
+            overflowWrap: "break-word",
+            position: "relative",
+            transitionDuration: "0.3s",
+            transitionProperty: "box-shadow, border-color",
+            transitionTimingFunction: "cubic-bezier(0.165, 0.84, 0.44, 1)",
+            wordBreak: "break-word",
+            backgroundColor: "rgb(255, 255, 255)",
           }}
         >
           {/* Mobile Layout: 2 Sections */}
-          <div className="flex gap-4">
+          <div className="flex gap-4 max-sm:gap-2">
             {/* LEFT SECTION: Image, Vote & Share/Comment - with same background as image */}
-            <div className="flex flex-col items-center space-y-3 bg-gradient-to-br from-gray-50 to-gray-100 p-3 rounded-lg border border-gray-200/50">
+            <div className="flex flex-col items-center space-y-3 bg-gradient-to-br from-gray-50 to-gray-100 p-3 max-sm:p-2 rounded-lg border border-gray-200/50">
               {/* Vote Buttons */}
               <VoteButtons initialVotes={votes} compact size="sm" />
 
               {/* Mobile Image */}
-              <div className="w-24 h-24 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex-shrink-0 relative overflow-hidden flex items-center justify-center border border-gray-200/50">
+              <div className="w-24 h-24 max-sm:w-20 max-sm:h-20 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex-shrink-0 relative overflow-hidden flex items-center justify-center border border-gray-200/50">
                 <img
                   src={image}
                   alt={title}
@@ -328,9 +323,9 @@ export const DealCard = ({
                     e.preventDefault();
                     // Handle comment
                   }}
-                  className="flex items-center justify-center w-8 h-8 rounded-full bg-white/80 hover:bg-white transition-colors duration-200"
+                  className="flex items-center justify-center w-8 h-8 max-sm:w-6 max-sm:h-6 rounded-full bg-white/80 hover:bg-white transition-colors duration-200"
                 >
-                  <MessageCircle className="h-3 w-3 text-gray-600" />
+                  <MessageCircle className="h-3 w-3 max-sm:h-2.5 max-sm:w-2.5 text-gray-600" />
                 </button>
 
                 <button
@@ -338,52 +333,52 @@ export const DealCard = ({
                     e.preventDefault();
                     handleShare();
                   }}
-                  className="flex items-center justify-center w-8 h-8 rounded-full bg-white/80 hover:bg-white transition-colors duration-200"
+                  className="flex items-center justify-center w-8 h-8 max-sm:w-6 max-sm:h-6 rounded-full bg-white/80 hover:bg-white transition-colors duration-200"
                 >
-                  <Share2 className="h-3 w-3 text-gray-600" />
+                  <Share2 className="h-3 w-3 max-sm:h-2.5 max-sm:w-2.5 text-gray-600" />
                 </button>
               </div>
             </div>
 
             {/* RIGHT SECTION: Product Details */}
-            <div className="flex-1 min-w-0 space-y-3">
+            <div className="flex-1 min-w-0 space-y-3 max-sm:space-y-2">
               {/* Title */}
-              <h3 className="font-bold text-gray-900 text-sm line-clamp-2 leading-tight">
+              <h3 className="font-bold text-gray-900 text-sm max-sm:text-xs line-clamp-2 leading-tight">
                 {title}
               </h3>
 
               {/* Price */}
               <div className="flex items-center gap-2">
                 <span
-                  className="text-lg font-bold"
+                  className="text-lg max-sm:text-base font-bold"
                   style={{ color: "rgba(111, 162, 37, 1)" }}
                 >
                   ${discountedPrice}
                 </span>
-                <span className="text-sm text-gray-500 line-through">
+                <span className="text-sm max-sm:text-xs text-gray-500 line-through">
                   ${originalPrice}
                 </span>
               </div>
 
               {/* Merchant and Time */}
-              <div className="flex items-center justify-between text-xs text-gray-500">
+              <div className="flex items-center justify-between text-xs max-sm:text-xs text-gray-500">
                 <div className="flex items-center gap-1">
-                  <MapPin className="h-3 w-3" />
+                  <MapPin className="h-3 w-3 max-sm:h-2.5 max-sm:w-2.5" />
                   <span className="text-black sm:text-gray-500">
                     {merchant}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
+                  <Clock className="h-3 w-3 max-sm:h-2.5 max-sm:w-2.5" />
                   <span>{timePosted}</span>
                 </div>
               </div>
 
               {/* Promo Code for Mobile */}
               {promoCode && (
-                <div className="bg-orange-50 border border-orange-200 rounded p-2">
+                <div className="bg-orange-50 border border-orange-200 rounded p-2 max-sm:p-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-orange-600 font-medium">
+                    <span className="text-xs max-sm:text-xs text-orange-600 font-medium">
                       Code: {promoCode}
                     </span>
                     <Button
@@ -393,7 +388,7 @@ export const DealCard = ({
                         e.preventDefault();
                         handleCopyCode();
                       }}
-                      className="text-xs h-5 px-2"
+                      className="text-xs max-sm:text-xs h-5 max-sm:h-4 px-2 max-sm:px-1.5"
                     >
                       <Copy className="h-2 w-2 mr-1" />
                       {codeCopied ? "Copied!" : "Copy"}
@@ -410,7 +405,7 @@ export const DealCard = ({
                     e.preventDefault();
                     // Handle get deal action
                   }}
-                  className="text-xs bg-blue-600 hover:bg-blue-700 text-white h-6 px-3"
+                  className="text-xs max-sm:text-xs bg-blue-600 hover:bg-blue-700 text-white h-6 max-sm:h-5 px-3 max-sm:px-2"
                 >
                   <ExternalLink className="h-2 w-2 mr-1" />
                   Get Deal
