@@ -265,8 +265,42 @@ const Deal = () => {
 
             {/* Deal Details */}
             <div className="space-y-6">
-              {/* Title and Price */}
+              {/* Vote Icons and Title */}
               <div className="space-y-4">
+                {/* Vote Icons */}
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleVote("up")}
+                      className="flex items-center justify-center hover:bg-green-100 rounded-full p-2 transition-colors duration-200"
+                    >
+                      <ThumbsUp
+                        className={cn(
+                          "h-6 w-6 text-black font-bold",
+                          userVote === "up" && "text-green-600 fill-current",
+                        )}
+                      />
+                    </button>
+
+                    <span className="text-lg font-bold text-gray-900 min-w-[40px] text-center">
+                      {votes}
+                    </span>
+
+                    <button
+                      onClick={() => handleVote("down")}
+                      className="flex items-center justify-center hover:bg-red-100 rounded-full p-2 transition-colors duration-200"
+                    >
+                      <ThumbsDown
+                        className={cn(
+                          "h-6 w-6 text-black font-bold",
+                          userVote === "down" && "text-red-600 fill-current",
+                        )}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Title */}
                 <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
                   {dealData.title}
                 </h1>
