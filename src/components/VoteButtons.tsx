@@ -38,53 +38,53 @@ export const VoteButtons = ({
 
   if (compact) {
     return (
-      <div className={cn("flex items-center gap-2", className)}>
-        {/* Thumbs Up */}
+      <div className={cn("flex items-center gap-1", className)}>
+        {/* Thumbs Up Button */}
         <Button
           variant="ghost"
           size="sm"
           onClick={() => handleVote("up")}
           className={cn(
-            "hover:bg-gray-100 transition-all duration-200 rounded-full",
-            isLarge ? "h-12 w-12 p-3" : "h-10 w-10 p-2",
-            userVote === "up" && "bg-gray-100",
+            "hover:bg-gray-50 transition-all duration-200 rounded p-1",
+            isLarge ? "h-10 w-10" : "h-8 w-8",
+            userVote === "up" && "bg-gray-50",
           )}
         >
           <ThumbsUp
             className={cn(
-              "text-gray-500",
-              isLarge ? "h-6 w-6" : "h-5 w-5",
-              userVote === "up" && "text-gray-700",
+              "text-gray-400",
+              isLarge ? "h-5 w-5" : "h-4 w-4",
+              userVote === "up" && "text-gray-600",
             )}
           />
         </Button>
 
-        {/* Vote Count */}
+        {/* Vote Count Text */}
         <span
           className={cn(
-            "font-medium text-gray-500 px-2",
-            isLarge ? "text-lg" : "text-base",
+            "text-gray-400 mx-1",
+            isLarge ? "text-base font-medium" : "text-sm font-medium",
           )}
         >
           {votes} votes
         </span>
 
-        {/* Thumbs Down */}
+        {/* Thumbs Down Button */}
         <Button
           variant="ghost"
           size="sm"
           onClick={() => handleVote("down")}
           className={cn(
-            "hover:bg-gray-100 transition-all duration-200 rounded-full",
-            isLarge ? "h-12 w-12 p-3" : "h-10 w-10 p-2",
-            userVote === "down" && "bg-gray-100",
+            "hover:bg-gray-50 transition-all duration-200 rounded p-1",
+            isLarge ? "h-10 w-10" : "h-8 w-8",
+            userVote === "down" && "bg-gray-50",
           )}
         >
           <ThumbsDown
             className={cn(
-              "text-gray-500",
-              isLarge ? "h-6 w-6" : "h-5 w-5",
-              userVote === "down" && "text-gray-700",
+              "text-gray-400",
+              isLarge ? "h-5 w-5" : "h-4 w-4",
+              userVote === "down" && "text-gray-600",
             )}
           />
         </Button>
