@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -41,8 +42,12 @@ const feedTabs = [
 ];
 
 export const Navigation = () => {
+  const location = useLocation();
   const [activeCategory, setActiveCategory] = useState("deals");
   const [activeTab, setActiveTab] = useState("for-you");
+
+  // Only show secondary menu on homepage
+  const isHomepage = location.pathname === "/";
 
   const handleCategoryClick = (categoryId: string) => {
     if (categoryId === "categories") {
@@ -130,50 +135,52 @@ export const Navigation = () => {
           })}
         </div>
 
-        {/* Secondary Navigation */}
-        <div className="flex items-center justify-between py-3 border-t border-gray-200/50 px-4 sm:px-6 lg:px-8">
-          {/* Feed Tabs */}
-          <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
-            {feedTabs.map((tab) => {
-              const isActive = activeTab === tab.id;
-              const Icon = tab.icon;
+        {/* Secondary Navigation - Only on Homepage */}
+        {isHomepage && (
+          <div className="flex items-center justify-between py-3 border-t border-gray-200/50 px-4 sm:px-6 lg:px-8">
+            {/* Feed Tabs */}
+            <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
+              {feedTabs.map((tab) => {
+                const isActive = activeTab === tab.id;
+                const Icon = tab.icon;
 
-              return (
-                <Button
-                  key={tab.id}
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setActiveTab(tab.id)}
-                  className={cn(
-                    "relative text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200",
-                    isActive
-                      ? "text-orange-600 bg-orange-50 hover:bg-orange-100"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                  )}
-                >
-                  <div className="flex items-center gap-2">
-                    {Icon && <Icon className="h-4 w-4" />}
-                    {tab.label}
-                  </div>
-                  {isActive && (
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full" />
-                  )}
-                </Button>
-              );
-            })}
+                return (
+                  <Button
+                    key={tab.id}
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setActiveTab(tab.id)}
+                    className={cn(
+                      "relative text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200",
+                      isActive
+                        ? "text-orange-600 bg-orange-50 hover:bg-orange-100"
+                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                    )}
+                  >
+                    <div className="flex items-center gap-2">
+                      {Icon && <Icon className="h-4 w-4" />}
+                      {tab.label}
+                    </div>
+                    {isActive && (
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full" />
+                    )}
+                  </Button>
+                );
+              })}
+            </div>
+
+            {/* Filter Button */}
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2 rounded-lg border-gray-300 hover:bg-gray-50 transition-all duration-200"
+            >
+              <Filter className="h-4 w-4" />
+              <span className="hidden sm:inline">Filter</span>
+              <ChevronDown className="h-4 w-4" />
+            </Button>
           </div>
-
-          {/* Filter Button */}
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-2 rounded-lg border-gray-300 hover:bg-gray-50 transition-all duration-200"
-          >
-            <Filter className="h-4 w-4" />
-            <span className="hidden sm:inline">Filter</span>
-            <ChevronDown className="h-4 w-4" />
-          </Button>
-        </div>
+        )}
       </div>
     </div>
   );
