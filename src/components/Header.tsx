@@ -10,7 +10,7 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50 shadow-sm">
+    <header className="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50 shadow-sm w-full">
       {/* Top Header */}
       <div className="w-full">
         <div className="flex items-center justify-between h-16 lg:h-18 px-4 sm:px-6 lg:px-8">
@@ -79,10 +79,11 @@ export const Header = () => {
         </div>
 
         {/* Mobile Search Bar */}
-        <div className={cn(
-          "md:hidden overflow-hidden transition-all duration-300 ease-out px-4 sm:px-6 lg:px-8",
-          isMenuOpen ? "max-h-20 pb-4 opacity-100" : "max-h-0 opacity-0"
-        )}>
+        <div
+          className={cn(
+            "md:hidden overflow-hidden transition-all duration-300 ease-out px-4 sm:px-6 lg:px-8",
+            isMenuOpen ? "max-h-20 pb-4 opacity-100" : "max-h-0 opacity-0",
+          )}
         >
           <SearchBar />
         </div>
