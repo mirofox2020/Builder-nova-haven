@@ -9,6 +9,7 @@ import {
   Users,
   DollarSign,
   Activity,
+  Lightbulb,
 } from "lucide-react";
 
 interface HotDeal {
@@ -135,53 +136,44 @@ export const Sidebar = () => {
         </CardContent>
       </Card>
 
-      {/* Today's Stats */}
-      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-lg flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-              <Activity className="h-4 w-4 text-white" />
-            </div>
-            <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-              Today's Stats
-            </span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex justify-between items-center p-3 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
-                <TrendingUp className="h-4 w-4 text-white" />
+      {/* Pro Tips */}
+      <Card className="bg-gradient-to-br from-purple-500 to-pink-500 border-0 shadow-lg text-white overflow-hidden">
+        <CardContent className="p-6 relative">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+          <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full translate-y-10 -translate-x-10"></div>
+          <div className="relative space-y-4">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                <Lightbulb className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-medium text-gray-700">
-                New Deals
-              </span>
+              <h3 className="font-bold text-lg text-white">Pro Tips</h3>
             </div>
-            <span className="font-bold text-green-600 text-lg">+47</span>
-          </div>
-
-          <div className="flex justify-between items-center p-3 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                <Users className="h-4 w-4 text-white" />
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                <p className="text-white/90 text-sm leading-relaxed">
+                  Vote on deals to help others find the best
+                </p>
               </div>
-              <span className="text-sm font-medium text-gray-700">
-                Active Users
-              </span>
-            </div>
-            <span className="font-bold text-blue-600 text-lg">2.4K</span>
-          </div>
-
-          <div className="flex justify-between items-center p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center">
-                <DollarSign className="h-4 w-4 text-white" />
+              <div className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                <p className="text-white/90 text-sm leading-relaxed">
+                  Set up alerts for your favorite brands
+                </p>
               </div>
-              <span className="text-sm font-medium text-gray-700">
-                Total Savings
-              </span>
+              <div className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                <p className="text-white/90 text-sm leading-relaxed">
+                  Check expiry dates before purchasing
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                <p className="text-white/90 text-sm leading-relaxed">
+                  Share great deals with friends
+                </p>
+              </div>
             </div>
-            <span className="font-bold text-purple-600 text-lg">$1.2M</span>
           </div>
         </CardContent>
       </Card>
