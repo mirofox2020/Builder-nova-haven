@@ -110,9 +110,9 @@ const Index = () => {
       <Header />
 
       <main className="relative w-full">
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+        <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 lg:gap-8 py-6 lg:py-8">
           {/* Main Content */}
-          <div className="xl:col-span-3 space-y-6 lg:space-y-8">
+          <div className="xl:col-span-3 space-y-6 lg:space-y-8 px-4 sm:px-6 lg:px-8">
             {/* Section Header */}
             <div className="space-y-3 text-center lg:text-left">
               <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent font-sans">
@@ -143,7 +143,7 @@ const Index = () => {
             </div>
 
             {/* Sidebar on Mobile/Tablet */}
-            <div className="xl:hidden">
+            <div className="xl:hidden px-4 sm:px-6 lg:px-8">
               <Sidebar />
             </div>
 
@@ -156,7 +156,7 @@ const Index = () => {
           </div>
 
           {/* Sidebar Desktop Only */}
-          <div className="hidden xl:block xl:col-span-1">
+          <div className="hidden xl:block xl:col-span-1 px-4 sm:px-6 lg:px-8">
             <div className="sticky top-24 lg:top-28">
               <Sidebar />
             </div>
@@ -166,7 +166,7 @@ const Index = () => {
 
       {/* Footer - Full Width */}
       <footer className="relative bg-white/80 backdrop-blur-sm border-t border-gray-200/50 mt-16 w-full">
-        <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
+        <div className="w-full py-12 px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
             <div>
               <h3 className="font-bold text-gray-900 mb-4 text-lg">Company</h3>

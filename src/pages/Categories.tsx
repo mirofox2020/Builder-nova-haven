@@ -99,147 +99,153 @@ const Categories = () => {
 
       <Header />
 
-      <main className="relative w-full px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-        {/* Category Header */}
-        <div className="mb-6">
-          <div className="flex items-center gap-4 mb-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => window.history.back()}
-              className="hover:bg-gray-100"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
-            </Button>
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">{category.icon}</span>
-              <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent font-sans">
-                {category.name}
-              </h1>
-            </div>
-          </div>
-          <p className="text-gray-600 text-lg">
-            Discover the best deals in {category.name.toLowerCase()}. Save money
-            with our curated selection.
-          </p>
-        </div>
-
-        {/* Subcategory Filters */}
-        <div className="mb-8">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Filter by Category
-          </h2>
-          <div className="flex flex-wrap gap-3 overflow-x-auto scrollbar-hide pb-2">
-            {/* All Categories Filter */}
-            <Button
-              variant={selectedSubcategory === "all" ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedSubcategory("all")}
-              className={cn(
-                "flex items-center gap-2 whitespace-nowrap transition-all duration-200",
-                selectedSubcategory === "all"
-                  ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-md"
-                  : "hover:bg-gray-50",
-              )}
-            >
-              <span className="text-lg">🏷️</span>
-              <span>All</span>
-            </Button>
-
-            {/* Subcategory Filters */}
-            {category.subcategories.map((subcategory) => (
+      <main className="relative w-full py-6 lg:py-8">
+        <div className="px-4 sm:px-6 lg:px-8">
+          {/* Category Header */}
+          <div className="mb-6">
+            <div className="flex items-center gap-4 mb-4">
               <Button
-                key={subcategory.id}
-                variant={
-                  selectedSubcategory === subcategory.id ? "default" : "outline"
-                }
+                variant="ghost"
                 size="sm"
-                onClick={() => setSelectedSubcategory(subcategory.id)}
+                onClick={() => window.history.back()}
+                className="hover:bg-gray-100"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">{category.icon}</span>
+                <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent font-sans">
+                  {category.name}
+                </h1>
+              </div>
+            </div>
+            <p className="text-gray-600 text-lg">
+              Discover the best deals in {category.name.toLowerCase()}. Save
+              money with our curated selection.
+            </p>
+          </div>
+
+          {/* Subcategory Filters */}
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              Filter by Category
+            </h2>
+            <div className="flex flex-wrap gap-3 overflow-x-auto scrollbar-hide pb-2">
+              {/* All Categories Filter */}
+              <Button
+                variant={selectedSubcategory === "all" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedSubcategory("all")}
                 className={cn(
                   "flex items-center gap-2 whitespace-nowrap transition-all duration-200",
-                  selectedSubcategory === subcategory.id
+                  selectedSubcategory === "all"
                     ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-md"
                     : "hover:bg-gray-50",
                 )}
               >
-                <span className="text-lg">{subcategory.icon}</span>
-                <span>{subcategory.name}</span>
+                <span className="text-lg">🏷️</span>
+                <span>All</span>
               </Button>
-            ))}
-          </div>
-        </div>
 
-        {/* Active Filter Display */}
-        {selectedSubcategory !== "all" && (
-          <div className="mb-6">
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-600">Showing deals for:</span>
-              <Badge variant="secondary" className="flex items-center gap-1">
-                <span>
-                  {
-                    category.subcategories.find(
-                      (sub) => sub.id === selectedSubcategory,
-                    )?.icon
+              {/* Subcategory Filters */}
+              {category.subcategories.map((subcategory) => (
+                <Button
+                  key={subcategory.id}
+                  variant={
+                    selectedSubcategory === subcategory.id
+                      ? "default"
+                      : "outline"
                   }
-                </span>
-                <span>
-                  {
-                    category.subcategories.find(
-                      (sub) => sub.id === selectedSubcategory,
-                    )?.name
-                  }
-                </span>
-              </Badge>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setSelectedSubcategory("all")}
-                className="text-xs text-gray-500 hover:text-gray-700"
-              >
-                Clear filter
-              </Button>
+                  size="sm"
+                  onClick={() => setSelectedSubcategory(subcategory.id)}
+                  className={cn(
+                    "flex items-center gap-2 whitespace-nowrap transition-all duration-200",
+                    selectedSubcategory === subcategory.id
+                      ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-md"
+                      : "hover:bg-gray-50",
+                  )}
+                >
+                  <span className="text-lg">{subcategory.icon}</span>
+                  <span>{subcategory.name}</span>
+                </Button>
+              ))}
             </div>
           </div>
-        )}
 
-        {/* Results Count */}
-        <div className="flex items-center justify-between mb-6">
-          <p className="text-gray-600">
-            Found {categoryDeals.length} deals in {category.name}
-          </p>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-2"
-          >
-            <Filter className="h-4 w-4" />
-            More Filters
-          </Button>
-        </div>
+          {/* Active Filter Display */}
+          {selectedSubcategory !== "all" && (
+            <div className="mb-6">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-600">
+                  Showing deals for:
+                </span>
+                <Badge variant="secondary" className="flex items-center gap-1">
+                  <span>
+                    {
+                      category.subcategories.find(
+                        (sub) => sub.id === selectedSubcategory,
+                      )?.icon
+                    }
+                  </span>
+                  <span>
+                    {
+                      category.subcategories.find(
+                        (sub) => sub.id === selectedSubcategory,
+                      )?.name
+                    }
+                  </span>
+                </Badge>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setSelectedSubcategory("all")}
+                  className="text-xs text-gray-500 hover:text-gray-700"
+                >
+                  Clear filter
+                </Button>
+              </div>
+            </div>
+          )}
 
-        {/* Deals Grid */}
-        <div className="space-y-6">
-          {/* Desktop Layout - Hidden on Mobile */}
-          <div className="hidden lg:block space-y-6">
-            {categoryDeals.map((deal) => (
-              <DealCard key={deal.id} {...deal} />
-            ))}
+          {/* Results Count */}
+          <div className="flex items-center justify-between mb-6">
+            <p className="text-gray-600">
+              Found {categoryDeals.length} deals in {category.name}
+            </p>
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2"
+            >
+              <Filter className="h-4 w-4" />
+              More Filters
+            </Button>
           </div>
 
-          {/* Mobile Grid Layout - Hidden on Desktop */}
-          <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:hidden">
-            {categoryDeals.map((deal) => (
-              <DealCard key={deal.id} {...deal} />
-            ))}
-          </div>
-        </div>
+          {/* Deals Grid */}
+          <div className="space-y-6">
+            {/* Desktop Layout - Hidden on Mobile */}
+            <div className="hidden lg:block space-y-6">
+              {categoryDeals.map((deal) => (
+                <DealCard key={deal.id} {...deal} />
+              ))}
+            </div>
 
-        {/* Load More */}
-        <div className="text-center pt-8">
-          <Button className="px-8 py-4 bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-700 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 font-semibold text-lg hover:-translate-y-1">
-            Load More Deals
-          </Button>
+            {/* Mobile Grid Layout - Hidden on Desktop */}
+            <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:hidden">
+              {categoryDeals.map((deal) => (
+                <DealCard key={deal.id} {...deal} />
+              ))}
+            </div>
+          </div>
+
+          {/* Load More */}
+          <div className="text-center pt-8">
+            <Button className="px-8 py-4 bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-700 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 font-semibold text-lg hover:-translate-y-1">
+              Load More Deals
+            </Button>
+          </div>
         </div>
       </main>
     </div>
