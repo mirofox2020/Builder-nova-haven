@@ -268,8 +268,9 @@ const Deal = () => {
             <div className="space-y-6">
               {/* Vote Icons and Title */}
               <div className="space-y-4">
-                {/* Vote Icons */}
-                <div className="flex items-center gap-3">
+                {/* Vote Icons with Save and Share */}
+                <div className="flex items-center justify-between">
+                  {/* Vote Icons */}
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleVote("up")}
@@ -297,6 +298,33 @@ const Deal = () => {
                           userVote === "down" && "text-red-600 fill-current",
                         )}
                       />
+                    </button>
+                  </div>
+
+                  {/* Save and Share Icons */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setIsBookmarked(!isBookmarked)}
+                      className={cn(
+                        "flex items-center justify-center rounded-full p-2 transition-all duration-200",
+                        isBookmarked
+                          ? "bg-yellow-100 hover:bg-yellow-200"
+                          : "hover:bg-gray-100",
+                      )}
+                    >
+                      <Bookmark
+                        className={cn(
+                          "h-6 w-6 text-black font-bold",
+                          isBookmarked && "text-yellow-600 fill-current",
+                        )}
+                      />
+                    </button>
+
+                    <button
+                      onClick={handleShare}
+                      className="flex items-center justify-center hover:bg-blue-100 rounded-full p-2 transition-colors duration-200"
+                    >
+                      <Share2 className="h-6 w-6 text-black font-bold" />
                     </button>
                   </div>
                 </div>
@@ -483,7 +511,7 @@ const Deal = () => {
                 Description
               </h2>
               <div className="prose prose-gray max-w-none">
-                <div className="whitespace-pre-line text-gray-700 leading-relaxed">
+                <div className="whitespace-pre-line text-black leading-relaxed">
                   {dealData.fullDescription}
                 </div>
               </div>
