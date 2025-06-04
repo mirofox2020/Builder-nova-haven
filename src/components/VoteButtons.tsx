@@ -37,22 +37,19 @@ export const VoteButtons = ({
     return (
       <div
         className={cn(
-          "flex items-center bg-gray-50 border border-gray-200 rounded-lg px-3 py-2",
+          "flex items-center bg-gray-100 border border-gray-200 rounded-md px-2 py-1",
           className,
         )}
       >
         {/* Thumbs Up */}
         <button
           onClick={() => handleVote("up")}
-          className={cn(
-            "flex items-center justify-center hover:bg-gray-100 rounded transition-colors duration-200",
-            isLarge ? "h-8 w-8" : "h-7 w-7",
-          )}
+          className="flex items-center justify-center hover:bg-gray-200 rounded p-1 transition-colors duration-200"
         >
           <ThumbsUp
             className={cn(
               "text-gray-500",
-              isLarge ? "h-5 w-5" : "h-4 w-4",
+              isLarge ? "h-4 w-4" : "h-3.5 w-3.5",
               userVote === "up" && "text-blue-600",
             )}
           />
@@ -61,8 +58,8 @@ export const VoteButtons = ({
         {/* Votes Text */}
         <span
           className={cn(
-            "text-gray-500 font-normal px-2",
-            isLarge ? "text-base" : "text-sm",
+            "text-gray-600 font-normal px-2",
+            isLarge ? "text-sm" : "text-xs",
           )}
         >
           {votes} votes
@@ -71,15 +68,12 @@ export const VoteButtons = ({
         {/* Thumbs Down */}
         <button
           onClick={() => handleVote("down")}
-          className={cn(
-            "flex items-center justify-center hover:bg-gray-100 rounded transition-colors duration-200",
-            isLarge ? "h-8 w-8" : "h-7 w-7",
-          )}
+          className="flex items-center justify-center hover:bg-gray-200 rounded p-1 transition-colors duration-200"
         >
           <ThumbsDown
             className={cn(
               "text-gray-500",
-              isLarge ? "h-5 w-5" : "h-4 w-4",
+              isLarge ? "h-4 w-4" : "h-3.5 w-3.5",
               userVote === "down" && "text-red-600",
             )}
           />
