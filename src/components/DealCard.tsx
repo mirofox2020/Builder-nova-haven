@@ -307,7 +307,7 @@ export const DealCard = ({
                 <img
                   src={image}
                   alt={title}
-                  className="w-full h-full object-contain p-2"
+                  className="w-full h-full object-contain p-2 max-sm:p-0"
                 />
                 {discount > 0 && (
                   <div className="absolute top-1 left-1 bg-green-600 text-white px-1.5 py-0.5 rounded text-xs font-semibold shadow-sm">
