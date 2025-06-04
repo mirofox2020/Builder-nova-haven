@@ -37,43 +37,38 @@ export const VoteButtons = ({
     return (
       <div
         className={cn(
-          "inline-flex items-center bg-gray-100 rounded-full px-2 py-1",
+          "inline-flex items-center bg-gray-100 rounded-full px-2.5 py-1.5 gap-1",
           className,
         )}
       >
         {/* Thumbs Up */}
         <button
           onClick={() => handleVote("up")}
-          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-0.5 transition-colors duration-200"
+          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-1 transition-colors duration-200"
         >
           <ThumbsUp
             className={cn(
               "text-gray-500",
-              isLarge ? "h-4 w-4" : "h-3.5 w-3.5",
+              "h-3.5 w-3.5",
               userVote === "up" && "text-blue-600",
             )}
           />
         </button>
 
         {/* Votes Text */}
-        <span
-          className={cn(
-            "text-gray-600 font-medium mx-2",
-            isLarge ? "text-sm" : "text-xs",
-          )}
-        >
+        <span className="text-gray-600 font-normal text-xs px-1">
           {votes} votes
         </span>
 
         {/* Thumbs Down */}
         <button
           onClick={() => handleVote("down")}
-          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-0.5 transition-colors duration-200"
+          className="flex items-center justify-center hover:bg-gray-200 rounded-full p-1 transition-colors duration-200"
         >
           <ThumbsDown
             className={cn(
               "text-gray-500",
-              isLarge ? "h-4 w-4" : "h-3.5 w-3.5",
+              "h-3.5 w-3.5",
               userVote === "down" && "text-red-600",
             )}
           />
