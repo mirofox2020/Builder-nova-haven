@@ -73,10 +73,9 @@ export const DealCard = ({
       {/* Desktop Layout */}
       <Card
         className={cn(
-          "group overflow-hidden hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-0 shadow-sm hover:-translate-y-1 hidden lg:block cursor-pointer",
+          "group overflow-hidden hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-0 shadow-sm hover:-translate-y-1 hidden lg:block",
           !isAvailable && "opacity-75",
         )}
-        onClick={() => (window.location.href = `/deal/${id}`)}
       >
         <CardContent className="p-0">
           <div className="flex flex-col lg:flex-row">
