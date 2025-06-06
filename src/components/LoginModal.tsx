@@ -29,12 +29,21 @@ export const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
       password: "demo123",
       name: "Demo User",
       avatar: "/placeholder.svg",
+      role: "user",
+    },
+    {
+      email: "admin@dealshub.com",
+      password: "admin123",
+      name: "Admin User",
+      avatar: "/placeholder.svg",
+      role: "admin",
     },
     {
       email: "john@example.com",
       password: "password",
       name: "John Smith",
       avatar: "/placeholder.svg",
+      role: "user",
     },
   ];
 
@@ -127,24 +136,48 @@ export const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
             <p className="text-sm text-blue-700 mb-3">
               Use these credentials to test the login:
             </p>
-            <div className="space-y-1 text-sm text-blue-800">
-              <p>
-                <strong>Email:</strong> demo@example.com
-              </p>
-              <p>
-                <strong>Password:</strong> demo123
-              </p>
+            <div className="space-y-3">
+              <div className="space-y-1 text-sm text-blue-800">
+                <p>
+                  <strong>User Account:</strong>
+                </p>
+                <p>Email: demo@example.com</p>
+                <p>Password: demo123</p>
+              </div>
+              <div className="space-y-1 text-sm text-red-800">
+                <p>
+                  <strong>Admin Account:</strong>
+                </p>
+                <p>Email: admin@dealshub.com</p>
+                <p>Password: admin123</p>
+              </div>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleDemoLogin}
-              className="mt-3 border-blue-300 text-blue-700 hover:bg-blue-100"
-            >
-              Auto-fill Demo Credentials
-            </Button>
+            <div className="flex gap-2 mt-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleDemoLogin}
+                className="border-blue-300 text-blue-700 hover:bg-blue-100"
+              >
+                User Login
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setFormData({
+                    email: "admin@dealshub.com",
+                    password: "admin123",
+                    name: "",
+                    confirmPassword: "",
+                  });
+                }}
+                className="border-red-300 text-red-700 hover:bg-red-100"
+              >
+                Admin Login
+              </Button>
+            </div>
           </div>
-
           <form onSubmit={handleSubmit} className="space-y-4">
             {!isLogin && (
               <div className="space-y-2">
