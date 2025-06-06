@@ -206,12 +206,11 @@ const Dashboard = () => {
       case "overview":
         return (
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
               Dashboard Overview
             </h1>
-
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
               <Card>
                 <CardContent className="p-6">
                   <div className="flex items-center">
@@ -246,14 +245,49 @@ const Dashboard = () => {
               </Card>
 
               <Card>
-                <CardContent className="p-6">
+                <CardContent className="p-3 sm:p-6">
                   <div className="flex items-center">
-                    <Package className="h-8 w-8 text-green-500" />
-                    <div className="ml-4">
-                      <p className="text-sm font-medium text-gray-600">
+                    <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />
+                    <div className="ml-2 sm:ml-4">
+                      <p className="text-xs sm:text-sm font-medium text-gray-600">
+                        Saved Deals
+                      </p>
+                      <p className="text-lg sm:text-2xl font-bold text-gray-900">
+                        24
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-3 sm:p-6">
+                  <div className="flex items-center">
+                    <Bell className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />
+                    <div className="ml-2 sm:ml-4">
+                      <p className="text-xs sm:text-sm font-medium text-gray-600">
+                        Active Alerts
+                      </p>
+                      <p className="text-lg sm:text-2xl font-bold text-gray-900">
+                        {
+                          sampleAlerts.filter((a) => a.status === "active")
+                            .length
+                        }
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-3 sm:p-6">
+                  <div className="flex items-center">
+                    <Package className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
+                    <div className="ml-2 sm:ml-4">
+                      <p className="text-xs sm:text-sm font-medium text-gray-600">
                         Submitted Deals
                       </p>
-                      <p className="text-2xl font-bold text-gray-900">
+                      <p className="text-lg sm:text-2xl font-bold text-gray-900">
                         {sampleSubmittedDeals.length}
                       </p>
                     </div>
@@ -262,14 +296,16 @@ const Dashboard = () => {
               </Card>
 
               <Card>
-                <CardContent className="p-6">
+                <CardContent className="p-3 sm:p-6">
                   <div className="flex items-center">
-                    <DollarSign className="h-8 w-8 text-yellow-500" />
-                    <div className="ml-4">
-                      <p className="text-sm font-medium text-gray-600">
+                    <DollarSign className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-500" />
+                    <div className="ml-2 sm:ml-4">
+                      <p className="text-xs sm:text-sm font-medium text-gray-600">
                         Total Savings
                       </p>
-                      <p className="text-2xl font-bold text-gray-900">$2,340</p>
+                      <p className="text-lg sm:text-2xl font-bold text-gray-900">
+                        $2,340
+                      </p>
                     </div>
                   </div>
                 </CardContent>
@@ -316,8 +352,10 @@ const Dashboard = () => {
       case "alerts":
         return (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold text-gray-900">My Alerts</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                My Alerts
+              </h1>
               <Button className="bg-orange-500 hover:bg-orange-600">
                 <Plus className="h-4 w-4 mr-2" />
                 Add New Alert
@@ -330,7 +368,7 @@ const Dashboard = () => {
                 <CardTitle>Create Price Alert</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700">
                       Product URL or Search
@@ -438,7 +476,7 @@ const Dashboard = () => {
                           <h3 className="font-semibold text-gray-900">
                             {alert.productName}
                           </h3>
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2 text-sm">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mt-2 text-sm">
                             <div>
                               <span className="text-gray-500">
                                 Current Price:
@@ -470,7 +508,7 @@ const Dashboard = () => {
                             Last checked: {alert.lastChecked}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 ml-4">
+                        <div className="flex items-center gap-1 sm:gap-2 ml-2 sm:ml-4 mt-2 sm:mt-0">
                           <Button variant="outline" size="sm">
                             <Eye className="h-4 w-4" />
                           </Button>
@@ -497,68 +535,69 @@ const Dashboard = () => {
       case "submitted":
         return (
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
               My Submitted Deals
             </h1>
-
             <Card>
-              <CardContent className="p-6">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Deal Title</TableHead>
-                      <TableHead>Date Submitted</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Votes</TableHead>
-                      <TableHead>Comments</TableHead>
-                      <TableHead>Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {sampleSubmittedDeals.map((deal) => (
-                      <TableRow key={deal.id}>
-                        <TableCell className="font-medium">
-                          {deal.title}
-                        </TableCell>
-                        <TableCell>{deal.dateSubmitted}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            {getStatusIcon(deal.status)}
-                            <Badge
-                              variant={
-                                deal.status === "approved"
-                                  ? "default"
-                                  : deal.status === "pending"
-                                    ? "secondary"
-                                    : "destructive"
-                              }
-                              className={cn(
-                                deal.status === "approved" &&
-                                  "bg-green-100 text-green-800",
-                                deal.status === "pending" &&
-                                  "bg-yellow-100 text-yellow-800",
-                              )}
-                            >
-                              {deal.status}
-                            </Badge>
-                          </div>
-                        </TableCell>
-                        <TableCell>{deal.votes}</TableCell>
-                        <TableCell>{deal.comments}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <Button variant="outline" size="sm">
-                              <Eye className="h-4 w-4" />
-                            </Button>
-                            <Button variant="outline" size="sm">
-                              <Edit3 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
+              <CardContent className="p-3 sm:p-6">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Deal Title</TableHead>
+                        <TableHead>Date Submitted</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Votes</TableHead>
+                        <TableHead>Comments</TableHead>
+                        <TableHead>Actions</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {sampleSubmittedDeals.map((deal) => (
+                        <TableRow key={deal.id}>
+                          <TableCell className="font-medium">
+                            {deal.title}
+                          </TableCell>
+                          <TableCell>{deal.dateSubmitted}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              {getStatusIcon(deal.status)}
+                              <Badge
+                                variant={
+                                  deal.status === "approved"
+                                    ? "default"
+                                    : deal.status === "pending"
+                                      ? "secondary"
+                                      : "destructive"
+                                }
+                                className={cn(
+                                  deal.status === "approved" &&
+                                    "bg-green-100 text-green-800",
+                                  deal.status === "pending" &&
+                                    "bg-yellow-100 text-yellow-800",
+                                )}
+                              >
+                                {deal.status}
+                              </Badge>
+                            </div>
+                          </TableCell>
+                          <TableCell>{deal.votes}</TableCell>
+                          <TableCell>{deal.comments}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <Button variant="outline" size="sm">
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                              <Button variant="outline" size="sm">
+                                <Edit3 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -567,10 +606,9 @@ const Dashboard = () => {
       case "profile":
         return (
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
               Profile Settings
             </h1>
-
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Account Settings */}
               <Card>
@@ -717,8 +755,8 @@ const Dashboard = () => {
       case "notifications":
         return (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold text-gray-900">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
                 Notifications
               </h1>
               <Button variant="outline">Mark All as Read</Button>
@@ -872,7 +910,7 @@ const Dashboard = () => {
             </Button>
           </div>
 
-          <div className="p-6 lg:p-8">{renderContent()}</div>
+          <div className="p-4 sm:p-6 lg:p-8">{renderContent()}</div>
         </div>
       </div>
     </div>
