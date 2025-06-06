@@ -176,6 +176,7 @@ const ManageDeals = () => {
     promoCode: "",
     url: "",
     expiresAt: "",
+    image: "",
   });
 
   const getStatusIcon = (status: string) => {
