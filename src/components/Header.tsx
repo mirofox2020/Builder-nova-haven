@@ -14,6 +14,8 @@ import {
   X,
   LogOut,
   Settings,
+  Shield,
+  Home,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -74,6 +76,19 @@ export const Header = () => {
     // You could add logic here to remember what they were trying to do
   };
 
+  const navigateToDashboard = () => {
+    setShowProfileDropdown(false);
+    if (user?.role === "admin") {
+      window.location.href = "/admin";
+    } else {
+      window.location.href = "/dashboard";
+    }
+  };
+
+  const navigateToHome = () => {
+    window.location.href = "/";
+  };
+
   return (
     <>
       <header className="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50 shadow-sm w-full">
@@ -82,14 +97,17 @@ export const Header = () => {
           <div className="flex items-center justify-between h-16 lg:h-18 px-4 sm:px-6 lg:px-8">
             {/* Logo */}
             <div className="flex items-center">
-              <div className="flex items-center space-x-2">
+              <button
+                onClick={navigateToHome}
+                className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-200"
+              >
                 <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-pink-500 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">D</span>
                 </div>
                 <h1 className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent font-sans">
                   DealsHub
                 </h1>
-              </div>
+              </button>
             </div>
 
             {/* Center - Search Bar (Hidden on mobile) */}
@@ -169,7 +187,9 @@ export const Header = () => {
                       <p className="text-sm font-medium text-gray-900">
                         {user?.name || "User"}
                       </p>
-                      <p className="text-xs text-gray-500">View Profile</p>
+                      <p className="text-xs text-gray-500">
+                        {user?.role === "admin" ? "Admin" : "View Profile"}
+                      </p>
                     </div>
                   </button>
 
@@ -190,23 +210,26 @@ export const Header = () => {
                             <p className="text-sm text-gray-500">
                               {user?.email}
                             </p>
+                            {user?.role === "admin" && (
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 mt-1">
+                                <Shield className="h-3 w-3 mr-1" />
+                                Admin
+                              </span>
+                            )}
                           </div>
                         </div>
                       </div>
 
                       <div className="p-2">
                         <button
-                          onClick={() => {
-                            setShowProfileDropdown(false);
-                            const dashboardUrl =
-                              user?.role === "admin"
-                                ? "/admin-dashboard"
-                                : "/dashboard";
-                            window.location.href = dashboardUrl;
-                          }}
+                          onClick={navigateToDashboard}
                           className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-gray-100 rounded-md transition-colors"
                         >
-                          <Settings className="h-4 w-4 text-gray-500" />
+                          {user?.role === "admin" ? (
+                            <Shield className="h-4 w-4 text-blue-500" />
+                          ) : (
+                            <Settings className="h-4 w-4 text-gray-500" />
+                          )}
                           <span className="text-sm text-gray-700">
                             {user?.role === "admin"
                               ? "Admin Dashboard"
@@ -217,13 +240,23 @@ export const Header = () => {
                         <button
                           onClick={() => {
                             setShowProfileDropdown(false);
-                            window.location.href = "/";
+                            window.location.href = "/profile";
                           }}
                           className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-gray-100 rounded-md transition-colors"
                         >
                           <User className="h-4 w-4 text-gray-500" />
                           <span className="text-sm text-gray-700">
                             Profile Settings
+                          </span>
+                        </button>
+
+                        <button
+                          onClick={navigateToHome}
+                          className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-gray-100 rounded-md transition-colors"
+                        >
+                          <Home className="h-4 w-4 text-gray-500" />
+                          <span className="text-sm text-gray-700">
+                            Browse Deals
                           </span>
                         </button>
 
@@ -268,45 +301,71 @@ export const Header = () => {
           <div
             className={cn(
               "lg:hidden overflow-hidden transition-all duration-300 ease-out px-4 sm:px-6 lg:px-8",
-              isMenuOpen ? "max-h-20 pb-4 opacity-100" : "max-h-0 opacity-0",
+              isMenuOpen ? "max-h-32 pb-4 opacity-100" : "max-h-0 opacity-0",
             )}
           >
-            <div className="flex gap-2 pt-2">
+            <div className="flex flex-col gap-2 pt-2">
               {isLoggedIn ? (
                 <>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex-1"
-                    onClick={handleCreateAlert}
-                  >
-                    <Bell className="h-4 w-4 mr-2" />
-                    Create Alert
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="flex-1 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white"
-                    onClick={handlePostDeal}
-                  >
-                    <Plus className="h-4 w-4 mr-2" />
-                    Post Deal
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={handleCreateAlert}
+                    >
+                      <Bell className="h-4 w-4 mr-2" />
+                      Create Alert
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="flex-1 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white"
+                      onClick={handlePostDeal}
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      Post Deal
+                    </Button>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={navigateToDashboard}
+                    >
+                      {user?.role === "admin" ? (
+                        <Shield className="h-4 w-4 mr-2" />
+                      ) : (
+                        <Settings className="h-4 w-4 mr-2" />
+                      )}
+                      {user?.role === "admin" ? "Admin" : "Dashboard"}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 text-red-600 border-red-200 hover:bg-red-50"
+                      onClick={handleLogout}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </Button>
+                  </div>
                 </>
               ) : (
                 <>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="flex-1"
+                    className="w-full"
                     onClick={() => setIsLoginModalOpen(true)}
                   >
                     <User className="h-4 w-4 mr-2" />
-                    Login
+                    Login / Register
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="flex-1"
+                    className="w-full"
                     onClick={() => setIsLoginModalOpen(true)}
                   >
                     <Bell className="h-4 w-4 mr-2" />

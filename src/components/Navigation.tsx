@@ -15,7 +15,6 @@ import {
   Tag,
   Percent,
   Gift,
-  MessageCircle,
   Filter,
   ChevronDown,
   Flame,
@@ -70,6 +69,9 @@ const availableStores = [
   { id: "samsung", name: "Samsung", logo: "📱" },
   { id: "tesla", name: "Tesla", logo: "🚗" },
   { id: "canon", name: "Canon", logo: "📷" },
+  { id: "kitchenaid", name: "KitchenAid", logo: "🍳" },
+  { id: "levis", name: "Levi's", logo: "👖" },
+  { id: "playstation", name: "PlayStation", logo: "🎮" },
 ];
 
 const discountRanges = [
@@ -185,16 +187,33 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-64 max-h-96 overflow-y-auto">
+                    <DropdownMenuLabel className="text-base font-semibold">
+                      Browse Categories
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
                     {categories.map((cat) => (
                       <DropdownMenuItem
                         key={cat.id}
                         onClick={() => handleCategorySelect(cat.id)}
-                        className="flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-50"
+                        className="flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-50 transition-colors duration-200"
                       >
                         <span className="text-lg">{cat.icon}</span>
-                        <span className="font-medium">{cat.name}</span>
+                        <div className="flex-1">
+                          <span className="font-medium">{cat.name}</span>
+                          <div className="text-xs text-gray-500 mt-0.5">
+                            {cat.subcategories.length} subcategories
+                          </div>
+                        </div>
                       </DropdownMenuItem>
                     ))}
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={() => (window.location.href = "/")}
+                      className="flex items-center gap-3 p-3 cursor-pointer hover:bg-orange-50 text-orange-600 font-medium"
+                    >
+                      <span className="text-lg">🏠</span>
+                      <span>Browse All Deals</span>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               );
