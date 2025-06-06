@@ -95,7 +95,9 @@ export const DealCard = ({
               <div className="space-y-4">
                 {/* Vote and Time at Top - Bigger Vote Buttons */}
                 <div className="flex items-center justify-between">
-                  <VoteButtons initialVotes={votes} compact size="lg" />
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <VoteButtons initialVotes={votes} compact size="lg" />
+                  </div>
                   <div className="flex items-center gap-1 text-xs text-gray-500">
                     <Clock className="h-3 w-3" />
                     <span className="font-medium">{timePosted}</span>
