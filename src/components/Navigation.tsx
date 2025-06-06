@@ -7,6 +7,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import {
   Tag,
@@ -17,9 +20,18 @@ import {
   ChevronDown,
   Flame,
   TrendingUp,
+  Store,
+  RotateCcw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { categories } from "@/data/categories";
+
+interface NavigationProps {
+  onFiltersChange?: (filters: {
+    stores: string[];
+    discountRanges: string[];
+  }) => void;
+}
 
 const mainCategories = [
   {
@@ -41,10 +53,41 @@ const feedTabs = [
   { id: "all", label: "All", icon: null },
 ];
 
-export const Navigation = () => {
+const availableStores = [
+  { id: "amazon", name: "Amazon", logo: "🛒" },
+  { id: "bestbuy", name: "Best Buy", logo: "🔵" },
+  { id: "walmart", name: "Walmart", logo: "🏪" },
+  { id: "nike", name: "Nike", logo: "👟" },
+  { id: "sony", name: "Sony", logo: "📺" },
+  { id: "apple", name: "Apple", logo: "🍎" },
+  { id: "ebay", name: "eBay", logo: "🛍️" },
+  { id: "lego", name: "LEGO", logo: "🧩" },
+  { id: "google", name: "Google Store", logo: "🔍" },
+  { id: "dyson", name: "Dyson", logo: "🌪️" },
+  { id: "microsoft", name: "Microsoft", logo: "💻" },
+  { id: "nintendo", name: "Nintendo", logo: "🎮" },
+  { id: "bose", name: "Bose", logo: "🎧" },
+  { id: "samsung", name: "Samsung", logo: "📱" },
+  { id: "tesla", name: "Tesla", logo: "🚗" },
+  { id: "canon", name: "Canon", logo: "📷" },
+];
+
+const discountRanges = [
+  { id: "10-20", label: "10% - 20% off", min: 10, max: 20 },
+  { id: "20-30", label: "20% - 30% off", min: 20, max: 30 },
+  { id: "30-40", label: "30% - 40% off", min: 30, max: 40 },
+  { id: "40-50", label: "40% - 50% off", min: 40, max: 50 },
+  { id: "50+", label: "50%+ off", min: 50, max: 100 },
+];
+
+export const Navigation = ({ onFiltersChange }: NavigationProps) => {
   const location = useLocation();
   const [activeCategory, setActiveCategory] = useState("deals");
   const [activeTab, setActiveTab] = useState("for-you");
+  const [selectedStores, setSelectedStores] = useState<string[]>([]);
+  const [selectedDiscountRanges, setSelectedDiscountRanges] = useState<
+    string[]
+  >([]);
 
   // Only show secondary menu on homepage
   const isHomepage = location.pathname === "/";
@@ -61,6 +104,49 @@ export const Navigation = () => {
     // Navigate to category page
     window.location.href = `/categories/${categoryId}`;
   };
+
+  const handleStoreToggle = (storeId: string) => {
+    const newSelectedStores = selectedStores.includes(storeId)
+      ? selectedStores.filter((id) => id !== storeId)
+      : [...selectedStores, storeId];
+
+    setSelectedStores(newSelectedStores);
+
+    // Notify parent component of filter changes
+    onFiltersChange?.({
+      stores: newSelectedStores,
+      discountRanges: selectedDiscountRanges,
+    });
+  };
+
+  const handleDiscountToggle = (rangeId: string) => {
+    const newSelectedRanges = selectedDiscountRanges.includes(rangeId)
+      ? selectedDiscountRanges.filter((id) => id !== rangeId)
+      : [...selectedDiscountRanges, rangeId];
+
+    setSelectedDiscountRanges(newSelectedRanges);
+
+    // Notify parent component of filter changes
+    onFiltersChange?.({
+      stores: selectedStores,
+      discountRanges: newSelectedRanges,
+    });
+  };
+
+  const handleClearFilters = () => {
+    setSelectedStores([]);
+    setSelectedDiscountRanges([]);
+
+    onFiltersChange?.({
+      stores: [],
+      discountRanges: [],
+    });
+  };
+
+  const hasActiveFilters =
+    selectedStores.length > 0 || selectedDiscountRanges.length > 0;
+  const activeFiltersCount =
+    selectedStores.length + selectedDiscountRanges.length;
 
   return (
     <div className="bg-white/50 backdrop-blur-sm border-b border-gray-200/70">
@@ -169,16 +255,136 @@ export const Navigation = () => {
               })}
             </div>
 
-            {/* Filter Button */}
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex items-center gap-2 rounded-lg border-gray-300 hover:bg-gray-50 transition-all duration-200"
-            >
-              <Filter className="h-4 w-4" />
-              <span className="hidden sm:inline">Filter</span>
-              <ChevronDown className="h-4 w-4" />
-            </Button>
+            {/* Filter Button with Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={cn(
+                    "flex items-center gap-2 rounded-lg border-gray-300 hover:bg-gray-50 transition-all duration-200 relative",
+                    hasActiveFilters &&
+                      "border-orange-500 bg-orange-50 text-orange-600",
+                  )}
+                >
+                  <Filter className="h-4 w-4" />
+                  <span className="hidden sm:inline">Filter</span>
+                  {hasActiveFilters && (
+                    <Badge className="bg-orange-500 text-white text-xs h-5 px-1.5 ml-1">
+                      {activeFiltersCount}
+                    </Badge>
+                  )}
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-80 max-h-96 overflow-y-auto"
+                align="end"
+              >
+                {/* Filter Header */}
+                <div className="flex items-center justify-between p-3 border-b">
+                  <DropdownMenuLabel className="text-base font-semibold">
+                    Filter Deals
+                  </DropdownMenuLabel>
+                  {hasActiveFilters && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleClearFilters}
+                      className="text-orange-600 hover:text-orange-700 hover:bg-orange-50 h-auto p-1"
+                    >
+                      <RotateCcw className="h-4 w-4 mr-1" />
+                      Clear All
+                    </Button>
+                  )}
+                </div>
+
+                {/* Stores Filter */}
+                <div className="py-2">
+                  <DropdownMenuLabel className="flex items-center gap-2 text-sm font-medium text-gray-700 px-3 py-2">
+                    <Store className="h-4 w-4" />
+                    Stores
+                  </DropdownMenuLabel>
+                  <div className="max-h-48 overflow-y-auto">
+                    {availableStores.map((store) => (
+                      <DropdownMenuCheckboxItem
+                        key={store.id}
+                        checked={selectedStores.includes(store.id)}
+                        onCheckedChange={() => handleStoreToggle(store.id)}
+                        className="flex items-center gap-3 px-3 py-2 cursor-pointer"
+                      >
+                        <span className="text-base">{store.logo}</span>
+                        <span className="text-sm">{store.name}</span>
+                      </DropdownMenuCheckboxItem>
+                    ))}
+                  </div>
+                </div>
+
+                <DropdownMenuSeparator />
+
+                {/* Discount Ranges Filter */}
+                <div className="py-2">
+                  <DropdownMenuLabel className="flex items-center gap-2 text-sm font-medium text-gray-700 px-3 py-2">
+                    <Percent className="h-4 w-4" />
+                    Discount Range
+                  </DropdownMenuLabel>
+                  {discountRanges.map((range) => (
+                    <DropdownMenuCheckboxItem
+                      key={range.id}
+                      checked={selectedDiscountRanges.includes(range.id)}
+                      onCheckedChange={() => handleDiscountToggle(range.id)}
+                      className="flex items-center gap-3 px-3 py-2 cursor-pointer"
+                    >
+                      <span className="text-sm font-medium text-green-600">
+                        {range.label}
+                      </span>
+                    </DropdownMenuCheckboxItem>
+                  ))}
+                </div>
+
+                {/* Active Filters Summary */}
+                {hasActiveFilters && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <div className="p-3 bg-gray-50">
+                      <p className="text-xs text-gray-600 mb-2">
+                        Active Filters:
+                      </p>
+                      <div className="flex flex-wrap gap-1">
+                        {selectedStores.map((storeId) => {
+                          const store = availableStores.find(
+                            (s) => s.id === storeId,
+                          );
+                          return (
+                            <Badge
+                              key={storeId}
+                              variant="secondary"
+                              className="text-xs"
+                            >
+                              {store?.logo} {store?.name}
+                            </Badge>
+                          );
+                        })}
+                        {selectedDiscountRanges.map((rangeId) => {
+                          const range = discountRanges.find(
+                            (r) => r.id === rangeId,
+                          );
+                          return (
+                            <Badge
+                              key={rangeId}
+                              variant="secondary"
+                              className="text-xs"
+                            >
+                              {range?.label}
+                            </Badge>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         )}
       </div>
