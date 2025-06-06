@@ -657,25 +657,89 @@ const Admin = () => {
                     }
                     className="min-h-[100px]"
                   />
-                  <Button variant="outline" size="sm" className="mt-2">
-                    Generate with AI
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm">
+                      <RefreshCw className="h-4 w-4 mr-2" />
+                      Generate with ChatGPT
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Globe className="h-4 w-4 mr-2" />
+                      Fetch from URL
+                    </Button>
+                  </div>
                 </div>
 
-                <div className="mt-4 flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    id="featured"
-                    checked={newDeal.featured}
-                    onChange={(e) =>
-                      setNewDeal({ ...newDeal, featured: e.target.checked })
-                    }
-                  />
-                  <label htmlFor="featured" className="text-sm text-gray-700">
-                    Mark as Featured Deal
-                  </label>
-                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700">
+                      Subcategory
+                    </label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select subcategory" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="smartphones">Smartphones</SelectItem>
+                        <SelectItem value="laptops">Laptops</SelectItem>
+                        <SelectItem value="headphones">Headphones</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700">
+                      Expiration Date
+                    </label>
+                    <Input type="date" />
+                  </div>
+                </div>
+                <div className="mt-4 space-y-3">
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        id="featured"
+                        checked={newDeal.featured}
+                        onChange={(e) =>
+                          setNewDeal({ ...newDeal, featured: e.target.checked })
+                        }
+                      />
+                      <label
+                        htmlFor="featured"
+                        className="text-sm text-gray-700"
+                      >
+                        Mark as Featured Deal
+                      </label>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <input type="checkbox" id="published" defaultChecked />
+                      <label
+                        htmlFor="published"
+                        className="text-sm text-gray-700"
+                      >
+                        Publish Immediately
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700">
+                      Deal Status
+                    </label>
+                    <Select defaultValue="published">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="published">Published</SelectItem>
+                        <SelectItem value="draft">Draft</SelectItem>
+                        <SelectItem value="scheduled">Scheduled</SelectItem>
+                        <SelectItem value="expired">Expired</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
                 <div className="mt-6 flex gap-3">
                   <Button
                     onClick={handleCreateDeal}
@@ -759,6 +823,257 @@ const Admin = () => {
                               </Button>
                               <Button variant="outline" size="sm">
                                 <Eye className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
+      case "categories":
+        return (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                Manage Categories
+              </h1>
+              <Button className="bg-blue-600 hover:bg-blue-700">
+                <Plus className="h-4 w-4 mr-2" />
+                Add Category
+              </Button>
+            </div>
+
+            {/* Categories Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  id: "1",
+                  name: "Electronics",
+                  icon: "📱",
+                  subcategories: 8,
+                  deals: 450,
+                },
+                {
+                  id: "2",
+                  name: "Fashion",
+                  icon: "👕",
+                  subcategories: 8,
+                  deals: 230,
+                },
+                {
+                  id: "3",
+                  name: "Home & Kitchen",
+                  icon: "🏠",
+                  subcategories: 8,
+                  deals: 180,
+                },
+                {
+                  id: "4",
+                  name: "Health & Beauty",
+                  icon: "💄",
+                  subcategories: 8,
+                  deals: 120,
+                },
+                {
+                  id: "5",
+                  name: "Sports & Outdoors",
+                  icon: "⚽",
+                  subcategories: 8,
+                  deals: 95,
+                },
+                {
+                  id: "6",
+                  name: "Automotive",
+                  icon: "🚗",
+                  subcategories: 8,
+                  deals: 78,
+                },
+              ].map((category) => (
+                <Card key={category.id}>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4 mb-4">
+                      <span className="text-3xl">{category.icon}</span>
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          {category.name}
+                        </h3>
+                        <p className="text-sm text-gray-500">
+                          {category.subcategories} subcategories •{" "}
+                          {category.deals} deals
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" className="flex-1">
+                        <Edit3 className="h-4 w-4 mr-1" />
+                        Edit
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-red-600"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Add New Category Form */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Add New Category</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <Input placeholder="Category name" />
+                  <Input placeholder="Icon (emoji)" />
+                  <Button className="bg-green-600 hover:bg-green-700">
+                    Add Category
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
+      case "alerts":
+        return (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                Manage Alerts
+              </h1>
+              <div className="flex gap-2">
+                <Button variant="outline">
+                  <Filter className="h-4 w-4 mr-2" />
+                  Filter
+                </Button>
+                <Button variant="outline">
+                  <Download className="h-4 w-4 mr-2" />
+                  Export
+                </Button>
+              </div>
+            </div>
+
+            {/* Alert Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Card>
+                <CardContent className="p-4 text-center">
+                  <Bell className="h-6 w-6 text-blue-500 mx-auto mb-2" />
+                  <p className="text-2xl font-bold">1,247</p>
+                  <p className="text-xs text-gray-500">Total Alerts</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-4 text-center">
+                  <AlertTriangle className="h-6 w-6 text-orange-500 mx-auto mb-2" />
+                  <p className="text-2xl font-bold">156</p>
+                  <p className="text-xs text-gray-500">Triggered</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-4 text-center">
+                  <Users className="h-6 w-6 text-green-500 mx-auto mb-2" />
+                  <p className="text-2xl font-bold">892</p>
+                  <p className="text-xs text-gray-500">Active Users</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-4 text-center">
+                  <Package className="h-6 w-6 text-purple-500 mx-auto mb-2" />
+                  <p className="text-2xl font-bold">34</p>
+                  <p className="text-xs text-gray-500">This Week</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Alerts Table */}
+            <Card>
+              <CardContent className="p-3 sm:p-6">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>User</TableHead>
+                        <TableHead>Product</TableHead>
+                        <TableHead>Target Price</TableHead>
+                        <TableHead>Current Price</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Created</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {[
+                        {
+                          id: "1",
+                          user: "john_doe",
+                          product: "iPhone 15 Pro Max",
+                          targetPrice: 999,
+                          currentPrice: 1199,
+                          status: "active",
+                          created: "2024-01-15",
+                        },
+                        {
+                          id: "2",
+                          user: "sarah_wilson",
+                          product: "Samsung Galaxy S24",
+                          targetPrice: 899,
+                          currentPrice: 850,
+                          status: "triggered",
+                          created: "2024-01-12",
+                        },
+                      ].map((alert) => (
+                        <TableRow key={alert.id}>
+                          <TableCell className="font-medium">
+                            {alert.user}
+                          </TableCell>
+                          <TableCell>{alert.product}</TableCell>
+                          <TableCell>${alert.targetPrice}</TableCell>
+                          <TableCell>
+                            <span
+                              className={cn(
+                                "font-bold",
+                                alert.currentPrice <= alert.targetPrice
+                                  ? "text-green-600"
+                                  : "text-gray-900",
+                              )}
+                            >
+                              ${alert.currentPrice}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <Badge
+                              variant={
+                                alert.status === "triggered"
+                                  ? "default"
+                                  : "secondary"
+                              }
+                            >
+                              {alert.status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>{alert.created}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-1">
+                              <Button variant="outline" size="sm">
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="text-red-600"
+                              >
+                                <Trash2 className="h-4 w-4" />
                               </Button>
                             </div>
                           </TableCell>
@@ -1020,6 +1335,7 @@ https://walmart.com/product3`}
             </h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* API Configuration */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -1031,13 +1347,16 @@ https://walmart.com/product3`}
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">
-                        OpenAI API Key
+                        OpenAI API Key (ChatGPT)
                       </label>
                       <Input type="password" placeholder="sk-..." />
+                      <p className="text-xs text-gray-500">
+                        For auto-generating product descriptions
+                      </p>
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">
-                        Amazon API Key
+                        Amazon Product API
                       </label>
                       <Input type="password" placeholder="AKIAI..." />
                     </div>
@@ -1047,11 +1366,21 @@ https://walmart.com/product3`}
                       </label>
                       <Input type="password" placeholder="wmt..." />
                     </div>
-                    <Button className="w-full">Save API Keys</Button>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-gray-700">
+                        Best Buy API Key
+                      </label>
+                      <Input type="password" placeholder="bb..." />
+                    </div>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                      <Database className="h-4 w-4 mr-2" />
+                      Save API Keys
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
 
+              {/* Notification Settings */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -1062,37 +1391,154 @@ https://walmart.com/product3`}
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <label className="text-sm font-medium text-gray-700">
-                        Email Notifications
-                      </label>
-                      <Button variant="outline" size="sm">
+                      <div>
+                        <label className="text-sm font-medium text-gray-700">
+                          Email Notifications
+                        </label>
+                        <p className="text-xs text-gray-500">
+                          Deal approvals, user notifications
+                        </p>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="bg-green-100 text-green-700"
+                      >
                         Enabled
                       </Button>
                     </div>
                     <div className="flex items-center justify-between">
-                      <label className="text-sm font-medium text-gray-700">
-                        Push Notifications
-                      </label>
-                      <Button variant="outline" size="sm">
+                      <div>
+                        <label className="text-sm font-medium text-gray-700">
+                          Push Notifications
+                        </label>
+                        <p className="text-xs text-gray-500">
+                          Real-time alerts for admins
+                        </p>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="bg-green-100 text-green-700"
+                      >
                         Enabled
                       </Button>
                     </div>
                     <div className="flex items-center justify-between">
-                      <label className="text-sm font-medium text-gray-700">
-                        Auto-Upload Features
-                      </label>
-                      <Button variant="outline" size="sm">
+                      <div>
+                        <label className="text-sm font-medium text-gray-700">
+                          Auto-Upload Features
+                        </label>
+                        <p className="text-xs text-gray-500">
+                          Automatic deal imports
+                        </p>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="bg-red-100 text-red-700"
+                      >
                         Disabled
                       </Button>
                     </div>
-                    <Button className="w-full">Save Settings</Button>
+                    <Button className="w-full bg-green-600 hover:bg-green-700">
+                      Save Settings
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Deal Expiration Settings */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Calendar className="h-5 w-5" />
+                    Deal Settings
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-gray-700">
+                        Default Expiration (Days)
+                      </label>
+                      <Input type="number" defaultValue="30" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-gray-700">
+                        Auto-Archive Expired Deals
+                      </label>
+                      <Select defaultValue="enabled">
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="enabled">Enabled</SelectItem>
+                          <SelectItem value="disabled">Disabled</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-gray-700">
+                        Featured Deal Duration (Days)
+                      </label>
+                      <Input type="number" defaultValue="7" />
+                    </div>
+                    <Button className="w-full">Save Deal Settings</Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Database & Performance */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Database className="h-5 w-5" />
+                    Database & Performance
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-sm font-medium text-gray-700">
+                          Database Status
+                        </span>
+                        <p className="text-xs text-gray-500">
+                          Firebase connection
+                        </p>
+                      </div>
+                      <Badge className="bg-green-100 text-green-700">
+                        Connected
+                      </Badge>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-sm font-medium text-gray-700">
+                          Cache Status
+                        </span>
+                        <p className="text-xs text-gray-500">Redis cache</p>
+                      </div>
+                      <Badge className="bg-green-100 text-green-700">
+                        Active
+                      </Badge>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" className="flex-1">
+                        <RefreshCw className="h-4 w-4 mr-2" />
+                        Clear Cache
+                      </Button>
+                      <Button variant="outline" size="sm" className="flex-1">
+                        <Database className="h-4 w-4 mr-2" />
+                        Backup DB
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
           </div>
         );
-
       default:
         return <div>Section not found</div>;
     }
