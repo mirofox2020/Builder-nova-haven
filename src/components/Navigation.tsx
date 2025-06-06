@@ -99,6 +99,18 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
       // Handle categories dropdown - will be handled by dropdown component
       return;
     }
+
+    // Navigate to dedicated pages for codes and deals
+    if (categoryId === "codes") {
+      window.location.href = "/discount-codes";
+      return;
+    }
+
+    if (categoryId === "deals") {
+      window.location.href = "/deals";
+      return;
+    }
+
     setActiveCategory(categoryId);
 
     // Notify parent component of content type change

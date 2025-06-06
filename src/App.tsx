@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Search from "./pages/Search";
+import DiscountCodes from "./pages/DiscountCodes";
+import Deals from "./pages/Deals";
 import NotFound from "./pages/NotFound";
 import "./App.css";
 
@@ -20,6 +22,8 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/discount-codes" element={<DiscountCodes />} />
+        <Route path="/deals" element={<Deals />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
