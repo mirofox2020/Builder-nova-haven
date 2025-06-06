@@ -363,7 +363,13 @@ export const DealCard = ({
               </div>
 
               {/* Title */}
-              <h3 className="font-bold text-gray-900 text-sm max-sm:text-xs line-clamp-2 leading-tight">
+              <h3
+                className="font-bold text-gray-900 text-sm max-sm:text-xs line-clamp-2 leading-tight cursor-pointer hover:text-orange-600 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.location.href = `/deal/${id}`;
+                }}
+              >
                 {title}
               </h3>
 
