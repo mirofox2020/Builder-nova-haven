@@ -1,200 +1,262 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { VoteButtons } from "./VoteButtons";
-import {
-  ExternalLink,
-  TrendingUp,
-  Flame,
-  Users,
-  DollarSign,
-  Activity,
-  Lightbulb,
-} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Flame, TrendingUp, Clock, Vote, MessageCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface HotDeal {
-  id: string;
-  title: string;
-  image: string;
-  originalPrice: number;
-  discountedPrice: number;
-  discount: number;
-  votes: number;
-  merchant: string;
-}
-
-const hotDeals: HotDeal[] = [
+// Sample deals data for sidebar (should match the main deals data)
+const sidebarDeals = [
   {
     id: "1",
-    title: "Apple iPhone 15 Pro Max",
+    title: "Apple iPhone 15 Pro Max 256GB - Natural Titanium",
     image: "/placeholder.svg",
     originalPrice: 1199,
     discountedPrice: 999,
     discount: 17,
-    votes: 342,
-    merchant: "Amazon",
-  },
-  {
-    id: "2",
-    title: "Samsung Galaxy Buds2 Pro",
-    image: "/placeholder.svg",
-    originalPrice: 229,
-    discountedPrice: 149,
-    discount: 35,
-    votes: 156,
-    merchant: "Best Buy",
+    merchant: "eBay",
+    timePosted: "2h ago",
+    votes: 312, // High votes for hottest
+    comments: 67,
+    isAvailable: true,
   },
   {
     id: "3",
-    title: "Nike Air Max 270",
+    title: 'Nike Air Jordan 1 Retro High OG "Chicago"',
     image: "/placeholder.svg",
-    originalPrice: 150,
-    discountedPrice: 89,
-    discount: 41,
-    votes: 89,
+    originalPrice: 170,
+    discountedPrice: 119,
+    discount: 30,
     merchant: "Nike",
+    timePosted: "6h ago",
+    votes: 298, // High votes
+    comments: 45,
+    isAvailable: true,
   },
   {
-    id: "4",
-    title: "MacBook Air M2",
+    id: "14",
+    title: "Tesla Model S Plaid Performance Upgrade",
     image: "/placeholder.svg",
-    originalPrice: 1199,
-    discountedPrice: 949,
-    discount: 21,
+    originalPrice: 4999,
+    discountedPrice: 3999,
+    discount: 20,
+    merchant: "Tesla",
+    timePosted: "3d ago",
+    votes: 267, // High votes
+    comments: 48,
+    isAvailable: true,
+  },
+  {
+    id: "5",
+    title: "Sony WH-1000XM5 Wireless Noise Canceling Headphones",
+    image: "/placeholder.svg",
+    originalPrice: 399,
+    discountedPrice: 279,
+    discount: 30,
+    merchant: "Sony",
+    timePosted: "12h ago",
     votes: 234,
-    merchant: "Apple",
+    comments: 19,
+    isAvailable: true,
+  },
+  {
+    id: "10",
+    title: "Nintendo Switch OLED Model - Neon Red/Blue",
+    image: "/placeholder.svg",
+    originalPrice: 349,
+    discountedPrice: 299,
+    discount: 14,
+    merchant: "Nintendo",
+    timePosted: "2d ago",
+    votes: 198,
+    comments: 31,
+    isAvailable: true,
   },
 ];
 
+// Categories for quick access
+const quickCategories = [
+  { name: "Electronics", icon: "📱", deals: 234 },
+  { name: "Fashion", icon: "👕", deals: 156 },
+  { name: "Home & Kitchen", icon: "🏠", deals: 89 },
+  { name: "Sports", icon: "⚽", deals: 67 },
+];
+
 export const Sidebar = () => {
+  // Sort deals by votes to show hottest deals
+  const hottestDeals = sidebarDeals
+    .sort((a, b) => b.votes - a.votes)
+    .slice(0, 5);
+
+  const handleDealClick = (dealId: string) => {
+    window.location.href = `/deal/${dealId}`;
+  };
+
+  const handleCategoryClick = (categoryName: string) => {
+    const categoryId = categoryName
+      .toLowerCase()
+      .replace(/ & /g, "-")
+      .replace(/ /g, "-");
+    window.location.href = `/categories/${categoryId}`;
+  };
+
   return (
     <div className="space-y-6">
       {/* Hottest Deals */}
       <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-lg flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <Flame className="h-4 w-4 text-white" />
-            </div>
-            <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+        <CardHeader className="pb-3">
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <Flame className="h-5 w-5 text-red-500" />
+            <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
               Hottest Deals
             </span>
           </CardTitle>
+          <p className="text-xs text-gray-500">Most voted deals right now</p>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {hotDeals.map((deal, index) => (
-            <div key={deal.id} className="group">
-              <div className="flex gap-3 px-3 py-0 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-pink-50 transition-all duration-200 border border-transparent hover:border-orange-200">
-                {/* Product Image */}
-                <div className="w-14 h-14 flex-shrink-0 relative">
+        <CardContent className="space-y-3">
+          {hottestDeals.map((deal, index) => (
+            <div
+              key={deal.id}
+              className="group cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-all duration-200 border border-gray-100 hover:border-orange-200 hover:shadow-sm"
+              onClick={() => handleDealClick(deal.id)}
+            >
+              <div className="flex gap-3">
+                <div className="relative flex-shrink-0">
                   <img
                     src={deal.image}
                     alt={deal.title}
-                    className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-200"
+                    className="w-12 h-12 rounded-lg object-cover bg-gray-100"
                   />
-                  {index === 0 && (
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">#1</span>
+                  {index < 3 && (
+                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                      {index + 1}
                     </div>
                   )}
                 </div>
-
-                {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-normal text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors">
+                  <h4 className="font-normal text-sm text-gray-900 line-clamp-2 leading-tight group-hover:text-orange-600 transition-colors duration-200">
                     {deal.title}
                   </h4>
-
-                  <div className="flex items-center gap-2 mt-2">
-                    <span className="font-bold text-sm text-gray-900">
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-sm font-bold text-green-600">
                       ${deal.discountedPrice}
                     </span>
-                    <span className="text-xs text-gray-500 line-through">
-                      ${deal.originalPrice}
-                    </span>
-                    <Badge className="bg-gray-200 text-black text-xs py-0 border-0">
-                      -{deal.discount}%
+                    <Badge className="bg-gray-200 text-black text-xs px-1.5 py-0.5">
+                      {deal.discount}% off
                     </Badge>
                   </div>
-
-                  <div className="text-xs text-gray-500 mt-1 font-medium">
-                    {deal.merchant}
+                  <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <Vote className="h-3 w-3" />
+                      <span>{deal.votes}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <MessageCircle className="h-3 w-3" />
+                      <span>{deal.comments}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      <span>{deal.timePosted}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-
           <Button
             variant="outline"
-            className="w-full text-sm border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300 transition-all duration-200"
             size="sm"
+            className="w-full mt-3 text-red-600 border-red-200 hover:bg-red-50"
+            onClick={() => (window.location.href = "/deals")}
           >
+            <Flame className="h-3 w-3 mr-2" />
             View All Hot Deals
-            <ExternalLink className="h-3 w-3 ml-2" />
           </Button>
         </CardContent>
       </Card>
 
-      {/* Pro Tips */}
-      <Card className="bg-gradient-to-br from-purple-500 to-pink-500 border-0 shadow-lg text-white overflow-hidden">
-        <CardContent className="p-6 relative">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
-          <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full translate-y-10 -translate-x-10"></div>
-          <div className="relative space-y-4">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-                <Lightbulb className="h-4 w-4 text-white" />
+      {/* Trending Categories */}
+      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+        <CardHeader className="pb-3">
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <TrendingUp className="h-5 w-5 text-blue-500" />
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Trending Categories
+            </span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          {quickCategories.map((category) => (
+            <button
+              key={category.name}
+              onClick={() => handleCategoryClick(category.name)}
+              className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-all duration-200 border border-gray-100 hover:border-blue-200 group"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-lg">{category.icon}</span>
+                <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
+                  {category.name}
+                </span>
               </div>
-              <h3 className="font-bold text-lg text-white">Pro Tips</h3>
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                <p className="text-white/90 text-sm leading-relaxed">
-                  Vote on deals to help others find the best
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                <p className="text-white/90 text-sm leading-relaxed">
-                  Set up alerts for your favorite brands
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                <p className="text-white/90 text-sm leading-relaxed">
-                  Check expiry dates before purchasing
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                <p className="text-white/90 text-sm leading-relaxed">
-                  Share great deals with friends
-                </p>
-              </div>
-            </div>
+              <Badge
+                variant="secondary"
+                className="text-xs bg-blue-100 text-blue-700"
+              >
+                {category.deals}
+              </Badge>
+            </button>
+          ))}
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full mt-3 text-blue-600 border-blue-200 hover:bg-blue-50"
+            onClick={() => (window.location.href = "/")}
+          >
+            <TrendingUp className="h-3 w-3 mr-2" />
+            Browse All Categories
+          </Button>
+        </CardContent>
+      </Card>
+
+      {/* Quick Stats */}
+      <Card className="bg-gradient-to-br from-orange-50 to-pink-50 border-orange-200">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg text-gray-900">Today's Stats</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600">New Deals</span>
+            <span className="font-bold text-orange-600">24</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600">Hot Offers</span>
+            <span className="font-bold text-red-600">8</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600">Active Codes</span>
+            <span className="font-bold text-purple-600">156</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600">Total Savings</span>
+            <span className="font-bold text-green-600">$47K</span>
           </div>
         </CardContent>
       </Card>
 
-      {/* Premium Ad Space */}
-      <Card className="bg-gradient-to-br from-orange-500 to-pink-500 border-0 shadow-lg text-white overflow-hidden">
-        <CardContent className="p-6 relative">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
-          <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full translate-y-10 -translate-x-10"></div>
-          <div className="relative text-center space-y-4">
-            <div className="space-y-2">
-              <h3 className="font-bold text-lg">Get Premium</h3>
-              <p className="text-white/90 text-sm leading-relaxed">
-                Unlock exclusive deals, early access, and ad-free browsing
-              </p>
-            </div>
-            <Button
-              size="sm"
-              className="w-full bg-white text-orange-600 hover:bg-gray-100 font-semibold shadow-md"
-            >
-              Upgrade Now
+      {/* Newsletter Signup */}
+      <Card className="bg-gradient-to-br from-gray-900 to-gray-800 text-white border-0">
+        <CardContent className="p-6 text-center">
+          <h3 className="font-bold text-lg mb-2">Never Miss a Deal!</h3>
+          <p className="text-gray-300 text-sm mb-4">
+            Get the hottest deals delivered to your inbox
+          </p>
+          <div className="space-y-2">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 text-sm focus:bg-white/20 focus:border-white/40 transition-all duration-200"
+            />
+            <Button className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white border-0">
+              Subscribe
             </Button>
           </div>
         </CardContent>

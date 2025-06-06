@@ -30,6 +30,7 @@ interface NavigationProps {
     stores: string[];
     discountRanges: string[];
     contentType: string;
+    feedFilter: string;
   }) => void;
 }
 
@@ -46,7 +47,7 @@ const mainCategories = [
 ];
 
 const feedTabs = [
-  { id: "for-you", label: "For you", active: true, icon: null },
+  { id: "for-you", label: "For you", icon: null },
   { id: "hottest", label: "Hottest", icon: Flame },
   { id: "trending", label: "Trending", icon: TrendingUp },
   { id: "all", label: "All", icon: null },
@@ -118,6 +119,19 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
       stores: selectedStores,
       discountRanges: selectedDiscountRanges,
       contentType: categoryId,
+      feedFilter: activeTab,
+    });
+  };
+
+  const handleTabClick = (tabId: string) => {
+    setActiveTab(tabId);
+
+    // Notify parent component of feed filter change
+    onFiltersChange?.({
+      stores: selectedStores,
+      discountRanges: selectedDiscountRanges,
+      contentType: activeCategory,
+      feedFilter: tabId,
     });
   };
 
@@ -138,6 +152,7 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
       stores: newSelectedStores,
       discountRanges: selectedDiscountRanges,
       contentType: activeCategory,
+      feedFilter: activeTab,
     });
   };
 
@@ -153,6 +168,7 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
       stores: selectedStores,
       discountRanges: newSelectedRanges,
       contentType: activeCategory,
+      feedFilter: activeTab,
     });
   };
 
@@ -164,6 +180,7 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
       stores: [],
       discountRanges: [],
       contentType: activeCategory,
+      feedFilter: activeTab,
     });
   };
 
@@ -276,7 +293,7 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
                     key={tab.id}
                     variant="ghost"
                     size="sm"
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => handleTabClick(tab.id)}
                     className={cn(
                       "relative text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200",
                       isActive

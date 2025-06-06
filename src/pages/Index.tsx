@@ -427,10 +427,12 @@ const Index = () => {
     stores: string[];
     discountRanges: string[];
     contentType: string;
+    feedFilter: string;
   }>({
     stores: [],
     discountRanges: [],
     contentType: "deals",
+    feedFilter: "for-you",
   });
 
   // Get current data source based on content type
@@ -444,7 +446,7 @@ const Index = () => {
     }
   };
 
-  // Filter items based on selected filters
+  // Filter and sort items based on selected filters
   const filteredItems = useMemo(() => {
     let filtered = getCurrentDataSource();
 
@@ -481,8 +483,59 @@ const Index = () => {
       });
     }
 
-    return filtered;
+    // Sort based on feed filter
+    switch (filters.feedFilter) {
+      case "hottest":
+        // Sort by most votes (highest to lowest)
+        return filtered.sort((a, b) => (b.votes || 0) - (a.votes || 0));
+
+      case "trending":
+        // Sort by most comments (highest to lowest)
+        return filtered.sort((a, b) => (b.comments || 0) - (a.comments || 0));
+
+      case "all":
+        // Sort by newest (parse timePosted and sort by recency)
+        return filtered.sort((a, b) => {
+          const timeA = parseTimePosted(a.timePosted);
+          const timeB = parseTimePosted(b.timePosted);
+          return timeA - timeB; // Most recent first
+        });
+
+      case "for-you":
+      default:
+        // Default sorting (mix of votes, comments, and recency)
+        return filtered.sort((a, b) => {
+          const scoreA =
+            (a.votes || 0) * 0.4 +
+            (a.comments || 0) * 0.3 +
+            (a.isFeatured ? 100 : 0);
+          const scoreB =
+            (b.votes || 0) * 0.4 +
+            (b.comments || 0) * 0.3 +
+            (b.isFeatured ? 100 : 0);
+          return scoreB - scoreA;
+        });
+    }
   }, [filters]);
+
+  // Helper function to parse time posted and convert to comparable number
+  const parseTimePosted = (timePosted: string): number => {
+    const now = Date.now();
+    const timeStr = timePosted.toLowerCase();
+
+    if (timeStr.includes("h ago")) {
+      const hours = parseInt(timeStr.match(/(\d+)h/)?.[1] || "0");
+      return now - hours * 60 * 60 * 1000;
+    } else if (timeStr.includes("d ago")) {
+      const days = parseInt(timeStr.match(/(\d+)d/)?.[1] || "0");
+      return now - days * 24 * 60 * 60 * 1000;
+    } else if (timeStr.includes("min ago")) {
+      const minutes = parseInt(timeStr.match(/(\d+)min/)?.[1] || "0");
+      return now - minutes * 60 * 1000;
+    }
+
+    return now; // Default to current time for unknown formats
+  };
 
   const displayedItems = filteredItems.slice(0, currentPage * ITEMS_PER_PAGE);
   const hasMoreItems = displayedItems.length < filteredItems.length;
@@ -502,6 +555,7 @@ const Index = () => {
     stores: string[];
     discountRanges: string[];
     contentType: string;
+    feedFilter: string;
   }) => {
     setFilters(newFilters);
     setCurrentPage(1); // Reset to first page when filters change
