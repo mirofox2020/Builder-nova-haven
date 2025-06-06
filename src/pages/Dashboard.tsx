@@ -40,6 +40,8 @@ import {
   Eye,
   Edit3,
   Trash2,
+  Menu,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -130,6 +132,7 @@ const sampleNotifications = [
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("overview");
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [newAlert, setNewAlert] = useState({
     productUrl: "",
     retailer: "",
@@ -789,47 +792,88 @@ const Dashboard = () => {
     }
   };
 
+  const SidebarContent = () => (
+    <div className="p-6">
+      <h2 className="text-lg font-semibold text-gray-900 mb-6">Dashboard</h2>
+      <nav className="space-y-2">
+        {sidebarItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <button
+              key={item.id}
+              onClick={() => {
+                setActiveSection(item.id);
+                setIsMobileSidebarOpen(false);
+              }}
+              className={cn(
+                "w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg transition-colors duration-200",
+                activeSection === item.id
+                  ? "bg-orange-100 text-orange-700 font-medium"
+                  : "text-gray-700 hover:bg-gray-100",
+              )}
+            >
+              <Icon className="h-5 w-5" />
+              {item.label}
+            </button>
+          );
+        })}
+      </nav>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       <Header />
 
       <div className="flex">
-        {/* Sidebar */}
+        {/* Desktop Sidebar */}
         <div className="hidden lg:block w-64 bg-white border-r border-gray-200 min-h-screen">
-          <div className="p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">
-              Dashboard
-            </h2>
-            <nav className="space-y-2">
-              {sidebarItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveSection(item.id)}
-                    className={cn(
-                      "w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg transition-colors duration-200",
-                      activeSection === item.id
-                        ? "bg-orange-100 text-orange-700 font-medium"
-                        : "text-gray-700 hover:bg-gray-100",
-                    )}
-                  >
-                    <Icon className="h-5 w-5" />
-                    {item.label}
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
+          <SidebarContent />
         </div>
 
-        {/* Mobile Sidebar (can be implemented with slide-out drawer) */}
-        <div className="lg:hidden">
-          {/* Mobile menu button can be added here */}
+        {/* Mobile Sidebar */}
+        <div
+          className={cn(
+            "lg:hidden fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out",
+            isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full",
+          )}
+        >
+          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+            <h2 className="text-lg font-semibold text-gray-900">Dashboard</h2>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileSidebarOpen(false)}
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          </div>
+          <SidebarContent />
         </div>
+
+        {/* Mobile Sidebar Overlay */}
+        {isMobileSidebarOpen && (
+          <div
+            className="lg:hidden fixed inset-0 z-40 bg-gray-600 bg-opacity-75"
+            onClick={() => setIsMobileSidebarOpen(false)}
+          />
+        )}
 
         {/* Main Content */}
-        <div className="flex-1 p-6 lg:p-8">{renderContent()}</div>
+        <div className="flex-1 min-h-screen">
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden bg-white border-b border-gray-200 px-4 py-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileSidebarOpen(true)}
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+          </div>
+
+          <div className="p-6 lg:p-8">{renderContent()}</div>
+        </div>
       </div>
     </div>
   );
