@@ -83,6 +83,11 @@ const Admin = () => {
       icon: Store,
     },
     {
+      id: "coupons",
+      label: "Manage Coupons",
+      icon: Ticket,
+    },
+    {
       id: "alerts",
       label: "Manage Alerts",
       icon: Bell,
