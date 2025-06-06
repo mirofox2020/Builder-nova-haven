@@ -106,7 +106,13 @@ export const DealCard = ({
 
                 {/* Title and Description */}
                 <div>
-                  <h3 className="font-bold text-gray-900 text-base lg:text-lg line-clamp-2 group-hover:text-orange-600 transition-colors duration-200">
+                  <h3
+                    className="font-bold text-gray-900 text-base lg:text-lg line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = `/deal/${id}`;
+                    }}
+                  >
                     {title}
                   </h3>
                   <p className="text-gray-600 text-sm mt-2 line-clamp-2 leading-relaxed">
