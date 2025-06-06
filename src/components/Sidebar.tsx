@@ -174,46 +174,43 @@ export const Sidebar = () => {
         </CardContent>
       </Card>
 
-      {/* Trending Categories */}
-      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+      {/* Pro Tips */}
+      <Card className="bg-gradient-to-br from-purple-500 to-pink-500 border-0 shadow-lg text-white">
         <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <TrendingUp className="h-5 w-5 text-blue-500" />
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Trending Categories
-            </span>
+          <CardTitle className="flex items-center gap-2 text-lg text-white">
+            <div className="w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center">
+              💡
+            </div>
+            Pro Tips
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2">
-          {quickCategories.map((category) => (
-            <button
-              key={category.name}
-              onClick={() => handleCategoryClick(category.name)}
-              className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-all duration-200 border border-gray-100 hover:border-blue-200 group"
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-lg">{category.icon}</span>
-                <span className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
-                  {category.name}
-                </span>
-              </div>
-              <Badge
-                variant="secondary"
-                className="text-xs bg-blue-100 text-blue-700"
-              >
-                {category.deals}
-              </Badge>
-            </button>
-          ))}
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full mt-3 text-blue-600 border-blue-200 hover:bg-blue-50"
-            onClick={() => (window.location.href = "/")}
-          >
-            <TrendingUp className="h-3 w-3 mr-2" />
-            Browse All Categories
-          </Button>
+        <CardContent className="space-y-3">
+          <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-sm text-white/90 leading-relaxed">
+                Vote on deals to help others find the best
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-sm text-white/90 leading-relaxed">
+                Set up alerts for your favorite brands
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-sm text-white/90 leading-relaxed">
+                Check expiry dates before purchasing
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-sm text-white/90 leading-relaxed">
+                Share great deals with friends
+              </p>
+            </div>
+          </div>
         </CardContent>
       </Card>
 
