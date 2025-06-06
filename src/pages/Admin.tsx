@@ -19,6 +19,7 @@ import {
   Shield,
   Database,
   Globe,
+  Ticket,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
