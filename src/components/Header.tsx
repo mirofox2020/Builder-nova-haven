@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // This would come from your auth context/state management
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <header className="bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50 shadow-sm w-full">
@@ -66,15 +68,29 @@ export const Header = () => {
               Post
             </Button>
 
-            {/* Login/Register */}
-            <Button
-              variant="outline"
-              size="sm"
-              className="hidden sm:flex hover:bg-gray-50 border-gray-300"
-            >
-              <User className="h-4 w-4 mr-2" />
-              Login
-            </Button>
+            {/* Login/Register or Profile */}
+            {isLoggedIn ? (
+              <button
+                onClick={() => (window.location.href = "/dashboard")}
+                className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full overflow-hidden bg-gray-200 hover:ring-2 hover:ring-orange-300 transition-all duration-200"
+              >
+                <img
+                  src="/placeholder.svg"
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </button>
+            ) : (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsLoggedIn(true)}
+                className="hidden sm:flex hover:bg-gray-50 border-gray-300"
+              >
+                <User className="h-4 w-4 mr-2" />
+                Login
+              </Button>
+            )}
           </div>
         </div>
 
