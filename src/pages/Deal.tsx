@@ -27,13 +27,14 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Sample deal data
-const dealData = {
-  id: "1",
-  title: "Apple iPhone 15 Pro Max 256GB - Natural Titanium",
-  description:
-    "Experience the ultimate iPhone with the iPhone 15 Pro Max. Featuring a stunning 6.7-inch Super Retina XDR display with ProMotion technology, the powerful A17 Pro chip, and an advanced camera system that captures incredible detail. The titanium design makes it lighter yet incredibly durable.",
-  fullDescription: `The iPhone 15 Pro Max represents the pinnacle of Apple's smartphone innovation. This flagship device combines cutting-edge technology with premium materials to deliver an unparalleled user experience.
+// Sample deals database - In a real app, this would come from an API
+const dealsDatabase = {
+  "1": {
+    id: "1",
+    title: "Apple iPhone 15 Pro Max 256GB - Natural Titanium",
+    description:
+      "Experience the ultimate iPhone with the iPhone 15 Pro Max. Featuring a stunning 6.7-inch Super Retina XDR display with ProMotion technology, the powerful A17 Pro chip, and an advanced camera system that captures incredible detail. The titanium design makes it lighter yet incredibly durable.",
+    fullDescription: `The iPhone 15 Pro Max represents the pinnacle of Apple's smartphone innovation. This flagship device combines cutting-edge technology with premium materials to deliver an unparalleled user experience.
 
 **Key Features:**
 • A17 Pro chip with 6-core CPU and 6-core GPU for lightning-fast performance
@@ -59,25 +60,124 @@ const dealData = {
 • Wireless and MagSafe charging support
 
 This deal includes free shipping and comes with Apple's standard one-year limited warranty. Don't miss this incredible opportunity to own the latest and greatest iPhone at an unbeatable price!`,
-  images: [
-    "/placeholder.svg",
-    "/placeholder.svg",
-    "/placeholder.svg",
-    "/placeholder.svg",
-  ],
-  originalPrice: 1199,
-  discountedPrice: 999,
-  discount: 17,
-  merchant: "eBay",
-  timePosted: "2h ago",
-  expiresAt: "2024-02-15",
-  votes: 156,
-  comments: 23,
-  promoCode: "IPHONE15",
-  isAvailable: true,
-  isFeatured: true,
-  category: "electronics",
-  subcategory: "smartphones",
+    images: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+    ],
+    originalPrice: 1199,
+    discountedPrice: 999,
+    discount: 17,
+    merchant: "eBay",
+    timePosted: "2h ago",
+    expiresAt: "2024-02-15",
+    votes: 156,
+    comments: 23,
+    promoCode: "IPHONE15",
+    isAvailable: true,
+    isFeatured: true,
+    category: "electronics",
+    subcategory: "smartphones",
+  },
+  "2": {
+    id: "2",
+    title: "Samsung Galaxy S24 Ultra 512GB",
+    description:
+      "Latest Samsung flagship with S Pen and incredible camera system. Features AI-enhanced photography and all-day battery life.",
+    fullDescription: `The Samsung Galaxy S24 Ultra sets new standards for Android flagship smartphones with its cutting-edge features and premium design.
+
+**Key Features:**
+• Snapdragon 8 Gen 3 processor for ultimate performance
+• 6.8-inch Dynamic AMOLED 2X display with 120Hz refresh rate
+• 200MP main camera with advanced zoom capabilities
+• Built-in S Pen for productivity and creativity
+• 5000mAh battery with 45W fast charging
+• Titanium frame for durability and premium feel
+• AI-powered camera features and editing tools
+• Samsung DeX for desktop-like experience
+
+**What's Included:**
+• Galaxy S24 Ultra
+• USB-C Cable
+• S Pen
+• Documentation
+
+**Technical Specifications:**
+• Storage: 512GB
+• RAM: 12GB
+• Network: 5G capable
+• Water Resistance: IP68
+• Wireless charging and PowerShare support
+
+This is an excellent deal on Samsung's most advanced smartphone with a significant discount and fast shipping!`,
+    images: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+    ],
+    originalPrice: 1399,
+    discountedPrice: 1099,
+    discount: 21,
+    merchant: "Best Buy",
+    timePosted: "4h ago",
+    expiresAt: "2024-02-20",
+    votes: 89,
+    comments: 12,
+    promoCode: "SAMSUNG21",
+    isAvailable: true,
+    isFeatured: false,
+    category: "electronics",
+    subcategory: "smartphones",
+  },
+  // Default deal for unknown IDs
+  default: {
+    id: "default",
+    title: "Amazing Product Deal",
+    description:
+      "This is an incredible deal on a high-quality product. Don't miss out on this limited-time offer!",
+    fullDescription: `This product offers exceptional value and quality at an unbeatable price.
+
+**Key Features:**
+• High-quality construction and materials
+• Latest technology and features
+• Excellent customer reviews and ratings
+• Fast shipping and reliable service
+• Manufacturer warranty included
+
+**What's Included:**
+• Product with original packaging
+• All necessary accessories
+• Documentation and warranty information
+
+**Why This Deal:**
+• Significant savings compared to regular price
+• Limited-time offer - act fast!
+• Trusted merchant with excellent reputation
+• Fast and free shipping included
+
+Don't miss this opportunity to get an amazing product at a fantastic price!`,
+    images: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+    ],
+    originalPrice: 299,
+    discountedPrice: 199,
+    discount: 33,
+    merchant: "DealsHub Store",
+    timePosted: "1h ago",
+    expiresAt: "2024-02-25",
+    votes: 45,
+    comments: 8,
+    promoCode: "DEAL33",
+    isAvailable: true,
+    isFeatured: false,
+    category: "general",
+    subcategory: "products",
+  },
 };
 
 // Sample recommended deals - 10 products for slider
