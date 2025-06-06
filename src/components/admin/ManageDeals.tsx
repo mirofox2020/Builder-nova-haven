@@ -292,6 +292,7 @@ const ManageDeals = () => {
       promoCode: "",
       url: "",
       expiresAt: "",
+      image: "",
     });
     setShowAddDeal(false);
     alert("Deal added successfully!");
