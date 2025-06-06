@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { DealCard } from "@/components/DealCard";
 import { Sidebar } from "@/components/Sidebar";
@@ -389,7 +389,13 @@ const ITEMS_PER_PAGE = 6;
 
 const Search = () => {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get("q") || "";
+  const location = useLocation();
+
+  // Get query from URL params with fallback
+  const query =
+    searchParams.get("q") ||
+    new URLSearchParams(location.search).get("q") ||
+    "";
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
