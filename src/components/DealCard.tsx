@@ -311,7 +311,9 @@ export const DealCard = ({
             {/* LEFT SECTION: Image, Vote & Share/Comment - with same background as image */}
             <div className="flex flex-col items-center space-y-3 bg-gradient-to-br from-gray-50 to-gray-100 p-3 max-sm:p-2 rounded-lg border border-gray-200/50">
               {/* Vote Buttons */}
-              <VoteButtons initialVotes={votes} compact size="sm" />
+              <div onClick={(e) => e.stopPropagation()}>
+                <VoteButtons initialVotes={votes} compact size="sm" />
+              </div>
 
               {/* Mobile Image */}
               <div className="w-24 h-24 max-sm:w-20 max-sm:h-20 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex-shrink-0 relative overflow-hidden flex items-center justify-center border border-gray-200/50">
