@@ -101,7 +101,7 @@ export const Sidebar = () => {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors">
+                  <h4 className="font-normal text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors">
                     {deal.title}
                   </h4>
 
