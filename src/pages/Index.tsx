@@ -326,11 +326,16 @@ const Index = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const nextPage = currentPage + 1;
-    const newDeals = allDeals.slice(0, nextPage * DEALS_PER_PAGE);
-
-    setDisplayedDeals(newDeals);
     setCurrentPage(nextPage);
     setIsLoading(false);
+  };
+
+  const handleFiltersChange = (newFilters: {
+    stores: string[];
+    discountRanges: string[];
+  }) => {
+    setFilters(newFilters);
+    setCurrentPage(1); // Reset to first page when filters change
   };
 
   return (
