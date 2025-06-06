@@ -836,7 +836,7 @@ const Deal = () => {
                 <div className="hidden md:block">
                   {/* First 6 items in grid */}
                   <div className="grid grid-cols-3 gap-6 mb-8">
-                    {recommendedDeals.slice(0, 6).map((deal, index) => (
+                    {filteredRecommendations.slice(0, 6).map((deal, index) => (
                       <div
                         key={deal.id}
                         className="group transform transition-all duration-300 hover:-translate-y-2 cursor-pointer"
