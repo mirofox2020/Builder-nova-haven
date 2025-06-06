@@ -1050,6 +1050,54 @@ const ManageDeals = () => {
             </div>
             <div>
               <label className="text-sm font-medium text-gray-700">
+                Main Image *
+              </label>
+              <div className="space-y-3">
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      // Create a preview URL for the uploaded image
+                      const reader = new FileReader();
+                      reader.onload = (e) => {
+                        setNewDeal({
+                          ...newDeal,
+                          image: e.target?.result as string,
+                        });
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                  className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                />
+                {newDeal.image && (
+                  <div className="relative">
+                    <img
+                      src={newDeal.image}
+                      alt="Deal preview"
+                      className="w-32 h-32 object-cover rounded-lg border-2 border-gray-200"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setNewDeal({ ...newDeal, image: "" })}
+                      className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 bg-red-100 hover:bg-red-200 text-red-600"
+                    >
+                      ×
+                    </Button>
+                  </div>
+                )}
+                <p className="text-xs text-gray-500">
+                  Upload a high-quality image (JPG, PNG, GIF) for your coupon or
+                  deal. Recommended size: 400x300px
+                </p>
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700">
                 Description
               </label>
               <Textarea
