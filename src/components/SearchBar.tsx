@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, X, TrendingUp, Clock } from "lucide-react";
@@ -24,6 +25,7 @@ const recentSearches = [
 ];
 
 export const SearchBar = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -101,7 +103,7 @@ export const SearchBar = () => {
   const handleSearch = () => {
     if (searchQuery.trim()) {
       // Navigate to search results page
-      window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setIsSearchOpen(false);
     }
   };
@@ -116,17 +118,17 @@ export const SearchBar = () => {
     setSearchQuery(suggestion);
     setIsSearchOpen(false);
     // Navigate to search results
-    window.location.href = `/search?q=${encodeURIComponent(suggestion)}`;
+    navigate(`/search?q=${encodeURIComponent(suggestion)}`);
   };
 
   const handleResultClick = (result: any) => {
     setIsSearchOpen(false);
     if (result.type === "deal") {
-      window.location.href = `/deal/${result.id}`;
+      navigate(`/deal/${result.id}`);
     } else if (result.type === "category") {
-      window.location.href = `/categories/${result.id}`;
+      navigate(`/categories/${result.id}`);
     } else if (result.type === "coupon") {
-      window.location.href = `/search?q=${encodeURIComponent(result.title)}`;
+      navigate(`/search?q=${encodeURIComponent(result.title)}`);
     }
   };
 
@@ -324,7 +326,7 @@ export const SearchBar = () => {
           <div className="border-t border-gray-100 p-2">
             <button
               onClick={() => {
-                window.location.href = "/";
+                navigate("/");
                 setIsSearchOpen(false);
               }}
               className="w-full flex items-center gap-3 p-2 hover:bg-gray-50 rounded-md transition-colors duration-200 text-left"
