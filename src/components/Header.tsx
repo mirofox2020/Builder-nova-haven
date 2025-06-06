@@ -150,22 +150,20 @@ export const Header = () => {
                         <button
                           onClick={() => {
                             setShowProfileDropdown(false);
-                            window.location.href = "/dashboard";
+                            const dashboardUrl =
+                              user?.role === "admin"
+                                ? "/admin-dashboard"
+                                : "/dashboard";
+                            window.location.href = dashboardUrl;
                           }}
                           className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-gray-100 rounded-md transition-colors"
                         >
                           <Settings className="h-4 w-4 text-gray-500" />
                           <span className="text-sm text-gray-700">
-                            Dashboard
+                            {user?.role === "admin"
+                              ? "Admin Dashboard"
+                              : "Dashboard"}
                           </span>
-                        </button>
-
-                        <button
-                          onClick={handleLogout}
-                          className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-gray-100 rounded-md transition-colors text-red-600"
-                        >
-                          <LogOut className="h-4 w-4" />
-                          <span className="text-sm">Sign Out</span>
                         </button>
                       </div>
                     </div>

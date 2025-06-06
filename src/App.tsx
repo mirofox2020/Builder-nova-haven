@@ -4,6 +4,7 @@ import Categories from "./pages/Categories";
 import Deal from "./pages/Deal";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 import "./App.css";
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/deal/:dealId" element={<Deal />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

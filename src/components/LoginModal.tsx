@@ -62,8 +62,10 @@ export const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
       if (user) {
         onLogin(user);
         onClose();
-        // Navigate to dashboard
-        window.location.href = "/dashboard";
+        // Navigate to appropriate dashboard based on role
+        const dashboardUrl =
+          user.role === "admin" ? "/admin-dashboard" : "/dashboard";
+        window.location.href = dashboardUrl;
       } else {
         alert("Invalid credentials! Try demo@example.com / demo123");
       }
@@ -77,6 +79,7 @@ export const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
         };
         onLogin(newUser);
         onClose();
+        // New users are regular users by default
         window.location.href = "/dashboard";
       } else {
         alert("Passwords don't match!");
