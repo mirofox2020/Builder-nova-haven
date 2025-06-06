@@ -111,9 +111,43 @@ const allCoupons = [
     isAvailable: true,
     type: "coupon",
   },
+  {
+    id: "c7",
+    title: "Samsung - Student Discount 20% Off",
+    description:
+      "Verify your student status and get 20% off Galaxy phones, tablets, and accessories.",
+    image: "/placeholder.svg",
+    originalPrice: null,
+    discountedPrice: null,
+    discount: 20,
+    merchant: "Samsung",
+    timePosted: "1d ago",
+    votes: 145,
+    comments: 28,
+    promoCode: "STUDENT20",
+    isAvailable: true,
+    type: "coupon",
+  },
+  {
+    id: "c8",
+    title: "Microsoft - Office 365 Family Plan Discount",
+    description:
+      "Get 30% off Microsoft 365 Family subscription for first year. Includes all Office apps.",
+    image: "/placeholder.svg",
+    originalPrice: null,
+    discountedPrice: null,
+    discount: 30,
+    merchant: "Microsoft",
+    timePosted: "2d ago",
+    votes: 92,
+    comments: 15,
+    promoCode: "OFFICE30FAM",
+    isAvailable: true,
+    type: "coupon",
+  },
 ];
 
-// Extended sample deals data
+// Sample deals data
 const allDeals = [
   {
     id: "1",
@@ -147,6 +181,7 @@ const allDeals = [
     votes: 89,
     comments: 12,
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "3",
@@ -163,6 +198,7 @@ const allDeals = [
     comments: 45,
     promoCode: "JORDAN30",
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "4",
@@ -178,6 +214,7 @@ const allDeals = [
     votes: 67,
     comments: 8,
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "5",
@@ -194,6 +231,7 @@ const allDeals = [
     comments: 19,
     promoCode: "SONY30OFF",
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "6",
@@ -209,8 +247,8 @@ const allDeals = [
     votes: 78,
     comments: 15,
     isAvailable: false,
+    type: "deal",
   },
-  // Additional deals for pagination
   {
     id: "7",
     title: "Google Pixel 8 Pro 256GB - Bay Blue",
@@ -225,6 +263,7 @@ const allDeals = [
     votes: 134,
     comments: 18,
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "8",
@@ -241,6 +280,7 @@ const allDeals = [
     comments: 14,
     promoCode: "DYSON27",
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "9",
@@ -256,6 +296,7 @@ const allDeals = [
     votes: 76,
     comments: 11,
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "10",
@@ -271,6 +312,7 @@ const allDeals = [
     votes: 198,
     comments: 31,
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "11",
@@ -287,6 +329,7 @@ const allDeals = [
     comments: 16,
     promoCode: "BOSE30",
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "12",
@@ -302,6 +345,7 @@ const allDeals = [
     votes: 156,
     comments: 28,
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "13",
@@ -317,6 +361,7 @@ const allDeals = [
     votes: 94,
     comments: 12,
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "14",
@@ -332,6 +377,7 @@ const allDeals = [
     votes: 312,
     comments: 67,
     isAvailable: true,
+    type: "deal",
   },
   {
     id: "15",
@@ -348,10 +394,11 @@ const allDeals = [
     comments: 9,
     promoCode: "CANON20",
     isAvailable: true,
+    type: "deal",
   },
 ];
 
-const DEALS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 6;
 
 // Store name mapping for filtering
 const storeMapping: { [key: string]: string } = {
@@ -386,14 +433,25 @@ const Index = () => {
     contentType: "deals",
   });
 
-  // Filter deals based on selected filters
-  const filteredDeals = useMemo(() => {
-    let filtered = allDeals;
+  // Get current data source based on content type
+  const getCurrentDataSource = () => {
+    switch (filters.contentType) {
+      case "codes":
+        return allCoupons;
+      case "deals":
+      default:
+        return allDeals;
+    }
+  };
+
+  // Filter items based on selected filters
+  const filteredItems = useMemo(() => {
+    let filtered = getCurrentDataSource();
 
     // Filter by stores
     if (filters.stores.length > 0) {
-      filtered = filtered.filter((deal) => {
-        const storeName = deal.merchant;
+      filtered = filtered.filter((item) => {
+        const storeName = item.merchant;
         return filters.stores.some(
           (storeId) =>
             storeMapping[storeId]?.toLowerCase() === storeName.toLowerCase(),
@@ -403,19 +461,19 @@ const Index = () => {
 
     // Filter by discount ranges
     if (filters.discountRanges.length > 0) {
-      filtered = filtered.filter((deal) => {
+      filtered = filtered.filter((item) => {
         return filters.discountRanges.some((rangeId) => {
           switch (rangeId) {
             case "10-20":
-              return deal.discount >= 10 && deal.discount < 20;
+              return item.discount >= 10 && item.discount < 20;
             case "20-30":
-              return deal.discount >= 20 && deal.discount < 30;
+              return item.discount >= 20 && item.discount < 30;
             case "30-40":
-              return deal.discount >= 30 && deal.discount < 40;
+              return item.discount >= 30 && item.discount < 40;
             case "40-50":
-              return deal.discount >= 40 && deal.discount < 50;
+              return item.discount >= 40 && item.discount < 50;
             case "50+":
-              return deal.discount >= 50;
+              return item.discount >= 50;
             default:
               return false;
           }
@@ -426,8 +484,8 @@ const Index = () => {
     return filtered;
   }, [filters]);
 
-  const displayedDeals = filteredDeals.slice(0, currentPage * DEALS_PER_PAGE);
-  const hasMoreDeals = displayedDeals.length < filteredDeals.length;
+  const displayedItems = filteredItems.slice(0, currentPage * ITEMS_PER_PAGE);
+  const hasMoreItems = displayedItems.length < filteredItems.length;
 
   const handleLoadMore = async () => {
     setIsLoading(true);
@@ -443,9 +501,32 @@ const Index = () => {
   const handleFiltersChange = (newFilters: {
     stores: string[];
     discountRanges: string[];
+    contentType: string;
   }) => {
     setFilters(newFilters);
     setCurrentPage(1); // Reset to first page when filters change
+  };
+
+  // Get the title based on content type
+  const getContentTitle = () => {
+    switch (filters.contentType) {
+      case "codes":
+        return "Discount Codes for you";
+      case "deals":
+      default:
+        return "Deals for you";
+    }
+  };
+
+  // Get the description based on content type
+  const getContentDescription = () => {
+    switch (filters.contentType) {
+      case "codes":
+        return "Discover the best discount codes and coupon offers from top brands. Save money with verified promo codes for electronics, fashion, home goods, and more.";
+      case "deals":
+      default:
+        return "Discover the best deals, discounts, and offers from top brands. Save money on electronics, fashion, home goods, and more with our carefully curated selection.";
+    }
   };
 
   return (
@@ -464,24 +545,22 @@ const Index = () => {
               {/* Section Header */}
               <div className="space-y-3 text-center lg:text-left">
                 <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent">
-                  Deals for you
+                  {getContentTitle()}
                 </h1>
                 <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
-                  Discover the best deals, discounts, and offers from top
-                  brands. Save money on electronics, fashion, home goods, and
-                  more with our carefully curated selection.
+                  {getContentDescription()}
                 </p>
               </div>
 
-              {/* Deals Grid */}
+              {/* Items Grid */}
               <div className="space-y-6 lg:space-y-6">
-                {displayedDeals.map((deal) => (
-                  <DealCard key={deal.id} {...deal} />
+                {displayedItems.map((item) => (
+                  <DealCard key={item.id} {...item} />
                 ))}
               </div>
 
               {/* Load More */}
-              {hasMoreDeals && (
+              {hasMoreItems && (
                 <div className="text-center pt-8">
                   <Button
                     onClick={handleLoadMore}
@@ -494,14 +573,14 @@ const Index = () => {
                         Loading...
                       </>
                     ) : (
-                      `Load More Deals (${allDeals.length - displayedDeals.length} remaining)`
+                      `Load More ${filters.contentType === "codes" ? "Codes" : "Deals"} (${filteredItems.length - displayedItems.length} remaining)`
                     )}
                   </Button>
                 </div>
               )}
 
-              {/* All Deals Loaded Message */}
-              {!hasMoreDeals && (
+              {/* All Items Loaded Message */}
+              {!hasMoreItems && displayedItems.length > 0 && (
                 <div className="text-center pt-8">
                   <div className="inline-flex items-center px-6 py-3 bg-green-50 border border-green-200 text-green-700 rounded-xl">
                     <svg
@@ -515,7 +594,33 @@ const Index = () => {
                         clipRule="evenodd"
                       />
                     </svg>
-                    You've seen all available deals! Check back later for more.
+                    You've seen all available{" "}
+                    {filters.contentType === "codes" ? "codes" : "deals"}! Check
+                    back later for more.
+                  </div>
+                </div>
+              )}
+
+              {/* No Results Message */}
+              {displayedItems.length === 0 && (
+                <div className="text-center pt-8">
+                  <div className="inline-flex items-center px-6 py-3 bg-gray-50 border border-gray-200 text-gray-600 rounded-xl">
+                    <svg
+                      className="h-5 w-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                    No {filters.contentType === "codes" ? "codes" : "deals"}{" "}
+                    found with current filters. Try adjusting your filter
+                    settings.
                   </div>
                 </div>
               )}
@@ -530,6 +635,9 @@ const Index = () => {
           </div>
         </div>
       </main>
+
+      {/* Navigation with Filter Handler */}
+      <Navigation onFiltersChange={handleFiltersChange} />
 
       {/* Footer */}
       <footer className="relative bg-white/80 backdrop-blur-sm border-t border-gray-200/50 mt-16 w-full">
@@ -617,15 +725,13 @@ const Index = () => {
                     href="#"
                     className="hover:text-orange-600 transition-colors duration-200"
                   >
-                    Cookie Policy
+                    Guidelines
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 mb-4 text-lg">
-                Follow Us
-              </h3>
+              <h3 className="font-bold text-gray-900 mb-4 text-lg">Social</h3>
               <ul className="space-y-3 text-gray-600">
                 <li>
                   <a
@@ -654,15 +760,11 @@ const Index = () => {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-200 mt-12 pt-8 text-center">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-6 h-6 bg-gradient-to-r from-orange-500 to-pink-500 rounded-md flex items-center justify-center">
-                <span className="text-white font-bold text-xs">D</span>
-              </div>
-              <span className="font-bold text-gray-900">DealsHub</span>
-            </div>
-            <p className="text-gray-600">
-              &copy; 2024 DealsHub. All rights reserved.
+
+          <div className="border-t border-gray-200/50 mt-12 pt-8 text-center">
+            <p className="text-gray-500 text-sm">
+              © 2024 DealsHub. All rights reserved. Find the best deals and
+              save money every day.
             </p>
           </div>
         </div>
