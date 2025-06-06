@@ -165,6 +165,29 @@ export const Header = () => {
                               : "Dashboard"}
                           </span>
                         </button>
+
+                        <button
+                          onClick={() => {
+                            setShowProfileDropdown(false);
+                            window.location.href = "/";
+                          }}
+                          className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-gray-100 rounded-md transition-colors"
+                        >
+                          <User className="h-4 w-4 text-gray-500" />
+                          <span className="text-sm text-gray-700">
+                            Profile Settings
+                          </span>
+                        </button>
+
+                        <div className="border-t border-gray-200 my-2"></div>
+
+                        <button
+                          onClick={handleLogout}
+                          className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-red-50 rounded-md transition-colors text-red-600"
+                        >
+                          <LogOut className="h-4 w-4" />
+                          <span className="text-sm font-medium">Sign Out</span>
+                        </button>
                       </div>
                     </div>
                   )}
