@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { DealCard } from "@/components/DealCard";
 import { Sidebar } from "@/components/Sidebar";
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
