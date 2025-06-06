@@ -112,7 +112,7 @@ export const Sidebar = () => {
                     <span className="text-xs text-gray-500 line-through">
                       ${deal.originalPrice}
                     </span>
-                    <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs py-0 border-0">
+                    <Badge className="bg-gray-200 text-black text-xs py-0 border-0">
                       -{deal.discount}%
                     </Badge>
                   </div>
