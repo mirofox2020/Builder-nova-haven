@@ -124,14 +124,33 @@ export const Header = () => {
                 Create Alert
               </Button>
 
-              {/* Post Deal Button */}
+              {/* Post Deal Button / Login Button (Mobile) */}
               <Button
                 size="sm"
-                className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-medium shadow-md hover:shadow-lg transition-all duration-200"
-                onClick={handlePostDeal}
+                className={cn(
+                  "font-medium shadow-md hover:shadow-lg transition-all duration-200",
+                  isLoggedIn
+                    ? "bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white"
+                    : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white lg:bg-gradient-to-r lg:from-orange-500 lg:to-pink-500 lg:hover:from-orange-600 lg:hover:to-pink-600",
+                )}
+                onClick={
+                  isLoggedIn ? handlePostDeal : () => setIsLoginModalOpen(true)
+                }
               >
-                <Plus className="h-4 w-4 mr-2" />
-                Post Deal
+                {isLoggedIn ? (
+                  <>
+                    <Plus className="h-4 w-4 mr-2" />
+                    <span className="hidden sm:inline">Post Deal</span>
+                    <span className="sm:hidden">Post</span>
+                  </>
+                ) : (
+                  <>
+                    <User className="h-4 w-4 mr-2 lg:hidden" />
+                    <Plus className="h-4 w-4 mr-2 hidden lg:inline" />
+                    <span className="lg:hidden">Login</span>
+                    <span className="hidden lg:inline">Post Deal</span>
+                  </>
+                )}
               </Button>
 
               {/* Login/Register or Profile */}
