@@ -123,6 +123,8 @@ const Admin = () => {
         return <ManageCategories />;
       case "stores":
         return <ManageStores />;
+      case "coupons":
+        return <ManageCoupons />;
       case "alerts":
         return <ManageAlerts />;
       case "users":
