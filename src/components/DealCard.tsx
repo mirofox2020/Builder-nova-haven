@@ -305,9 +305,8 @@ export const DealCard = ({
       {/* Mobile Layout - 2 Sections: Left (Image & Vote) + Right (Product Details) */}
       <div className="lg:hidden">
         <div
-          onClick={() => (window.location.href = `/deal/${id}`)}
           className={cn(
-            "block relative bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300 hover:border-orange-300 p-3 max-sm:px-1.5 max-sm:py-2 cursor-pointer",
+            "block relative bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300 hover:border-orange-300 p-3 max-sm:px-1.5 max-sm:py-2",
             !isAvailable && "opacity-75",
           )}
         >
