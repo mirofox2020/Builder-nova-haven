@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { SearchBar } from "./SearchBar";
 import { Navigation } from "./Navigation";
 import { LoginModal } from "./LoginModal";
+import { AlertModal } from "./AlertModal";
+import { PostDealModal } from "./PostDealModal";
 import {
   Search,
   Menu,
@@ -19,6 +20,8 @@ import { cn } from "@/lib/utils";
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [isPostDealModalOpen, setIsPostDealModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
@@ -45,6 +48,30 @@ export const Header = () => {
     localStorage.removeItem("user");
     setShowProfileDropdown(false);
     window.location.href = "/";
+  };
+
+  const handleCreateAlert = () => {
+    if (isLoggedIn) {
+      setIsAlertModalOpen(true);
+    } else {
+      setIsLoginModalOpen(true);
+    }
+  };
+
+  const handlePostDeal = () => {
+    if (isLoggedIn) {
+      setIsPostDealModalOpen(true);
+    } else {
+      setIsLoginModalOpen(true);
+    }
+  };
+
+  const handleLoginSuccess = (userData: any) => {
+    handleLogin(userData);
+    setIsLoginModalOpen(false);
+
+    // If user was trying to access a feature before login, open it now
+    // You could add logic here to remember what they were trying to do
   };
 
   return (
@@ -91,6 +118,7 @@ export const Header = () => {
                 variant="outline"
                 size="sm"
                 className="hidden lg:flex hover:bg-gray-50 border-gray-300"
+                onClick={handleCreateAlert}
               >
                 <Bell className="h-4 w-4 mr-2" />
                 Create Alert
@@ -100,9 +128,10 @@ export const Header = () => {
               <Button
                 size="sm"
                 className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-medium shadow-md hover:shadow-lg transition-all duration-200"
+                onClick={handlePostDeal}
               >
                 <Plus className="h-4 w-4 mr-2" />
-                Post
+                Post Deal
               </Button>
 
               {/* Login/Register or Profile */}
@@ -215,6 +244,45 @@ export const Header = () => {
           >
             <SearchBar />
           </div>
+
+          {/* Mobile Action Buttons */}
+          <div
+            className={cn(
+              "lg:hidden overflow-hidden transition-all duration-300 ease-out px-4 sm:px-6 lg:px-8",
+              isMenuOpen ? "max-h-20 pb-4 opacity-100" : "max-h-0 opacity-0",
+            )}
+          >
+            <div className="flex gap-2 pt-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                onClick={handleCreateAlert}
+              >
+                <Bell className="h-4 w-4 mr-2" />
+                Create Alert
+              </Button>
+              <Button
+                size="sm"
+                className="flex-1 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white"
+                onClick={handlePostDeal}
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                Post Deal
+              </Button>
+              {!isLoggedIn && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsLoginModalOpen(true)}
+                  className="flex-1"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  Login
+                </Button>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Navigation */}
@@ -225,7 +293,19 @@ export const Header = () => {
       <LoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
-        onLogin={handleLogin}
+        onLogin={handleLoginSuccess}
+      />
+
+      {/* Alert Modal */}
+      <AlertModal
+        isOpen={isAlertModalOpen}
+        onClose={() => setIsAlertModalOpen(false)}
+      />
+
+      {/* Post Deal Modal */}
+      <PostDealModal
+        isOpen={isPostDealModalOpen}
+        onClose={() => setIsPostDealModalOpen(false)}
       />
 
       {/* Click outside to close dropdown */}
