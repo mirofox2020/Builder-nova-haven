@@ -33,6 +33,7 @@ import ManageAlerts from "@/components/admin/ManageAlerts";
 import UsersManagement from "@/components/admin/UsersManagement";
 import SystemSettings from "@/components/admin/SystemSettings";
 import MassUpload from "@/components/admin/MassUpload";
+import ManageCoupons from "@/components/admin/ManageCoupons";
 
 const Admin = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
