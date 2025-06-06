@@ -363,6 +363,11 @@ const Deal = () => {
     dealsDatabase[dealId as keyof typeof dealsDatabase] ||
     dealsDatabase.default;
 
+  // Filter out current deal from recommendations
+  const filteredRecommendations = recommendedDeals.filter(
+    (deal) => deal.id !== dealId,
+  );
+
   const [selectedImage, setSelectedImage] = useState(0);
   const [codeCopied, setCodeCopied] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -371,7 +376,6 @@ const Deal = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // For demo - would come from auth context
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState(sampleComments);
-
   const handleCopyCode = () => {
     if (dealData.promoCode) {
       navigator.clipboard.writeText(dealData.promoCode);
