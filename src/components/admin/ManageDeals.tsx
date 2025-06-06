@@ -253,9 +253,10 @@ const ManageDeals = () => {
       !newDeal.title ||
       !newDeal.store ||
       !newDeal.originalPrice ||
-      !newDeal.salePrice
+      !newDeal.salePrice ||
+      !newDeal.image
     ) {
-      alert("Please fill in all required fields");
+      alert("Please fill in all required fields including the main image");
       return;
     }
 
