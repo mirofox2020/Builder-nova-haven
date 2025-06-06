@@ -927,30 +927,73 @@ const Deal = () => {
             <CardContent className="p-8">
               <div className="space-y-8">
                 {/* Section Header */}
-                <div className="text-center space-y-3">
-                  <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent">
-                    You may also like
-                  </h2>
-                  <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                    More great deals in {dealData.category} you might be
-                    interested in
-                  </p>
-                  <div className="w-24 h-0.5 bg-gradient-to-r from-orange-500 to-pink-500 mx-auto rounded-full"></div>
+                <div className="flex items-center justify-between">
+                  <div className="space-y-2">
+                    <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent">
+                      You may also like
+                    </h2>
+                    <p className="text-gray-600">
+                      More great deals in {dealData.category} you might be
+                      interested in
+                    </p>
+                  </div>
+
+                  {/* Navigation Arrows */}
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const container =
+                          document.getElementById("deals-carousel");
+                        if (container) {
+                          container.scrollBy({
+                            left: -400,
+                            behavior: "smooth",
+                          });
+                        }
+                      }}
+                      className="w-10 h-10 p-0 rounded-full border-gray-300 hover:bg-orange-50 hover:border-orange-300"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const container =
+                          document.getElementById("deals-carousel");
+                        if (container) {
+                          container.scrollBy({ left: 400, behavior: "smooth" });
+                        }
+                      }}
+                      className="w-10 h-10 p-0 rounded-full border-gray-300 hover:bg-orange-50 hover:border-orange-300"
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
 
-                {/* Desktop: Grid for first 6 items */}
-                <div className="hidden md:block">
-                  <div className="grid grid-cols-3 gap-6 mb-8">
-                    {filteredRecommendations.slice(0, 6).map((deal, index) => (
+                {/* Desktop & Tablet: 6-item grid that slides horizontally */}
+                <div className="hidden sm:block">
+                  <div
+                    id="deals-carousel"
+                    className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                    style={{ scrollSnapType: "x mandatory" }}
+                  >
+                    {filteredRecommendations.map((deal, index) => (
                       <div
                         key={deal.id}
-                        className="group transform transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+                        className="group transform transition-all duration-300 hover:-translate-y-2 cursor-pointer flex-shrink-0 w-64"
                         onClick={() =>
                           (window.location.href = `/deal/${deal.id}`)
                         }
-                        style={{ animationDelay: `${index * 150}ms` }}
+                        style={{
+                          animationDelay: `${index * 100}ms`,
+                          scrollSnapAlign: "start",
+                        }}
                       >
-                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:border-orange-200">
+                        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:border-orange-200 h-full">
                           <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 p-4 relative overflow-hidden">
                             <img
                               src={deal.image}
@@ -962,9 +1005,22 @@ const Deal = () => {
                             </div>
                           </div>
                           <div className="p-4">
-                            <h3 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
+                            <h3 className="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight mb-2">
                               {deal.title}
                             </h3>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <span className="text-lg font-bold text-green-600">
+                                  ${deal.discountedPrice}
+                                </span>
+                                <span className="text-sm text-gray-500 line-through">
+                                  ${deal.originalPrice}
+                                </span>
+                              </div>
+                              <Badge className="bg-gray-200 text-black text-xs px-2 py-1">
+                                {deal.merchant}
+                              </Badge>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -972,10 +1028,10 @@ const Deal = () => {
                   </div>
                 </div>
 
-                {/* Mobile: Horizontal Slider */}
-                <div className="md:hidden">
+                {/* Mobile: Simplified horizontal scroll */}
+                <div className="sm:hidden">
                   <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 scroll-smooth">
-                    {filteredRecommendations.slice(0, 10).map((deal, index) => (
+                    {filteredRecommendations.slice(0, 8).map((deal, index) => (
                       <div
                         key={deal.id}
                         className="group transform transition-all duration-300 hover:-translate-y-1 cursor-pointer flex-shrink-0 w-40"
@@ -996,9 +1052,12 @@ const Deal = () => {
                             </div>
                           </div>
                           <div className="p-3">
-                            <h3 className="font-bold text-xs text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight">
+                            <h3 className="font-bold text-xs text-gray-900 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200 leading-tight mb-1">
                               {deal.title}
                             </h3>
+                            <div className="text-xs text-green-600 font-bold">
+                              ${deal.discountedPrice}
+                            </div>
                           </div>
                         </div>
                       </div>
