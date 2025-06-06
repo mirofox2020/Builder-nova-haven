@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Header } from "@/components/Header";
 import { DealCard } from "@/components/DealCard";
 import { Sidebar } from "@/components/Sidebar";
+import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
