@@ -357,6 +357,12 @@ const sampleComments = [
 
 const Deal = () => {
   const { dealId } = useParams<{ dealId: string }>();
+
+  // Get deal data based on dealId, fallback to default if not found
+  const dealData =
+    dealsDatabase[dealId as keyof typeof dealsDatabase] ||
+    dealsDatabase.default;
+
   const [selectedImage, setSelectedImage] = useState(0);
   const [codeCopied, setCodeCopied] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
