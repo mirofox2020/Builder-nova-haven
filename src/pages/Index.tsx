@@ -245,14 +245,79 @@ const allDeals = [
 
 const DEALS_PER_PAGE = 6;
 
+// Store name mapping for filtering
+const storeMapping: { [key: string]: string } = {
+  amazon: "Amazon",
+  bestbuy: "Best Buy",
+  walmart: "Walmart",
+  nike: "Nike",
+  sony: "Sony",
+  apple: "Apple",
+  ebay: "eBay",
+  lego: "LEGO",
+  google: "Google Store",
+  dyson: "Dyson",
+  microsoft: "Microsoft",
+  nintendo: "Nintendo",
+  bose: "Bose",
+  samsung: "Samsung",
+  tesla: "Tesla",
+  canon: "Canon",
+};
+
 const Index = () => {
-  const [displayedDeals, setDisplayedDeals] = useState(
-    allDeals.slice(0, DEALS_PER_PAGE),
-  );
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filters, setFilters] = useState<{
+    stores: string[];
+    discountRanges: string[];
+  }>({
+    stores: [],
+    discountRanges: [],
+  });
 
-  const hasMoreDeals = displayedDeals.length < allDeals.length;
+  // Filter deals based on selected filters
+  const filteredDeals = useMemo(() => {
+    let filtered = allDeals;
+
+    // Filter by stores
+    if (filters.stores.length > 0) {
+      filtered = filtered.filter((deal) => {
+        const storeName = deal.merchant;
+        return filters.stores.some(
+          (storeId) =>
+            storeMapping[storeId]?.toLowerCase() === storeName.toLowerCase(),
+        );
+      });
+    }
+
+    // Filter by discount ranges
+    if (filters.discountRanges.length > 0) {
+      filtered = filtered.filter((deal) => {
+        return filters.discountRanges.some((rangeId) => {
+          switch (rangeId) {
+            case "10-20":
+              return deal.discount >= 10 && deal.discount < 20;
+            case "20-30":
+              return deal.discount >= 20 && deal.discount < 30;
+            case "30-40":
+              return deal.discount >= 30 && deal.discount < 40;
+            case "40-50":
+              return deal.discount >= 40 && deal.discount < 50;
+            case "50+":
+              return deal.discount >= 50;
+            default:
+              return false;
+          }
+        });
+      });
+    }
+
+    return filtered;
+  }, [filters]);
+
+  const displayedDeals = filteredDeals.slice(0, currentPage * DEALS_PER_PAGE);
+  const hasMoreDeals = displayedDeals.length < filteredDeals.length;
 
   const handleLoadMore = async () => {
     setIsLoading(true);
