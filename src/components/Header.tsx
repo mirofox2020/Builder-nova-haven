@@ -272,33 +272,47 @@ export const Header = () => {
             )}
           >
             <div className="flex gap-2 pt-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                onClick={handleCreateAlert}
-              >
-                <Bell className="h-4 w-4 mr-2" />
-                Create Alert
-              </Button>
-              <Button
-                size="sm"
-                className="flex-1 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white"
-                onClick={handlePostDeal}
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                Post Deal
-              </Button>
-              {!isLoggedIn && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setIsLoginModalOpen(true)}
-                  className="flex-1"
-                >
-                  <User className="h-4 w-4 mr-2" />
-                  Login
-                </Button>
+              {isLoggedIn ? (
+                <>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1"
+                    onClick={handleCreateAlert}
+                  >
+                    <Bell className="h-4 w-4 mr-2" />
+                    Create Alert
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="flex-1 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white"
+                    onClick={handlePostDeal}
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    Post Deal
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => setIsLoginModalOpen(true)}
+                  >
+                    <User className="h-4 w-4 mr-2" />
+                    Login
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => setIsLoginModalOpen(true)}
+                  >
+                    <Bell className="h-4 w-4 mr-2" />
+                    Create Alert
+                  </Button>
+                </>
               )}
             </div>
           </div>
