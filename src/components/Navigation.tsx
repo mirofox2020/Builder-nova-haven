@@ -30,6 +30,7 @@ interface NavigationProps {
   onFiltersChange?: (filters: {
     stores: string[];
     discountRanges: string[];
+    contentType: string;
   }) => void;
 }
 
@@ -43,7 +44,6 @@ const mainCategories = [
   { id: "codes", label: "Discount Codes", icon: Percent, badge: "234" },
   { id: "deals", label: "Deals", icon: Gift, active: true },
   { id: "freebies", label: "Freebies", icon: Gift, badge: "Hot" },
-  { id: "discussions", label: "Discussions", icon: MessageCircle },
 ];
 
 const feedTabs = [
@@ -98,6 +98,13 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
       return;
     }
     setActiveCategory(categoryId);
+
+    // Notify parent component of content type change
+    onFiltersChange?.({
+      stores: selectedStores,
+      discountRanges: selectedDiscountRanges,
+      contentType: categoryId,
+    });
   };
 
   const handleCategorySelect = (categoryId: string) => {
@@ -116,6 +123,7 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
     onFiltersChange?.({
       stores: newSelectedStores,
       discountRanges: selectedDiscountRanges,
+      contentType: activeCategory,
     });
   };
 
@@ -130,6 +138,7 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
     onFiltersChange?.({
       stores: selectedStores,
       discountRanges: newSelectedRanges,
+      contentType: activeCategory,
     });
   };
 
@@ -140,6 +149,7 @@ export const Navigation = ({ onFiltersChange }: NavigationProps) => {
     onFiltersChange?.({
       stores: [],
       discountRanges: [],
+      contentType: activeCategory,
     });
   };
 

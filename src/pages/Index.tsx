@@ -6,6 +6,113 @@ import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
+// Sample coupon codes data
+const allCoupons = [
+  {
+    id: "c1",
+    title: "Apple Store - 10% Off Entire Purchase",
+    description:
+      "Save 10% on all Apple products including iPhone, iPad, Mac, and accessories. Valid for new customers only.",
+    image: "/placeholder.svg",
+    originalPrice: null,
+    discountedPrice: null,
+    discount: 10,
+    merchant: "Apple",
+    timePosted: "1h ago",
+    votes: 89,
+    comments: 12,
+    promoCode: "APPLE10NEW",
+    isAvailable: true,
+    isFeatured: true,
+    type: "coupon",
+  },
+  {
+    id: "c2",
+    title: "Nike - $20 Off Orders Over $100",
+    description:
+      "Get $20 discount when you spend $100 or more on Nike shoes, apparel, and gear.",
+    image: "/placeholder.svg",
+    originalPrice: null,
+    discountedPrice: null,
+    discount: 20,
+    merchant: "Nike",
+    timePosted: "3h ago",
+    votes: 156,
+    comments: 23,
+    promoCode: "NIKE20OFF",
+    isAvailable: true,
+    type: "coupon",
+  },
+  {
+    id: "c3",
+    title: "Amazon - 15% Off Electronics",
+    description:
+      "Save 15% on electronics including laptops, phones, tablets, and smart home devices.",
+    image: "/placeholder.svg",
+    originalPrice: null,
+    discountedPrice: null,
+    discount: 15,
+    merchant: "Amazon",
+    timePosted: "5h ago",
+    votes: 234,
+    comments: 45,
+    promoCode: "ELECTRONICS15",
+    isAvailable: true,
+    type: "coupon",
+  },
+  {
+    id: "c4",
+    title: "Best Buy - Free Shipping + 5% Off",
+    description:
+      "Get free shipping on any order plus additional 5% off with student discount.",
+    image: "/placeholder.svg",
+    originalPrice: null,
+    discountedPrice: null,
+    discount: 5,
+    merchant: "Best Buy",
+    timePosted: "8h ago",
+    votes: 67,
+    comments: 8,
+    promoCode: "STUDENT5",
+    isAvailable: true,
+    type: "coupon",
+  },
+  {
+    id: "c5",
+    title: "Sony - 25% Off Headphones & Audio",
+    description:
+      "Save 25% on all Sony headphones, speakers, and audio equipment. Limited time offer.",
+    image: "/placeholder.svg",
+    originalPrice: null,
+    discountedPrice: null,
+    discount: 25,
+    merchant: "Sony",
+    timePosted: "12h ago",
+    votes: 123,
+    comments: 19,
+    promoCode: "SONY25AUDIO",
+    isAvailable: true,
+    type: "coupon",
+  },
+  {
+    id: "c6",
+    title: "LEGO - Buy 2 Get 1 Free",
+    description:
+      "Buy any 2 LEGO sets and get the third one free. Mix and match from entire collection.",
+    image: "/placeholder.svg",
+    originalPrice: null,
+    discountedPrice: null,
+    discount: 33,
+    merchant: "LEGO",
+    timePosted: "1d ago",
+    votes: 198,
+    comments: 34,
+    promoCode: "LEGO3FOR2",
+    isAvailable: true,
+    type: "coupon",
+  },
+];
+
 // Extended sample deals data
 const allDeals = [
   {
@@ -24,6 +131,7 @@ const allDeals = [
     promoCode: "IPHONE15",
     isAvailable: true,
     isFeatured: true,
+    type: "deal",
   },
   {
     id: "2",
@@ -271,9 +379,11 @@ const Index = () => {
   const [filters, setFilters] = useState<{
     stores: string[];
     discountRanges: string[];
+    contentType: string;
   }>({
     stores: [],
     discountRanges: [],
+    contentType: "deals",
   });
 
   // Filter deals based on selected filters
